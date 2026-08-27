@@ -106,11 +106,17 @@ test("statusは仕様の3値のみ", () => {
   assert.ok(procedures.every((p) => valid.has(p.status)));
 });
 
-test("公式情報で確認できない品目（蛍光灯・LED照明器具）は分別方法を断定しない", () => {
-  for (const name of ["蛍光灯・蛍光管", "LED照明器具"]) {
-    const it = wasteItems.find((i) => i.display_name === name);
-    assert.ok(it, `${name} not found`);
-    assert.equal(it.status, "UNCONFIRMED");
-    assert.match(it.how_to_dispose, /確認できませんでした/);
-  }
+test("LED照明器具は公式情報で確認できず、分別方法を断定しない（fail-closed）", () => {
+  const it = wasteItems.find((i) => i.display_name === "LED照明器具");
+  assert.ok(it, "LED照明器具 not found");
+  assert.equal(it.status, "UNCONFIRMED");
+  assert.match(it.how_to_dispose, /確認できませんでした/);
+});
+
+test("蛍光灯・蛍光管は専用FAQで確認済み（燃やせないごみ、fail-closedではない）", () => {
+  const it = wasteItems.find((i) => i.display_name === "蛍光灯・蛍光管");
+  assert.ok(it, "蛍光灯・蛍光管 not found");
+  assert.equal(it.status, "CONFIRMED_OFFICIAL");
+  assert.equal(it.category, "燃やせないごみ");
+  assert.doesNotMatch(it.how_to_dispose, /確認できませんでした/);
 });

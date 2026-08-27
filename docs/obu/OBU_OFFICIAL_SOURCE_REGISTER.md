@@ -62,12 +62,28 @@
 | 33 | https://www.city.obu.aichi.jp/faq/kankyo/gomi/1001336.html | よくある質問　花火やライターはどのように処分すれば良いですか｜大府市 | WebFetch | 2026-08-28 | ライターのガス抜き手順、花火・マッチの処理 |
 | 34 | https://www.tobuchita.jp/pages/mochikomi/riyouannai/ | 利用案内（受入時間・使用料等）｜東部知多衛生組合 | WebFetch | 2026-08-28 | 東部知多クリーンセンターの自己搬入料金（10kgごとに200円）、受入時間、持込禁止物リスト |
 
-### 公式情報で確認できなかった項目（UNCONFIRMED/PARTIALのまま採用した箇所）
+### 公式情報で確認できなかった項目（UNCONFIRMED/PARTIALのまま採用した箇所、2026-08-28 LIGHT_AUDIT_V0_2時点）
 
-- 蛍光灯・蛍光管、LED照明器具の分別区分（公式ごみ分別検索データベースに該当項目なし。案内パンフレットPDFは文字コードの問題で読み取り不能）。
-- 指定ごみ袋（燃やすしかないごみ・燃やせないごみ用）自体の販売価格。
-- プラスチック製品「指定20品目」の全リスト（ハンガーのみ確認）。
+- LED照明器具の分別区分（環境・ごみ・リサイクルFAQ一覧に該当項目なし、ごみ分別検索の静的取得内容にも記載なし。蛍光灯は下記「LIGHT_AUDIT_V0_2で解決した項目」で解決済み・別品目として区別）。
 - CD・DVD本体、鉛蓄電池・ポータブル電源の処分料金の有無。
-- 自転車の粗大ごみ戸別収集（電話申込）対応可否（自己搬入のみ確認）。
+- マイナンバーカード住所変更（券面・電子証明書更新）固有の手数料・詳細必要書類（単体の専用ページが見つからない）。
+- プラスチック製品30品目の具体的な個別リスト全件（画像のみで提示されており本文テキストとして取得不可。詳細は`docs/internal/OBU_OFFICIAL_SOURCE_CONFLICTS_V0_1.md`）。
 
-これらは `municipalities/obu/data/waste_items.json` 上で `status: "UNCONFIRMED"` または `"PARTIAL"`、`fee: "OFFICIAL_CONFIRMATION_REQUIRED"` 等のfail-closedな値として明示している。
+これらは `municipalities/obu/data/{waste_items,procedures}.json` 上で `status: "UNCONFIRMED"` または `"PARTIAL"`、`fee: "OFFICIAL_CONFIRMATION_REQUIRED"` 等のfail-closedな値として明示している。
+
+## LIGHT_AUDIT_V0_2（2026-08-28）で追加確認したソース
+
+| No | URL | ページタイトル | 更新日 | 取得方法 | 用途 |
+|---|---|---|---|---|---|
+| 35 | https://www.city.obu.aichi.jp/faq/kankyo/gomi/1001338.html | よくある質問　陶器やガラス製品などはどのように処分したら良いですか｜大府市 | 2018-10-22 | WebFetch | obu-0005（蛍光灯）をCONFIRMED_OFFICIALへ更新 |
+| 36 | https://www.city.obu.aichi.jp/faq/kankyo/gomi/1001340.html | よくある質問　自転車はどのようにごみに出せばよいですか｜大府市 | 2025-02-03 | WebFetch | obu-0020（自転車）をCONFIRMED_OFFICIALへ更新 |
+| 37 | https://www.city.obu.aichi.jp/shisei/koho/pressrelease/1003447/1038806/1039057.html | 中東情勢の悪化に伴う原料供給不足を見据え市指定ごみ袋の素材を変更します｜大府市 | 2026-04-27 | WebFetch | 指定ごみ袋の価格決定方式（市は卸売価格のみ決定）を確認 |
+| 38 | https://www.city.obu.aichi.jp/kurashi/gomi/recycle/1001810/1001812/1001813.html | プラスチック類(対象となるもの)｜大府市 | 2025-04-14 | WebFetch | obu-0028を「指定30品目」でCONFIRMED_OFFICIALへ更新。画像キャプションに旧「20品目」表記残存を確認 |
+| 39 | https://www.city.obu.aichi.jp/kurashi/gomi/recycle/1024239.html | 令和5年4月から資源となるプラスチックの回収方法が変わりました｜大府市 | 2025-04-15 | WebFetch | 「指定30品目」表記のクロスチェック |
+| 40 | https://www.city.obu.aichi.jp/shinseisho/s_another/1035116.html | オンラインでできる行政手続き｜大府市 | 2025-09-24 | WebFetch | obu-proc-08（児童手当）のオンライン対応を確認しCONFIRMED_OFFICIALへ更新 |
+| 41 | https://www.city.obu.aichi.jp/kurashi/zeikin/kokuho/1035960/index.html | 国民健康保険に関する届出｜大府市 | 2025-08-01 | WebFetch | obu-proc-09（国保加入）の14日以内期限を確認しCONFIRMED_OFFICIALへ更新。出典URLを本ページへ変更 |
+| 42 | https://www.city.obu.aichi.jp/kurashi/todokede/mynumber/1026036.html | 便利な引越しワンストップサービスをご利用ください｜大府市 | 2024-01-04 | WebFetch | obu-proc-11の「オンラインで完結する」誤案内リスクを解消。出典URLを本ページへ変更 |
+| 43 | https://www.city.obu.aichi.jp/faq/kankyo/gomi/index.html | ごみ・リサイクル・環境のよくある質問一覧｜大府市 | 記載なし | WebFetch | LED照明器具のFAQ項目が存在しないことを確認（UNCONFIRMED維持） |
+
+不整合の詳細評価（20品目 vs 30品目、専用FAQ vs 一般案内ページの沈黙）は
+`docs/internal/OBU_OFFICIAL_SOURCE_CONFLICTS_V0_1.md` を参照。
