@@ -82,19 +82,35 @@ test('required tricky item keywords are searchable', { skip: Boolean(wasteLoadEr
   assert.deepEqual(missing, [], `no match found for required keywords: ${missing.join(', ')}`);
 });
 
-// UNCONFIRMED items (e.g. 蛍光灯・蛍光管, LED照明器具 — see
+// UNCONFIRMED items (e.g. LED照明器具 — see
 // docs/internal/OBU_DIFFERENCE_FINDINGS_V0_1.md) must fail closed: no
-// disposal instructions, no invented phone/fee, an explicit "確認できませんでした"
-// style notice, and a fail-closed sentinel for fee where the true value is
-// unknown rather than a plausible-looking but unverified number.
+// disposal instructions, no invented phone/fee, an explicit "確認できません"
+// style notice in both how_to_dispose and fee rather than a plausible-looking
+// but unverified number. The fee text is natural Japanese shown directly in
+// the UI (src/app/app.js renders it verbatim), not an internal enum value —
+// see PRE_DEPLOY_MICRO_CLOSE_V0_3, which replaced the earlier raw English
+// sentinel strings (e.g. "OFFICIAL_CONFIRMATION_REQUIRED") that were leaking
+// into the public card display.
+const FAIL_CLOSED_FEE_RE = /確認できません|確認いただけ|依頼先|窓口でご確認|要問い合わせ/;
 test('UNCONFIRMED waste items fail closed: no fabricated how_to_dispose/collection/fee', { skip: Boolean(wasteLoadError) }, () => {
   const unconfirmed = wasteItems.filter((it) => it.status === 'UNCONFIRMED');
   assert.ok(unconfirmed.length > 0, 'expected at least one UNCONFIRMED item (fail-closed path must be exercised)');
-  const FEE_SENTINELS = new Set(['UNCONFIRMED', 'OFFICIAL_CONFIRMATION_REQUIRED', 'NOT_PUBLICLY_CONFIRMED']);
   for (const it of unconfirmed) {
     assert.match(it.how_to_dispose, /確認できませんでした/, `${it.item_id}.how_to_dispose must fail closed`);
-    assert.ok(FEE_SENTINELS.has(it.fee), `${it.item_id}.fee must be a fail-closed sentinel, got "${it.fee}"`);
+    assert.match(it.fee, FAIL_CLOSED_FEE_RE, `${it.item_id}.fee must read as fail-closed natural-language text, got "${it.fee}"`);
+    assert.doesNotMatch(it.fee, /^[A-Z_]+$/, `${it.item_id}.fee must not be a raw internal enum string, got "${it.fee}"`);
   }
+});
+
+// No fee field anywhere in the public data — regardless of status — may leak
+// a raw internal enum/sentinel token (all-caps snake_case) into the UI. This
+// pins the PRE_DEPLOY_MICRO_CLOSE_V0_3 fix so it cannot silently regress.
+test('no fee field in public data is a raw internal sentinel token', { skip: Boolean(wasteLoadError || procLoadError) }, () => {
+  const RAW_TOKEN_RE = /^[A-Z_]+$/;
+  const badWaste = wasteItems.filter((it) => RAW_TOKEN_RE.test(it.fee || ''));
+  const badProc = procedures.filter((p) => RAW_TOKEN_RE.test(p.fee || ''));
+  assert.deepEqual(badWaste.map((o) => o.item_id), [], 'waste fee leaks a raw internal token');
+  assert.deepEqual(badProc.map((o) => o.procedure_id), [], 'procedure fee leaks a raw internal token');
 });
 
 test('at least 12 procedures defined', { skip: Boolean(procLoadError) }, () => {
@@ -111,8 +127,7 @@ test('every procedure cites an official_url on city.obu.aichi.jp', { skip: Boole
   assert.deepEqual(offenders.map((o) => o.procedure_id), [], 'every procedure must cite a city.obu.aichi.jp source');
 });
 
-test('no waste item silently guesses a fee — unknown values use a fail-closed sentinel', { skip: Boolean(wasteLoadError) }, () => {
-  const SENTINELS = new Set(['UNCONFIRMED', 'OFFICIAL_CONFIRMATION_REQUIRED', 'NOT_PUBLICLY_CONFIRMED']);
-  const suspicious = wasteItems.filter((it) => it.status === 'UNCONFIRMED' && !SENTINELS.has(it.fee));
+test('no waste item silently guesses a fee — UNCONFIRMED items read as fail-closed, not a concrete number', { skip: Boolean(wasteLoadError) }, () => {
+  const suspicious = wasteItems.filter((it) => it.status === 'UNCONFIRMED' && !FAIL_CLOSED_FEE_RE.test(it.fee || ''));
   assert.deepEqual(suspicious.map((s) => s.item_id), [], 'UNCONFIRMED items must not carry a concrete-looking fee value');
 });

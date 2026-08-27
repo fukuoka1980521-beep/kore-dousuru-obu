@@ -159,7 +159,7 @@
     "how_to_dispose": "公式情報で確認できませんでした。",
     "collection_or_dropoff": "公式情報で確認できませんでした。",
     "application_required": false,
-    "fee": "OFFICIAL_CONFIRMATION_REQUIRED",
+    "fee": "公式情報で確認できませんでした。",
     "danger_notes": "該当なし",
     "battery_notes": "該当なし",
     "size_rule": "該当なし",
@@ -173,7 +173,7 @@
     "official_page_title": "ごみ分別検索｜大府市",
     "source_checked_at": "2026-08-28",
     "status": "UNCONFIRMED",
-    "notes": "公式ごみ分別検索ツールに該当項目が見当たらなかった。器具本体は燃やせないごみ、内蔵基板の扱いにより小型家電となる可能性もあるが未確認。蛍光灯・蛍光管（obu-0005）は専用FAQで確認できCONFIRMED_OFFICIALへ更新したが、LED照明器具のFAQ項目は大府市の環境・ごみ・リサイクルFAQ一覧に存在しないことを確認しており、蛍光灯とは別品目として区別してUNCONFIRMEDを維持する。分別方法は大府市環境課（0562-45-6223）へ確認してください。"
+    "notes": "公式ごみ分別検索ツールに該当項目が見当たらなかった（2026-08-28、PRE_DEPLOY_MICRO_CLOSE_V0_3で再確認済み）。器具本体は燃やせないごみ、内蔵基板の扱いにより小型家電となる可能性もあるが未確認。蛍光灯・蛍光管（obu-0005）は専用FAQで確認できCONFIRMED_OFFICIALへ更新したが、LED照明器具のFAQ項目は大府市の環境・ごみ・リサイクルFAQ一覧に存在しないことを確認しており、蛍光灯とは別品目として区別してUNCONFIRMEDを維持する。電球・蛍光灯・LED照明器具を同一分類として推測することはしない。分別方法は大府市環境課（0562-45-6223）へ確認してください。"
   },
   {
     "item_id": "obu-0007",
@@ -427,10 +427,10 @@
     ],
     "category": "電池類（市収集対象外）",
     "conditions": "鉛蓄電池、ポータブル電源、事業用電池、JBRC非加盟の自転車用バッテリー等。",
-    "how_to_dispose": "市では回収できないため、購入店・専門業者・メーカーに相談する。",
+    "how_to_dispose": "大府市では回収していません。販売店・製造メーカー等へご相談ください。",
     "collection_or_dropoff": "市の収集対象外。",
     "application_required": false,
-    "fee": "OFFICIAL_CONFIRMATION_REQUIRED",
+    "fee": "大府市では回収していないため料金は設定されていません。料金は依頼先（販売店・メーカー等）へご確認ください。",
     "danger_notes": "該当なし",
     "battery_notes": "市の資源ステーション・回収箱では受け付けないと明記されている。",
     "size_rule": "該当なし",
@@ -1050,8 +1050,8 @@
     "official_url": "https://www.city.obu.aichi.jp/kurashi/gomi/recycle/1029797.html",
     "official_page_title": "ごみ分別検索｜大府市",
     "source_checked_at": "2026-08-28",
-    "status": "PARTIAL",
-    "notes": "CDケースの説明文中に『中身は可燃』とあることから燃やすしかないごみと推定したが、ディスク単体の項目としては公式ごみ分別検索データベースで直接ヒットしなかったため断定はしない。"
+    "status": "CONFIRMED_OFFICIAL",
+    "notes": "公式ごみ分別検索（更新日2026-04-10）の『CD・DVDケース（ケースのみ）』の項目に、ケースはプラ、中身（ディスク本体）は可燃（燃やすしかないごみ）と明記されていることを確認した。公式本文に記載された事実のみを反映しており、それ以上の推測は加えていない。"
   },
   {
     "item_id": "obu-0036",
@@ -1126,7 +1126,7 @@
     "how_to_dispose": "生ごみ専用袋（青色）に入れ、燃やすしかないごみの日にごみ置場の片側に置く（反対側に黄色の通常ごみ袋を置く）。",
     "collection_or_dropoff": "ごみステーション収集。通常ごみはクリーンセンターへ、生ごみは横根バイオガス発電施設へ別々に搬送される。",
     "application_required": false,
-    "fee": "OFFICIAL_CONFIRMATION_REQUIRED",
+    "fee": "生ごみ専用袋の価格は公式情報で確認できませんでした。",
     "danger_notes": "該当なし",
     "battery_notes": "該当なし",
     "size_rule": "該当なし",
