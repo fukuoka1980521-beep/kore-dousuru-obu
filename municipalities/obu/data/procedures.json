@@ -1,0 +1,432 @@
+[
+  {
+    "procedure_id": "obu-proc-01",
+    "municipality_id": "obu",
+    "name": "転入届（大府市外から大府市への引越し）",
+    "aliases": [
+      "転入届",
+      "大府市に引っ越してきた",
+      "引っ越してきた",
+      "市外から引っ越し",
+      "引っこし",
+      "住所を移す"
+    ],
+    "conclusion": "大府市に住み始めてから14日以内に、前の市区町村で発行された転出証明書を持って市役所市民課の窓口へ行き、転入届を出してください（窓口のみ・郵送不可）。",
+    "deadline": "住み始めた日から14日以内。引っ越し日より前の届出は不可。",
+    "how_to": "総務部市民課窓口で本人（または同一世帯員）が届出。マイナンバーカードを持っている場合は「引越しワンストップサービス」でマイナポータルから事前に転入予約をオンラインで行えるが、最終的な届出は窓口で行う必要がある。",
+    "required_documents": [
+      "本人確認書類（運転免許証・旅券・マイナンバーカード等）",
+      "転出証明書（前住所地の市区町村発行）",
+      "マイナンバーカード（保有者全員分）",
+      "在留カード・特別永住者証明書（該当者）",
+      "介護保険受給資格証明書（該当者）"
+    ],
+    "fee": "OFFICIAL_CONFIRMATION_REQUIRED",
+    "window_office": "大府市役所1階 市民課",
+    "district_dependent": false,
+    "department_name": "総務部 市民課",
+    "phone": "0562-45-6218",
+    "business_hours": "月〜金 9:00〜17:00（水曜のみ19:45まで、最終受付19:30／祝日・12/29〜1/3を除く）",
+    "online_available": false,
+    "related_procedures": [
+      "obu-proc-04",
+      "obu-proc-06",
+      "obu-proc-08",
+      "obu-proc-09",
+      "obu-proc-11"
+    ],
+    "official_url": "https://www.city.obu.aichi.jp/kurashi/todokede/idou/1011608.html",
+    "official_page_title": "転入届（市外→大府市）｜大府市",
+    "source_checked_at": "2026-08-28",
+    "status": "CONFIRMED_OFFICIAL",
+    "notes": "郵送での転入届は受け付けていない。手数料の記載は公式ページで確認できなかった（届出自体は無料が一般的だが断定はしない）。"
+  },
+  {
+    "procedure_id": "obu-proc-02",
+    "municipality_id": "obu",
+    "name": "転出届（大府市から市外・海外への引越し）",
+    "aliases": [
+      "転出届",
+      "大府市から引っ越す",
+      "転出する",
+      "市外に引っ越す",
+      "大府市を出る"
+    ],
+    "conclusion": "引っ越し予定日のおおむね30日前から届出できます。マイナンバーカードがあればオンライン（マイナポータル）や郵送でも手続きでき、窓口に行かずに済む場合があります。",
+    "deadline": "引っ越し予定日のおおむね30日前から届出可能。転出後は速やかに新住所地で転入届（14日以内）が必要。",
+    "how_to": "窓口届出のほか、マイナンバーカードを持っている場合は「引越しワンストップサービス」でマイナポータルからオンライン届出が可能。郵送での転出届にも対応。",
+    "required_documents": [
+      "本人確認書類",
+      "マイナンバーカード（保有者）",
+      "住民基本台帳カード（海外転出者のみ）",
+      "印鑑登録証（登録者）",
+      "国民健康保険証・子ども医療受給者証・後期高齢者医療関連書類・介護保険被保険者証等（該当者、状況により異なる）"
+    ],
+    "fee": "OFFICIAL_CONFIRMATION_REQUIRED",
+    "window_office": "大府市役所1階 市民課（郵送・オンラインも可）",
+    "district_dependent": false,
+    "department_name": "総務部 市民課",
+    "phone": "0562-45-6218",
+    "business_hours": "月〜金 9:00〜17:00（水曜のみ19:45まで、最終受付19:30）",
+    "online_available": true,
+    "related_procedures": [
+      "obu-proc-01",
+      "obu-proc-10",
+      "obu-proc-11"
+    ],
+    "official_url": "https://www.city.obu.aichi.jp/kurashi/todokede/idou/1011523.html",
+    "official_page_title": "転出届（大府市→市外・海外）｜大府市",
+    "source_checked_at": "2026-08-28",
+    "status": "CONFIRMED_OFFICIAL",
+    "notes": "郵送用の申請ページも別途あり。引越しワンストップサービスは電子証明書が有効なマイナンバーカード保有者かつ国内転居者限定で、代理人は利用不可。"
+  },
+  {
+    "procedure_id": "obu-proc-03",
+    "municipality_id": "obu",
+    "name": "転居届（大府市内での引越し）",
+    "aliases": [
+      "転居届",
+      "市内で引っ越した",
+      "大府市内で住所変更",
+      "同じ市内で引っ越した"
+    ],
+    "conclusion": "大府市内で引っ越してから14日以内に、市民課の窓口で転居届を出してください（窓口のみ・郵送不可）。",
+    "deadline": "引っ越しをしてから14日以内。引越日より前の申請は不可。",
+    "how_to": "総務部市民課窓口で本人（または委任状を持つ代理人）が届出。",
+    "required_documents": [
+      "本人確認書類（運転免許証・旅券・マイナンバーカード等）",
+      "マイナンバーカード（保有者全員分）",
+      "在留カード・特別永住者証明書（該当者）",
+      "各種医療費受給者証（状況により）",
+      "委任状（代理人申請の場合）"
+    ],
+    "fee": "OFFICIAL_CONFIRMATION_REQUIRED",
+    "window_office": "大府市役所1階 市民課",
+    "district_dependent": false,
+    "department_name": "総務部 市民課",
+    "phone": "0562-45-6218",
+    "business_hours": "月〜金 9:00〜17:00（水曜のみ19:45まで、最終受付19:30）",
+    "online_available": false,
+    "related_procedures": [
+      "obu-proc-04",
+      "obu-proc-06",
+      "obu-proc-11"
+    ],
+    "official_url": "https://www.city.obu.aichi.jp/kurashi/todokede/idou/1011663.html",
+    "official_page_title": "転居届（大府市→大府市）｜大府市",
+    "source_checked_at": "2026-08-28",
+    "status": "CONFIRMED_OFFICIAL",
+    "notes": "郵送不可と明記。マイナンバーカード保有者は「引越しワンストップサービス」で市内転居のオンライン予約も可能（最終手続きは窓口）。"
+  },
+  {
+    "procedure_id": "obu-proc-04",
+    "municipality_id": "obu",
+    "name": "住民票の写しの取得",
+    "aliases": [
+      "住民票が欲しい",
+      "住民票の写し",
+      "住民票をとる",
+      "住民票コンビニ"
+    ],
+    "conclusion": "急ぎでマイナンバーカードがあれば、コンビニのマルチコピー機（6:30〜23:00、土日祝も可）が最も早く安く取得できます（1通200円）。市役所窓口（1通300円）や郵送でも取得できます。",
+    "deadline": "特になし（必要な都度取得）。",
+    "how_to": "①窓口申請（本人・同一世帯員、第三者は委任状が必要）②郵送申請（申請書・手数料分の定額小為替・返信用封筒・本人確認書類のコピーを同封し、必要日の7日前までに郵送）③コンビニ交付（マイナンバーカード＋暗証番号、対応店舗のマルチコピー機）。",
+    "required_documents": [
+      "【窓口】本人確認書類（マイナンバーカード・運転免許証・旅券等）",
+      "【郵送】申請書、手数料分の定額小為替、返信用封筒（切手貼付・宛先記入）、本人確認書類のコピー",
+      "【コンビニ】マイナンバーカード（顔写真付）、4桁の暗証番号"
+    ],
+    "fee": "窓口・郵送 1通300円／コンビニ交付 1通200円（期間限定の特別価格。通常価格に戻る可能性があるため公式ページで要確認）",
+    "window_office": "大府市役所1階 市民課",
+    "district_dependent": false,
+    "department_name": "総務部 市民課",
+    "phone": "0562-45-6218",
+    "business_hours": "窓口: 月〜金 9:00〜17:00（水曜のみ19:45まで）／コンビニ交付: 6:30〜23:00（土日祝可。年末年始・システムメンテナンス日を除く）",
+    "online_available": true,
+    "related_procedures": [
+      "obu-proc-01",
+      "obu-proc-02",
+      "obu-proc-03"
+    ],
+    "official_url": "https://www.city.obu.aichi.jp/kurashi/todokede/jyuuminhyo/1001569/1001570.html",
+    "official_page_title": "住民票の写し等の申請方法｜大府市",
+    "source_checked_at": "2026-08-28",
+    "status": "CONFIRMED_OFFICIAL",
+    "notes": "郵送先: 〒474-8701 愛知県大府市中央町五丁目70番地 大府市役所市民課。コンビニ交付の手数料詳細は https://www.city.obu.aichi.jp/kurashi/todokede/mynumber/1001544.html を参照。"
+  },
+  {
+    "procedure_id": "obu-proc-05",
+    "municipality_id": "obu",
+    "name": "戸籍証明書の取得（戸籍謄本・抄本・戸籍の附票等）",
+    "aliases": [
+      "戸籍謄本が欲しい",
+      "戸籍抄本",
+      "戸籍全部事項証明書",
+      "戸籍の附票",
+      "戸籍証明書"
+    ],
+    "conclusion": "マイナンバーカードがあれば、コンビニのマルチコピー機で戸籍謄本・抄本（各450円）を取得できます。窓口や郵送でも取得できます。ただし本籍が大府市にある方が対象です。",
+    "deadline": "特になし（必要な都度取得）。",
+    "how_to": "①窓口申請（本籍・筆頭者氏名を確認の上申請）②郵送申請（申請書・手数料分の定額小為替・返信用封筒・本人確認書類のコピーを同封し、必要日の7日前までに郵送）③コンビニ交付（マイナンバーカード＋暗証番号）。",
+    "required_documents": [
+      "【窓口】本籍・筆頭者氏名の情報、本人確認書類",
+      "【郵送】申請書（または必要事項を記入した便箋・昼間の連絡先電話番号）、手数料分の定額小為替、返信用封筒、本人確認書類のコピー",
+      "【コンビニ】マイナンバーカード（顔写真付）、暗証番号"
+    ],
+    "fee": "全部（個人）事項証明書 450円／除籍関連 750円／戸籍の附票の写し 300円／戸籍電子証明書提供用識別符号 400円／コンビニ交付は戸籍謄本・抄本各450円、戸籍の附票の写し300円",
+    "window_office": "大府市役所1階 市民課",
+    "district_dependent": false,
+    "department_name": "総務部 市民課",
+    "phone": "0562-45-6218",
+    "business_hours": "窓口: 月〜金 9:00〜17:00（水曜のみ19:45まで）／コンビニ交付: 6:30〜23:00（土日祝可）",
+    "online_available": true,
+    "related_procedures": [
+      "obu-proc-04"
+    ],
+    "official_url": "https://www.city.obu.aichi.jp/kurashi/todokede/koseki/1001589/index.html",
+    "official_page_title": "全部（個人）事項証明・戸籍謄（抄）本等｜大府市",
+    "source_checked_at": "2026-08-28",
+    "status": "CONFIRMED_OFFICIAL",
+    "notes": "郵送先: 〒474-8701 愛知県大府市中央町五丁目70番地 大府市役所市民課。本籍が大府市以外の場合は本籍地の市区町村へ申請が必要（大府市では取得不可）。"
+  },
+  {
+    "procedure_id": "obu-proc-06",
+    "municipality_id": "obu",
+    "name": "印鑑登録・印鑑登録証明書",
+    "aliases": [
+      "実印登録",
+      "印鑑証明",
+      "はんこの登録",
+      "印鑑登録証明書",
+      "印鑑登録"
+    ],
+    "conclusion": "官公署発行の写真付き本人確認書類（運転免許証等）を持って本人が市民課窓口に行けば、その場で無料で印鑑登録でき、登録証（カード）が交付されます（目安10〜15分）。証明書はコンビニでも取得できます。",
+    "deadline": "特になし（任意登録）。",
+    "how_to": "市民課窓口で登録したい印鑑と本人確認書類を提示し申請書を記入。代理人による登録は本人への文書照会が必要なため即日登録できず数日かかる。証明書は印鑑登録証を持参して窓口申請、またはマイナンバーカードでコンビニ交付も可能（事前登録者のみ）。",
+    "required_documents": [
+      "【登録時】官公署発行の写真付き本人確認書類、登録する印鑑（8mm〜25mmの正方形に収まるもの、ゴム印不可、氏名等の文字によるもの）",
+      "【証明書取得時】印鑑登録証、またはマイナンバーカード（コンビニ交付）"
+    ],
+    "fee": "登録: 無料／印鑑登録証明書: 窓口1通300円（コンビニ交付200円）",
+    "window_office": "大府市役所1階 市民課",
+    "district_dependent": false,
+    "department_name": "総務部 市民課",
+    "phone": "0562-45-6218",
+    "business_hours": "月〜金 9:00〜17:00（水曜のみ19:45まで、最終受付19:30）",
+    "online_available": false,
+    "related_procedures": [
+      "obu-proc-01",
+      "obu-proc-03"
+    ],
+    "official_url": "https://www.city.obu.aichi.jp/kurashi/todokede/jyuuminhyo/1001573/index.html",
+    "official_page_title": "印鑑登録及び印鑑登録証明書｜大府市",
+    "source_checked_at": "2026-08-28",
+    "status": "CONFIRMED_OFFICIAL",
+    "notes": "郵送による証明書交付申請は不可。15歳未満・意思無能力者は登録不可、一人一印。前住所地で登録した印鑑登録は転入により失効する扱いが一般的だが、大府市公式ページでの明記は確認できていない。"
+  },
+  {
+    "procedure_id": "obu-proc-07",
+    "municipality_id": "obu",
+    "name": "出生届",
+    "aliases": [
+      "子どもが生まれた",
+      "出生届",
+      "赤ちゃんが生まれたときの手続き"
+    ],
+    "conclusion": "生まれた日を含めて14日以内に、母子健康手帳と出生証明書（医師等の証明入り）を持って市民課で出生届を出してください。その後、子ども医療費や児童手当の申請へ進むのが一般的な流れです。",
+    "deadline": "生まれた日を含めて14日以内。",
+    "how_to": "父母の本籍地、届出人の所在地、または出生地のいずれかの市区町村役場（大府市の場合は市民課）に、届出人（父母・同居者・立会った医師/助産師等）が届出書を提出。",
+    "required_documents": [
+      "出生届（医師・助産師の出生証明書欄記入が必要）",
+      "母子健康手帳",
+      "届出人の本人確認書類",
+      "個人番号カード交付申請書兼電子証明書発行申請書（マイナンバーカードを申請する場合）",
+      "旅券（外国籍の場合）"
+    ],
+    "fee": "OFFICIAL_CONFIRMATION_REQUIRED",
+    "window_office": "大府市役所1階 市民課",
+    "district_dependent": false,
+    "department_name": "総務部 市民課",
+    "phone": "0562-45-6218",
+    "business_hours": "月〜金 9:00〜17:00（水曜のみ19:45まで）",
+    "online_available": false,
+    "related_procedures": [
+      "obu-proc-08",
+      "obu-proc-09"
+    ],
+    "official_url": "https://www.city.obu.aichi.jp/kurashi/todokede/koseki/1001593.html",
+    "official_page_title": "出生届｜大府市",
+    "source_checked_at": "2026-08-28",
+    "status": "CONFIRMED_OFFICIAL",
+    "notes": "出生届提出後、子ども医療費受給者証（保険医療課）・児童手当（こども若者支援課）の申請が別途必要。この後続の流れの詳細は検索結果の要約に基づく部分があり、必ず窓口で最新の案内を確認すること。"
+  },
+  {
+    "procedure_id": "obu-proc-08",
+    "municipality_id": "obu",
+    "name": "児童手当の申請",
+    "aliases": [
+      "児童手当",
+      "子ども手当",
+      "児童手当の申請"
+    ],
+    "conclusion": "出生や転入などで新たに対象になったら、こども若者支援課の窓口で「認定請求」の手続きをしてください。原則、請求した翌月分からの支給になるため、早めの手続きが必要です（月末生まれなど一部条件では出生日の翌日から15日以内の請求で当月分から支給される特例があります）。",
+    "deadline": "原則、請求した翌月分から支給。月末出生等の場合は出生日の翌日から15日以内に請求すれば出生月分から支給される特例あり。",
+    "how_to": "こども若者支援課窓口で認定請求書等を提出。手当額が増減する場合は額改定請求が必要。現況届は令和4年6月分以降、原則提出不要。",
+    "required_documents": [
+      "請求者及び配偶者等のマイナンバーカード、または本人確認書類",
+      "請求者名義の金融機関の普通預金通帳",
+      "健康保険証・児童のマイナンバー確認書類等（状況により）"
+    ],
+    "fee": "無料",
+    "window_office": "大府市役所 こども若者支援課",
+    "district_dependent": false,
+    "department_name": "健康未来部 こども若者支援課",
+    "phone": "0562-45-6229",
+    "business_hours": "月〜金 9:00〜17:00（水曜のみ19:45まで）",
+    "online_available": false,
+    "related_procedures": [
+      "obu-proc-07",
+      "obu-proc-01"
+    ],
+    "official_url": "https://www.city.obu.aichi.jp/kosodate/seido_teate/jidoteate/1004280.html",
+    "official_page_title": "児童手当のご案内｜大府市",
+    "source_checked_at": "2026-08-28",
+    "status": "PARTIAL",
+    "notes": "オンライン（マイナポータル等）申請への対応可否が公式ページで明記されていることを確認できなかったため online_available は false（未確認）とした。窓口またはファクスでの申請が案内されている。"
+  },
+  {
+    "procedure_id": "obu-proc-09",
+    "municipality_id": "obu",
+    "name": "国民健康保険の加入手続き",
+    "aliases": [
+      "国保に入る",
+      "会社の健康保険をやめた",
+      "国民健康保険加入"
+    ],
+    "conclusion": "会社の健康保険をやめたら、届出が遅れると保険税をさかのぼって（最大3年）払うことになるため、退職後はできるだけ早く保険医療課で国民健康保険の加入手続きをしてください。窓口が難しい場合は郵送も利用できます。",
+    "deadline": "明確な期限日数の記載はないが、遅延すると保険税の遡及請求（最大3年）・医療費全額自己負担のリスクがあるため速やかな届出が必要。",
+    "how_to": "保険医療課窓口、または郵送で届出。健康保険資格取得・喪失連絡票、退職証明書、離職票、雇用保険受給資格者証のいずれかで手続き可能。同一世帯以外の代理人は委任状が必要。",
+    "required_documents": [
+      "健康保険資格取得・喪失連絡票（または退職証明書／離職票／雇用保険受給資格者証のいずれか）",
+      "世帯主の本人確認書類（郵送の場合はコピー）",
+      "委任状（別世帯の代理人の場合）"
+    ],
+    "fee": "届出は無料（別途、所得等に応じた国民健康保険税が発生）",
+    "window_office": "大府市役所 保険医療課",
+    "district_dependent": false,
+    "department_name": "福祉部 保険医療課",
+    "phone": "国保年金係: 0562-45-6330／福祉医療係: 0562-45-6230",
+    "business_hours": "月〜金 9:00〜17:00（水曜のみ19:45まで）",
+    "online_available": false,
+    "related_procedures": [
+      "obu-proc-01",
+      "obu-proc-07"
+    ],
+    "official_url": "https://www.city.obu.aichi.jp/kurashi/zeikin/kokuho/1014040.html",
+    "official_page_title": "郵送で国民健康保険に関する届出ができます｜大府市",
+    "source_checked_at": "2026-08-28",
+    "status": "PARTIAL",
+    "notes": "加入時の郵送必要書類の一部詳細は検索結果の要約に基づく部分がある。窓口部署名「保険医療課」は組織ページで確認済み。"
+  },
+  {
+    "procedure_id": "obu-proc-10",
+    "municipality_id": "obu",
+    "name": "国民健康保険の脱退手続き",
+    "aliases": [
+      "国保をやめる",
+      "就職して社会保険に入った",
+      "国民健康保険脱退"
+    ],
+    "conclusion": "就職して職場の健康保険（社会保険）に入ったら、国民健康保険の脱退（資格喪失）届を保険医療課に出してください。届出が遅れると、その間の国保給付分の返還を求められることがあります。転出・死亡による脱退は郵送できないため窓口での手続きが必要です。",
+    "deadline": "明確な期限日数の記載はないが、遅延で給付分の返還を求められるリスクがあるため速やかな届出が必要。",
+    "how_to": "保険医療課窓口、または郵送（転出・死亡による脱退を除く）で国民健康保険資格喪失届を提出。",
+    "required_documents": [
+      "国民健康保険資格喪失届",
+      "被保険者証またはそれに相当する書類（全員分）",
+      "職場の健康保険の資格情報が分かるものの写し（全員分）",
+      "世帯主の本人確認書類（郵送の場合はコピー）"
+    ],
+    "fee": "無料",
+    "window_office": "大府市役所 保険医療課",
+    "district_dependent": false,
+    "department_name": "福祉部 保険医療課",
+    "phone": "国保年金係: 0562-45-6330／福祉医療係: 0562-45-6230",
+    "business_hours": "月〜金 9:00〜17:00（水曜のみ19:45まで）",
+    "online_available": false,
+    "related_procedures": [
+      "obu-proc-02",
+      "obu-proc-12"
+    ],
+    "official_url": "https://www.city.obu.aichi.jp/kurashi/zeikin/kokuho/1014040.html",
+    "official_page_title": "郵送で国民健康保険に関する届出ができます｜大府市",
+    "source_checked_at": "2026-08-28",
+    "status": "CONFIRMED_OFFICIAL",
+    "notes": "転出や死亡による脱退は郵送を利用できないと公式ページに明記されている。その場合は窓口手続きが必要。"
+  },
+  {
+    "procedure_id": "obu-proc-11",
+    "municipality_id": "obu",
+    "name": "マイナンバーカードの住所変更（券面・電子証明書の更新）",
+    "aliases": [
+      "マイナンバーカードの住所変更",
+      "マイナンバーカード 引っ越し手続き"
+    ],
+    "conclusion": "引っ越しの手続き（転入・転居届）の際に、家族全員分のマイナンバーカードと各自の暗証番号を持って市民課窓口へ行けば、住所変更に伴うカードの追記・電子証明書の更新ができます。転入・転居手続きの一部として案内されています。",
+    "deadline": "住所変更（転入・転居）の手続きと同時、またはその後速やかに（独立した期限の明記なし）。",
+    "how_to": "転入届・転居届の手続きの際に、家族全員分のマイナンバーカードと暗証番号を持参し、市民課窓口でカードの住所情報・電子証明書を更新してもらう。",
+    "required_documents": [
+      "本人及び同一世帯の家族全員分のマイナンバーカード",
+      "各自の暗証番号（利用者証明用電子証明書用パスワード等）"
+    ],
+    "fee": "OFFICIAL_CONFIRMATION_REQUIRED",
+    "window_office": "大府市役所1階 市民課",
+    "district_dependent": false,
+    "department_name": "総務部 市民課",
+    "phone": "0562-45-6218",
+    "business_hours": "月〜金 9:00〜17:00（水曜のみ19:45まで）",
+    "online_available": false,
+    "related_procedures": [
+      "obu-proc-01",
+      "obu-proc-02",
+      "obu-proc-03"
+    ],
+    "official_url": "https://www.city.obu.aichi.jp/kurashi/todokede/mynumber/index.html",
+    "official_page_title": "マイナンバー｜大府市",
+    "source_checked_at": "2026-08-28",
+    "status": "PARTIAL",
+    "notes": "マイナンバーカード単体の「住所変更」専用ページは確認できなかった。転入・転居・転出の各手続きページ内の案内に基づく。手数料・詳細必要書類は要追加確認。"
+  },
+  {
+    "procedure_id": "obu-proc-12",
+    "municipality_id": "obu",
+    "name": "死亡時の主要手続入口（おくやみ窓口・死亡届）",
+    "aliases": [
+      "家族が亡くなった",
+      "死亡届",
+      "おくやみ窓口",
+      "遺族の手続き"
+    ],
+    "conclusion": "まず死亡の事実を知った日から7日以内に死亡診断書（死体検案書）を添えて市民課に死亡届を出し、火葬許可証を受け取ってください。その後、市役所での各種手続き（国保・介護・児童手当・税金等）をまとめて行いたい場合は、事前予約制の「おくやみ窓口」を利用すると、関係部署の担当者が入れ替わりで対応してくれるため、窓口を個別に回らずに済みます。",
+    "deadline": "死亡届は死亡の事実を知った日から7日以内。おくやみ窓口は予約制で、開庁日から4日以降の日時のみ予約可（当日利用不可）。",
+    "how_to": "①死亡届: 市民課に死亡診断書等とともに提出（親族・同居者・後見人等が届出人）。②おくやみ窓口: 死亡届提出後、電話・ファクス・メール・来庁で事前予約（1日4枠）。",
+    "required_documents": [
+      "死亡届書、死亡診断書（死体検案書）",
+      "おくやみ窓口利用時: 予約時の申込内容・故人及び手続き者に関する情報（手続きにより異なる）"
+    ],
+    "fee": "OFFICIAL_CONFIRMATION_REQUIRED",
+    "window_office": "死亡届: 大府市役所1階 市民課／おくやみ窓口: 大府市役所1階7番窓口 福祉まるごと相談課",
+    "district_dependent": false,
+    "department_name": "死亡届: 総務部 市民課／おくやみ窓口: 福祉まるごと相談課",
+    "phone": "死亡届: 0562-45-6218／おくやみ窓口予約: 0562-45-6219",
+    "business_hours": "月〜金 9:00〜17:00（水曜のみ19:45まで、最終受付19:30）",
+    "online_available": false,
+    "related_procedures": [
+      "obu-proc-10"
+    ],
+    "official_url": "https://www.city.obu.aichi.jp/sodan/1022872/index.html",
+    "official_page_title": "おくやみ窓口をご利用ください｜大府市",
+    "source_checked_at": "2026-08-28",
+    "status": "CONFIRMED_OFFICIAL",
+    "notes": "死亡届自体のページは https://www.city.obu.aichi.jp/kurashi/todokede/koseki/1001594.html 。おくやみ窓口は市民課・保険医療課・高齢障がい支援課・こども若者支援課・ゼロカーボン推進課・農業振興課・水道経営課・税務課の手続きに対応（印鑑登録、保険、介護、児童手当、水道、税務等）。"
+  }
+]

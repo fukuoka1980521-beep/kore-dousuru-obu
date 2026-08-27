@@ -1,0 +1,26 @@
+{
+  "municipality_id": "obu",
+  "display_name": "大府市",
+  "display_name_full": "大府市版",
+  "app_title": "これどうする？",
+  "priority_nav": [
+    { "key": "gomi", "label": "ごみ", "icon": "🗑️" },
+    { "key": "hikkoshi", "label": "引越し", "icon": "🏠" },
+    { "key": "juminhyo", "label": "住民票", "icon": "📄" },
+    { "key": "kosodate", "label": "子育て", "icon": "👶" }
+  ],
+  "contact": {
+    "name": "大府市役所（代表）",
+    "phone": "0562-47-2111",
+    "hours": "月〜金 9:00〜17:00（水曜のみ19:45まで、最終受付19:30／祝日・12/29〜1/3を除く）",
+    "url": "https://www.city.obu.aichi.jp/"
+  },
+  "ward_list_url": "https://www.city.obu.aichi.jp/shisetsu/koukyou/shiyakusho/1005059/index.html",
+  "data": {
+    "waste_items": "../../municipalities/obu/data/waste_items.json",
+    "procedures": "../../municipalities/obu/data/procedures.json",
+    "life_events": "../../municipalities/obu/data/life_events.json"
+  },
+  "disclaimer": "本サイトは大府市の公式サイトではありません。最終的な判断は必ず大府市公式情報・窓口でご確認ください。",
+  "not_official_notice": "大府市の市章・公式キャラクターは使用していません。"
+}

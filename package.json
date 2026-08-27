@@ -1,0 +1,12 @@
+{
+  "name": "kore-dousuru-obu",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "大府市版「これどうする？」— ごみ分別ナビ + 行政手続ナビ",
+  "scripts": {
+    "serve": "node scripts/serve.js",
+    "test": "node --test tests/*.test.js",
+    "check:sync": "node scripts/check_public_sync.js"
+  }
+}

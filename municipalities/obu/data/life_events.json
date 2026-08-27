@@ -1,0 +1,97 @@
+[
+  {
+    "event_id": "move-in",
+    "display_name": "大府市へ引っ越してきたとき",
+    "aliases": [
+      "引っ越してきた",
+      "転入した",
+      "大府市に来た",
+      "大府市に引っ越してきた",
+      "市外から大府市に引っ越し",
+      "引っこしてきた",
+      "大府に引っ越し"
+    ],
+    "summary": "大府市外から大府市内に住所を移したときに確認する主な手続です。",
+    "related_procedures": [
+      { "procedure_id": "obu-proc-01", "condition_label": "多くの方が必要" },
+      { "procedure_id": "obu-proc-09", "condition_label": "国民健康保険に加入する場合" },
+      { "procedure_id": "obu-proc-11", "condition_label": "マイナンバーカードをお持ちの場合" },
+      { "procedure_id": "obu-proc-08", "condition_label": "対象年齢の子どもがいる場合" }
+    ],
+    "show_waste_link": true,
+    "source_checked_at": "2026-08-28"
+  },
+  {
+    "event_id": "move-out",
+    "display_name": "大府市から引っ越すとき",
+    "aliases": [
+      "大府市から引っ越す",
+      "転出する",
+      "大府市を出る",
+      "市外に引っ越す",
+      "大府から出て行く"
+    ],
+    "summary": "大府市から市外へ住所を移すときに確認する主な手続です。",
+    "related_procedures": [
+      { "procedure_id": "obu-proc-02", "condition_label": "多くの方が必要" },
+      { "procedure_id": "obu-proc-10", "condition_label": "国民健康保険に加入している場合" },
+      { "procedure_id": "obu-proc-11", "condition_label": "マイナンバーカードをお持ちの場合" }
+    ],
+    "show_waste_link": false,
+    "source_checked_at": "2026-08-28"
+  },
+  {
+    "event_id": "move-within-city",
+    "display_name": "大府市内で引っ越したとき",
+    "aliases": [
+      "大府市内で引っ越した",
+      "市内で引っ越し",
+      "同じ市内で引っ越した",
+      "大府市内で住所変更"
+    ],
+    "summary": "大府市内で住所が変わったときに確認する主な手続です。",
+    "related_procedures": [
+      { "procedure_id": "obu-proc-03", "condition_label": "多くの方が必要" },
+      { "procedure_id": "obu-proc-11", "condition_label": "マイナンバーカードをお持ちの場合" }
+    ],
+    "show_waste_link": true,
+    "source_checked_at": "2026-08-28"
+  },
+  {
+    "event_id": "birth",
+    "display_name": "子どもが生まれたとき",
+    "aliases": [
+      "子どもが生まれた",
+      "赤ちゃんが生まれた",
+      "出産した",
+      "子供が生まれた",
+      "出産の手続き"
+    ],
+    "summary": "大府市内でお子さんが生まれたときに確認する主な手続です。",
+    "related_procedures": [
+      { "procedure_id": "obu-proc-07", "condition_label": "多くの方が必要" },
+      { "procedure_id": "obu-proc-08", "condition_label": "多くの方が対象" },
+      { "procedure_id": "obu-proc-09", "condition_label": "国民健康保険に加入する世帯の場合" }
+    ],
+    "show_waste_link": false,
+    "source_checked_at": "2026-08-28"
+  },
+  {
+    "event_id": "death",
+    "display_name": "家族が亡くなったとき",
+    "aliases": [
+      "家族が亡くなった",
+      "身内が亡くなった",
+      "家族が死んだ",
+      "親が亡くなった",
+      "死亡の手続き"
+    ],
+    "summary": "ご家族が亡くなったときに確認する主な手続です。",
+    "related_procedures": [
+      { "procedure_id": "obu-proc-12", "condition_label": "多くの方が必要" },
+      { "procedure_id": "obu-proc-10", "condition_label": "故人が国民健康保険に加入していた場合" }
+    ],
+    "show_waste_link": false,
+    "source_checked_at": "2026-08-28"
+  }
+]
