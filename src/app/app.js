@@ -252,12 +252,21 @@
       `;
     }
 
+    // status "UNCONFIRMED" 品目はcategoryが実在の分別区分ではなく「未確認」を表す
+    // プレースホルダ（例: obu-0006）。通常の「◯◯として出してください」テンプレートに
+    // 流し込むと「未確認として出してください」という自己矛盾した指示文になるため、
+    // 分別区分を断定しない文面に分岐する。conditions等のデータそのものは変更しない。
+    const conclusionHtml =
+      it.status === "UNCONFIRMED"
+        ? `<div class="conclusion unresolved-conclusion"><strong>分別区分：未確認</strong> ${escapeHtml(it.conditions || "")} お手数ですが下記の担当窓口へ直接お問い合わせください。</div>`
+        : `<div class="conclusion"><strong>${escapeHtml(it.category)}</strong>として出してください。${escapeHtml(it.conditions || "")}</div>`;
+
     return `
       <a class="back-link" data-back="1">← 検索結果に戻る</a>
       <div class="card">
         <h2>${escapeHtml(it.display_name)} ${statusBadge(it.status)}</h2>
         ${freshnessBannerHtml({ riskLevel, freshness })}
-        <div class="conclusion"><strong>${escapeHtml(it.category)}</strong>として出してください。${escapeHtml(it.conditions || "")}</div>
+        ${conclusionHtml}
         <dl>
           <div class="row"><dt>出し方</dt><dd>${escapeHtml(it.how_to_dispose)}</dd></div>
           <div class="row"><dt>収集/持込み</dt><dd>${escapeHtml(it.collection_or_dropoff)}</dd></div>
@@ -266,7 +275,7 @@
           ${it.danger_notes && it.danger_notes !== "該当なし" ? `<div class="row"><dt>注意事項</dt><dd class="danger-notes">⚠️ ${escapeHtml(it.danger_notes)}</dd></div>` : ""}
           ${it.battery_notes && it.battery_notes !== "該当なし" ? `<div class="row"><dt>電池関連</dt><dd>${escapeHtml(it.battery_notes)}</dd></div>` : ""}
           <div class="row"><dt>サイズ基準</dt><dd>${escapeHtml(it.size_rule)}<br /><span style="color:var(--text-sub);font-size:12px;">${escapeHtml(it.effective_rule)}</span></dd></div>
-          <div class="row"><dt>適用期間</dt><dd>${escapeHtml(it.valid_from || "")} 〜 ${escapeHtml(it.valid_to || "現在も継続")}（${escapeHtml(it.rule_version)}）</dd></div>
+          ${versionCount > 1 ? `<div class="row"><dt>適用期間</dt><dd>${escapeHtml(it.valid_from || "")} 〜 ${escapeHtml(it.valid_to || "現在も継続")}</dd></div>` : ""}
           <div class="row"><dt>担当</dt><dd>${escapeHtml(it.department)}<div class="phone-block" style="margin-top:6px;">${it.phone ? `<a href="tel:${it.phone.replace(/[^0-9]/g, "")}">${escapeHtml(it.phone)}</a>` : "未確認"}</div></dd></div>
           <div class="row"><dt>公式情報</dt><dd><a class="official-link" href="${it.official_url}" target="_blank" rel="noopener">${escapeHtml(it.official_page_title)}</a></dd></div>
           <div class="row"><dt>確認日</dt><dd>${escapeHtml(it.source_checked_at)}</dd></div>
@@ -336,6 +345,7 @@
       <a class="back-link" data-back="1">← 検索結果に戻る</a>
       <div class="card life-event-card">
         <h2>${escapeHtml(e.display_name)}</h2>
+        ${e.summary ? `<div class="life-event-summary">${escapeHtml(e.summary)}</div>` : ""}
         <div class="conclusion">${escapeHtml(LIFE_EVENT_CAUTION)}</div>
         <div class="section-title" style="margin:14px 4px 8px;">まず確認すること</div>
         <div class="related-proc-list">${items}</div>
@@ -384,6 +394,7 @@
           <div class="date-picker-row">
             検索基準日:
             <input type="date" id="as-of-date" value="${state.asOfDate}" />
+            <span class="date-picker-note">（ルール変更日をまたいで確認したいときに変更してください。通常は変更不要です）</span>
           </div>
           ${eventResults.length ? `<div class="section-title">生活イベント（${eventResults.length}件）</div><div class="result-list">${eventResults.map(eventResultItem).join("")}</div>` : ""}
           ${wasteResults.length ? `<div class="section-title">ごみ・資源（${wasteResults.length}件）</div><div class="result-list">${wasteResults.map(wasteResultItem).join("")}</div>` : ""}
@@ -399,6 +410,7 @@
         <div class="date-picker-row">
           検索基準日:
           <input type="date" id="as-of-date" value="${state.asOfDate}" />
+          <span class="date-picker-note">（ルール変更日をまたいで確認したいときに変更してください。通常は変更不要です）</span>
         </div>
         <div class="category-chip-row">
           <button data-category="" class="${!state.categoryFilter ? "active" : ""}">すべて</button>
@@ -436,6 +448,11 @@
         </div>
       `;
     } else {
+      // 本サイトは検索頻度等のアクセス解析を一切収集していない（プライバシー優先の
+      // 静的サイト）ため、検索実績に基づく「人気」表示はできない。代わりに
+      // danger_notes が実在する品目（発火・破損等の実際の注意事項があるもの）
+      // だけを、その注意事項に基づいて表示する。
+      const cautionItems = activeItems.filter((i) => i.danger_notes && i.danger_notes !== "該当なし").slice(0, 5);
       body = `
         ${renderPriorityNav()}
         <div class="beta-notice">
@@ -452,8 +469,12 @@
               </div>`
             : ""
         }
-        <div class="section-title">よく検索される品目</div>
-        <div class="result-list">${activeItems.slice(0, 5).map(wasteResultItem).join("")}</div>
+        ${
+          cautionItems.length
+            ? `<div class="section-title">特に注意が必要な品目</div>
+              <div class="result-list">${cautionItems.map(wasteResultItem).join("")}</div>`
+            : ""
+        }
       `;
     }
 

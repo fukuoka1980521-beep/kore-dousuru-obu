@@ -119,6 +119,7 @@ main { padding: 8px 16px 24px; }
 }
 .card h2 { font-size: 18px; margin: 0 0 4px; }
 .card .conclusion { font-size: 15px; line-height: 1.6; background: #eef7f1; border-left: 4px solid var(--brand); padding: 10px 12px; border-radius: 8px; margin: 10px 0; }
+.card .conclusion.unresolved-conclusion { background: #fde5e2; border-left-color: var(--danger); }
 .card dl { margin: 0; }
 .card dl .row { display: flex; padding: 9px 0; border-top: 1px solid var(--border); }
 .card dl .row:first-child { border-top: none; }
@@ -160,8 +161,9 @@ main { padding: 8px 16px 24px; }
 
 .site-copyright { font-size: 11px; color: var(--text-sub); margin-top: 8px; }
 
-.date-picker-row { display:flex; align-items:center; gap:8px; font-size: 12px; color: var(--text-sub); margin: 4px 4px 0; }
+.date-picker-row { display:flex; flex-wrap: wrap; align-items:center; gap:8px; font-size: 12px; color: var(--text-sub); margin: 4px 4px 0; }
 .date-picker-row input { font-size: 12px; }
+.date-picker-note { color: var(--text-sub); }
 
 .category-chip-row { display: flex; gap: 8px; overflow-x: auto; padding: 10px 4px 4px; }
 .category-chip-row button {
@@ -194,6 +196,7 @@ main { padding: 8px 16px 24px; }
 .event-result-item { border-left: 4px solid var(--brand); }
 
 .life-event-card .conclusion { background: #eef7f1; }
+.life-event-summary { font-size: 14px; line-height: 1.6; color: var(--text-sub); margin: 4px 4px 0; }
 .related-proc-list { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
 .related-proc-card {
   border: 1px solid var(--border);
