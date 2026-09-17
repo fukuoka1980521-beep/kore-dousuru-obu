@@ -9,10 +9,26 @@ export const REVIEW_INTERVAL_DAYS = Object.freeze({ HIGH: 30, MEDIUM: 90, LOW: 3
 
 const HIGH_RISK_CATEGORIES = new Set(['電池類', '発火性危険物']);
 
+// A category can append a parenthetical qualifier to a high-risk category's
+// own name (e.g. "電池類（市収集対象外）" — still batteries, just not
+// collected curbside). Exact-match alone silently drops these as non-risk.
+// Match the category's own primary token exactly, or as the prefix of a
+// "（...）"-qualified variant. Deliberately NOT a plain substring test: that
+// would also match an unrelated category that merely contains "電池類"
+// somewhere in the middle of a compound name, which no current data does
+// but isn't a safe general assumption.
+function isHighRiskCategory(category) {
+  if (!category) return false;
+  for (const riskCategory of HIGH_RISK_CATEGORIES) {
+    if (category === riskCategory || category.startsWith(`${riskCategory}（`)) return true;
+  }
+  return false;
+}
+
 // riskLevel is an internal classification, not something any municipality publishes.
 export function computeRiskLevel(item, { isDateDependent = false } = {}) {
   if (item?.danger_notes && item.danger_notes !== '該当なし') return 'HIGH';
-  if (HIGH_RISK_CATEGORIES.has(item?.category)) return 'HIGH';
+  if (isHighRiskCategory(item?.category)) return 'HIGH';
   if (isDateDependent) return 'HIGH';
   if (item?.application_required || item?.category === '粗大ごみ') return 'MEDIUM';
   return 'LOW';

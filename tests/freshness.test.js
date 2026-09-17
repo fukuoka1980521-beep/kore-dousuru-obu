@@ -29,6 +29,24 @@ test('LOW/MEDIUM stale does not trip the HIGH-risk fail-safe', () => {
   assert.equal(isHighRiskStale('LOW', f.status), false);
 });
 
+test('a high-risk category with a parenthetical qualifier is still classified HIGH', () => {
+  // Regression for obu-0014/obu-0015 ("電池類（市収集対象外）"): a plain
+  // Set.has() exact match silently dropped these two real waste-item
+  // records (button batteries / lead-acid batteries excluded from curbside
+  // collection) to LOW risk.
+  const risk = computeRiskLevel({ category: '電池類（市収集対象外）', danger_notes: '該当なし' });
+  assert.equal(risk, 'HIGH');
+});
+
+test('an unrelated category sharing the same qualifier suffix is not swept into HIGH', () => {
+  // "家電リサイクル法対象品（市収集対象外）" is real obu data that shares the
+  // "（市収集対象外）" qualifier with the battery category above but is not
+  // itself high-risk — guards against overcorrecting into a loose match on
+  // the qualifier instead of the risk category's own name.
+  const risk = computeRiskLevel({ category: '家電リサイクル法対象品（市収集対象外）', danger_notes: '該当なし' });
+  assert.notEqual(risk, 'HIGH');
+});
+
 test('date-dependent items (rule changes across a boundary) are classified HIGH', () => {
   const risk = computeRiskLevel({ category: '粗大ごみ', danger_notes: '該当なし' }, { isDateDependent: true });
   assert.equal(risk, 'HIGH');
