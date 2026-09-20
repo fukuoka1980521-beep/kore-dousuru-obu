@@ -1,0 +1,1950 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>これどうする？ 半田市版｜非公式・実証版</title>
+<meta name="description" content="半田市の公式情報をもとに、ごみの出し方や主要な生活手続を「次に何をすればよいか」の形で確認する非公式の実証サービスです。最終確認は半田市公式情報をご利用ください。" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="これどうする？ 半田市版" />
+<meta property="og:title" content="これどうする？ 半田市版｜非公式・実証版" />
+<meta property="og:description" content="半田市の公式情報をもとに、ごみの出し方や主要な生活手続を「次に何をすればよいか」の形で確認する非公式の実証サービスです。最終確認は半田市公式情報をご利用ください。" />
+<meta property="og:url" content="https://fukuoka1980521-beep.github.io/kore-dousuru-obu/handa/" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="これどうする？ 半田市版｜非公式・実証版" />
+<meta name="twitter:description" content="半田市の公式情報をもとに、ごみの出し方や主要な生活手続を「次に何をすればよいか」の形で確認する非公式の実証サービスです。最終確認は半田市公式情報をご利用ください。" />
+<style>
+:root {
+  --bg: #f5f6f4;
+  --surface: #ffffff;
+  --text: #1f2622;
+  --text-sub: #5a6560;
+  --brand: #1b6f4c;
+  --brand-dark: #114c34;
+  --accent: #e08b1d;
+  --danger: #c0392b;
+  --border: #e1e4e0;
+  --radius: 14px;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+  font-size: 16px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-text-size-adjust: 100%;
+}
+
+.app-shell { max-width: 480px; margin: 0 auto; min-height: 100vh; background: var(--bg); padding-bottom: 72px; }
+
+header.app-header {
+  background: var(--brand);
+  color: #fff;
+  padding: 14px 16px 18px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+header.app-header .muni-name { font-size: 13px; opacity: 0.85; letter-spacing: 0.02em; }
+header.app-header .app-title { font-size: 22px; font-weight: 700; margin-top: 2px; }
+.unofficial-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 999px;
+  padding: 1px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-left: 4px;
+}
+
+.search-box {
+  margin-top: 12px;
+  display: flex;
+  background: #fff;
+  border-radius: 999px;
+  padding: 10px 14px;
+  box-shadow: var(--shadow);
+}
+.search-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  color: var(--text);
+}
+.search-box button { border: none; background: var(--brand); color: #fff; border-radius: 999px; padding: 6px 12px; font-size: 13px; font-weight: 700; cursor: pointer; }
+
+.priority-nav {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 14px 16px 4px;
+}
+.priority-nav button {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 4px;
+  text-align: center;
+  font-size: 13px;
+  cursor: pointer;
+}
+.priority-nav button .icon { font-size: 22px; display: block; margin-bottom: 4px; }
+
+main { padding: 8px 16px 24px; }
+
+.section-title { font-size: 14px; font-weight: 700; color: var(--text-sub); margin: 18px 4px 8px; }
+
+.result-list { display: flex; flex-direction: column; gap: 10px; }
+
+.result-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+.result-item .name { font-weight: 700; font-size: 15px; }
+.result-item .category { font-size: 12px; color: var(--text-sub); margin-top: 2px; }
+
+.status-badge {
+  display: inline-block;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.status-badge.confirmed { background: #e3f3ea; color: var(--brand-dark); }
+.status-badge.partial { background: #fdeecb; color: #8a5a00; }
+.status-badge.unconfirmed { background: #fde5e2; color: var(--danger); }
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px 18px 20px;
+  margin-top: 8px;
+}
+.card h2 { font-size: 18px; margin: 0 0 4px; }
+.card .conclusion { font-size: 15px; line-height: 1.6; background: #eef7f1; border-left: 4px solid var(--brand); padding: 10px 12px; border-radius: 8px; margin: 10px 0; }
+.card dl { margin: 0; }
+.card dl .row { display: flex; padding: 9px 0; border-top: 1px solid var(--border); }
+.card dl .row:first-child { border-top: none; }
+.card dl dt { flex: 0 0 92px; font-size: 12px; color: var(--text-sub); padding-top: 2px; }
+.card dl dd { flex: 1; min-width: 0; margin: 0; font-size: 14px; line-height: 1.55; overflow-wrap: break-word; word-break: break-word; }
+.card .official-link { display: inline-block; margin-top: 4px; color: var(--brand); text-decoration: underline; font-size: 13px; overflow-wrap: break-word; word-break: break-word; }
+.card .danger-notes { color: var(--danger); font-weight: 600; }
+.card .phone-block { background: #fff8ea; border-radius: 8px; padding: 8px 10px; font-size: 14px; overflow-wrap: break-word; word-break: break-word; }
+.card .phone-block a { color: inherit; font-weight: 700; overflow-wrap: break-word; word-break: break-word; }
+
+.back-link { display: inline-block; margin: 12px 4px; color: var(--brand); font-size: 14px; cursor: pointer; }
+
+.zero-result { text-align: center; padding: 40px 12px; color: var(--text-sub); }
+.zero-result .suggestions { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.zero-result .suggestions button { border: 1px solid var(--border); background: #fff; border-radius: 999px; padding: 6px 14px; font-size: 13px; }
+.zero-result .official-box { margin-top: 20px; background: var(--surface); border-radius: var(--radius); padding: 16px; text-align: left; }
+
+.notice-banner {
+  background: #fff3cd;
+  color: #7a5b00;
+  font-size: 12px;
+  padding: 8px 16px;
+  text-align: center;
+}
+
+.beta-notice {
+  background: #eef7f1;
+  border: 1px solid var(--brand);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  margin: 14px 4px 4px;
+  font-size: 13px;
+  color: var(--brand-dark);
+  line-height: 1.5;
+}
+.beta-notice strong { font-size: 13px; }
+
+.feedback-privacy-note { color: var(--danger); }
+
+.site-copyright { font-size: 11px; color: var(--text-sub); margin-top: 8px; }
+
+.date-picker-row { display:flex; align-items:center; gap:8px; font-size: 12px; color: var(--text-sub); margin: 4px 4px 0; }
+.date-picker-row input { font-size: 12px; }
+
+.search-result-summary {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--brand-dark);
+  background: #eef7f1;
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin: 4px 4px 8px;
+}
+
+.category-chip-row { display: flex; gap: 8px; overflow-x: auto; padding: 10px 4px 4px; }
+.category-chip-row button {
+  flex: 0 0 auto;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-sub);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+.category-chip-row button.active { background: var(--brand); border-color: var(--brand); color: #fff; font-weight: 700; }
+
+/* 生活イベント: 「ホームから出来事を選ぶ」導線と、イベント詳細内の
+   確認項目チェックリスト。procedureのデータ(期限等)は複製せず参照のみ。 */
+.event-chip-row { display: flex; flex-wrap: wrap; gap: 8px; padding: 10px 4px 4px; }
+.event-chip-row button {
+  flex: 0 0 auto;
+  border: 1px solid var(--brand);
+  background: #eef7f1;
+  color: var(--brand-dark);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.event-result-item { border-left: 4px solid var(--brand); }
+
+.life-event-card .conclusion { background: #eef7f1; }
+.related-proc-list { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+.related-proc-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  background: var(--surface);
+}
+.related-proc-name { font-weight: 700; font-size: 15px; }
+.related-proc-condition { font-size: 12px; color: var(--brand-dark); background: #eef7f1; display: inline-block; padding: 2px 8px; border-radius: 999px; margin-top: 4px; }
+.related-proc-deadline { font-size: 13px; color: var(--text-sub); margin-top: 6px; }
+.related-proc-confirm {
+  margin-top: 10px;
+  border: none;
+  background: var(--brand);
+  color: #fff;
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.event-waste-link {
+  display: block;
+  width: 100%;
+  margin-top: 14px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  border-radius: var(--radius);
+  padding: 12px;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+}
+
+footer.app-footer {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  max-width: 480px; margin: 0 auto;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 0 max(8px, env(safe-area-inset-bottom));
+}
+footer.app-footer button { background: none; border: none; font-size: 11px; color: var(--text-sub); display:flex; flex-direction:column; align-items:center; gap:2px; }
+footer.app-footer button.active { color: var(--brand); font-weight: 700; }
+footer.app-footer button .icon { font-size: 20px; }
+
+.deeplink-error {
+  background: #fde5e2;
+  color: var(--danger);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  font-size: 13px;
+  margin: 8px 4px 14px;
+}
+
+.fuzzy-suggestions { display: flex; flex-wrap: wrap; gap: 8px; }
+.fuzzy-candidate {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  border: 1px solid var(--border);
+  background: #fff;
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: left;
+}
+.fuzzy-candidate .name { font-weight: 700; }
+.fuzzy-candidate .category { font-size: 11px; color: var(--text-sub); }
+
+.feedback-box { margin-top: 16px; text-align: center; }
+.feedback-link {
+  display: inline-block;
+  color: var(--brand);
+  text-decoration: underline;
+  font-size: 13px;
+}
+.feedback-note { font-size: 11px; color: var(--text-sub); margin-top: 4px; }
+
+.freshness-banner {
+  background: #fdeecb;
+  color: #8a5a00;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 13px;
+  margin: 10px 0;
+  line-height: 1.5;
+}
+.freshness-policy-note { display: block; font-size: 11px; color: var(--text-sub); margin-top: 4px; }
+
+.stale-highrisk-banner {
+  background: #fde5e2;
+  color: var(--danger);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin: 10px 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.stale-highrisk-banner strong { font-size: 15px; }
+
+.share-block { margin-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+.share-btn {
+  align-self: flex-start;
+  border: 1px solid var(--border);
+  background: #fff;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 13px;
+  cursor: pointer;
+  color: var(--text);
+}
+.share-url-fallback {
+  width: 100%;
+  font-size: 12px;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-sub);
+  background: var(--bg);
+}
+
+.office-finder {
+  margin-top: 18px;
+  border-top: 1px dashed var(--border);
+  padding-top: 14px;
+}
+.office-finder-controls { display: flex; flex-direction: column; gap: 10px; }
+.office-finder-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--text-sub);
+}
+.office-finder-field select {
+  font-size: 15px;
+  padding: 10px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+}
+.office-finder-reset { margin: 10px 4px 0; font-size: 13px; }
+.office-result { margin-top: 12px; }
+.office-result-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  background: var(--surface);
+  margin-top: 8px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+.office-role-label {
+  font-size: 12px;
+  color: var(--brand-dark);
+  background: #eef7f1;
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-bottom: 6px;
+}
+.office-name { font-weight: 700; font-size: 15px; }
+.office-address { font-size: 13px; color: var(--text-sub); margin-top: 4px; }
+.office-phone { margin-top: 4px; font-size: 14px; }
+.office-phone a { color: inherit; font-weight: 700; }
+.office-hours { font-size: 13px; color: var(--text-sub); margin-top: 4px; }
+.office-links { display: flex; gap: 14px; margin-top: 8px; flex-wrap: wrap; }
+.office-links .official-link { margin-top: 0; }
+.office-hours-caution {
+  font-size: 12px;
+  color: var(--text-sub);
+  background: #fff8ea;
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-top: 10px;
+}
+.office-result-unknown, .office-result-split {
+  font-size: 14px;
+  line-height: 1.6;
+}
+.office-result-unknown p, .office-result-split p { margin: 0 0 6px; }
+
+
+
+/* Feynman/action-first UX: resident language first, implementation metadata later. */
+.priority-nav button { min-height: 74px; line-height: 1.25; }
+.quick-query-row { display: flex; flex-wrap: wrap; gap: 8px; padding: 2px 4px 4px; }
+.quick-query-row button {
+  border: 1px solid var(--brand); background: #fff; color: var(--brand-dark);
+  border-radius: 999px; padding: 8px 13px; font-size: 13px; font-weight: 700; cursor: pointer;
+}
+.single-result-note {
+  margin: 8px 4px 4px; padding: 8px 10px; border-radius: 8px;
+  background: #eef7f1; color: var(--text-sub); font-size: 12px;
+}
+.date-picker-human { align-items: flex-start; flex-wrap: wrap; background: #fff8ea; padding: 8px 10px; border-radius: 8px; }
+.date-picker-human strong { flex: 1 1 100%; color: #7a5b00; font-size: 12px; }
+.action-lead {
+  font-size: 15px; line-height: 1.65; background: #eef7f1; border-left: 4px solid var(--brand);
+  padding: 11px 12px; border-radius: 8px; margin: 12px 0;
+}
+.action-lead-label { font-size: 12px; font-weight: 700; color: var(--brand-dark); margin-bottom: 2px; }
+.action-grid { display: grid; grid-template-columns: 1fr; gap: 8px; margin: 10px 0 12px; }
+.action-item { display: flex; flex-direction: column; gap: 4px; border: 1px solid var(--border); border-radius: 10px; padding: 11px 12px; background: #fff; }
+.action-item strong { font-size: 13px; }
+.action-item span { font-size: 14px; line-height: 1.55; overflow-wrap: break-word; }
+.procedure-method { margin-top: 12px; border: 1px solid var(--border); border-radius: 10px; padding: 11px 12px; font-size: 14px; line-height: 1.55; }
+.procedure-method strong { display: block; margin-bottom: 4px; font-size: 13px; }
+.source-details { margin-top: 12px; border-top: 1px solid var(--border); padding-top: 10px; }
+.source-details summary { cursor: pointer; color: var(--brand); font-weight: 700; font-size: 13px; padding: 4px 0 8px; }
+.event-summary { font-size: 14px; line-height: 1.6; color: var(--text-sub); margin: 6px 0 10px; }
+.intent-choice-panel { margin-top: 6px; }
+
+/* スマホでの検索UX限定修正: 検索欄にフォーカス中（＝ソフトウェアキーボード表示中の
+   可能性が高い間）だけ、免責バナーを一時的に隠して縦方向の余白を検索結果側へ譲る。
+   899px以下のみに閉じているためPC表示（900px以上）は一切変更されない。 */
+@media (max-width: 899px) {
+  .app-shell:focus-within .notice-banner { display: none; }
+}
+
+/* Desktop: the mobile-first shell stays intact below this width, but on a
+   PC viewport a fixed 480px column reads as an oversized empty margin.
+   Widen the column and let result lists breathe into two columns — no
+   sidebar, no dashboard chrome, no separate desktop design. */
+@media (min-width: 900px) {
+  .app-shell { max-width: 880px; }
+  footer.app-footer { max-width: 880px; }
+  .result-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .fuzzy-suggestions { gap: 10px; }
+  .office-finder-controls { flex-direction: row; gap: 16px; }
+  .office-finder-field { flex: 1; }
+}
+
+
+/* Handa: one-glance collection schedule */
+.today-garbage { margin: 12px 0; }
+.today-garbage h2 { margin-bottom: 8px; }
+.today-garbage-answer { padding: 12px; border-radius: 10px; background: #eef7f1; font-size: 16px; line-height: 1.6; margin-bottom: 10px; }
+.collection-district-label { display: flex; flex-direction: column; gap: 6px; font-weight: 700; font-size: 13px; }
+.collection-district-label select { min-height: 44px; border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; background: #fff; font-size: 16px; }
+.today-garbage-note { color: var(--text-sub); font-size: 12px; line-height: 1.55; margin-top: 8px; }
+.today-garbage-links { display: flex; flex-direction: column; gap: 6px; margin-top: 9px; }
+
+</style>
+</head>
+<body>
+<div id="app">読み込み中…</div>
+<script>
+window.__HANDA_EMBEDDED__={
+  config:{"municipality_id":"handa","display_name":"半田市","display_name_full":"半田市版","app_title":"これどうする？","priority_nav":[{"key":"gomi","label":"捨てたい","icon":"🗑️"},{"key":"hikkoshi","label":"引っ越した","icon":"🏠"},{"key":"juminhyo","label":"住民票がほしい","icon":"📄"},{"key":"kosodate","label":"子どものこと","icon":"👶"}],"contact":{"name":"半田市役所（代表）","phone":"0569-21-3111","hours":"平日9:00〜16:00（水曜日は19:00まで）","url":"https://www.city.handa.lg.jp/"},"data":{"waste_items":"../../municipalities/handa/data/waste_items.json","procedures":"../../municipalities/handa/data/procedures.json","life_events":"../../municipalities/handa/data/life_events.json","collection_schedule":"../../municipalities/handa/data/collection_schedule.json"},"disclaimer":"本サイトは半田市の公式サイトではありません。最終的な判断は必ず半田市公式情報・窓口でご確認ください。","not_official_notice":"半田市の市章・公式キャラクターは使用していません。"},
+  waste:[{"item_id":"hnd-burn-01","municipality_id":"handa","display_name":"生ごみ","aliases":["生ごみ","台所ごみ"],"category":"燃やせるごみ","conditions":"水切りをして出す。","how_to_dispose":"半田市指定ごみ袋（グリーン）に入れ、燃やせるごみの収集日の朝8時までに出す。","collection_or_dropoff":"ごみステーション（地区別の燃やせるごみ収集日）","application_required":false,"fee":"指定ごみ袋代が必要","danger_notes":"該当なし","battery_notes":"該当なし","size_rule":"指定袋に入るもの。","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003067/1003073/1003074.html","official_page_title":"燃やせるごみの出し方｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-burn-02","municipality_id":"handa","display_name":"汚れた紙・布類","aliases":["汚れた紙","汚れた布","ティッシュ","使用済みマスク"],"category":"燃やせるごみ","conditions":"資源として出せない汚れた紙・布。","how_to_dispose":"半田市指定ごみ袋（グリーン）に入れ、燃やせるごみの収集日の朝8時までに出す。","collection_or_dropoff":"ごみステーション（地区別の燃やせるごみ収集日）","application_required":false,"fee":"指定ごみ袋代が必要","danger_notes":"該当なし","battery_notes":"該当なし","size_rule":"指定袋に入るもの。","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003067/1003073/1003074.html","official_page_title":"燃やせるごみの出し方｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-burn-03","municipality_id":"handa","display_name":"かばん・靴","aliases":["かばん","バッグ","靴","くつ"],"category":"燃やせるごみ","conditions":"革・ゴム製品を含む。","how_to_dispose":"半田市指定ごみ袋（グリーン）に入れ、燃やせるごみの収集日の朝8時までに出す。","collection_or_dropoff":"ごみステーション（地区別の燃やせるごみ収集日）","application_required":false,"fee":"指定ごみ袋代が必要","danger_notes":"該当なし","battery_notes":"該当なし","size_rule":"指定袋に入るもの。","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003067/1003073/1003074.html","official_page_title":"燃やせるごみの出し方｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-burn-04","municipality_id":"handa","display_name":"硬質プラスチック製品","aliases":["バケツ","おもちゃ","タッパー","タッパーウェア","プラスチックハンガー","洗濯かご"],"category":"燃やせるごみ","conditions":"商品そのものの硬いプラスチック製品。容器包装とは別区分。","how_to_dispose":"半田市指定ごみ袋（グリーン）に入れ、燃やせるごみの収集日の朝8時までに出す。 リサイクルセンターへ直接持ち込む場合は資源として無料。","collection_or_dropoff":"ごみステーション（地区別の燃やせるごみ収集日）","application_required":false,"fee":"指定ごみ袋代が必要","danger_notes":"該当なし","battery_notes":"該当なし","size_rule":"指定袋に入るもの。","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003067/1003073/1003074.html","official_page_title":"燃やせるごみの出し方｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-burn-05","municipality_id":"handa","display_name":"布団・毛布","aliases":["布団","ふとん","毛布","こたつ布団"],"category":"燃やせるごみ","conditions":"1枚ごとに折りたたむ。","how_to_dispose":"燃やせるごみの収集日に、半田市指定ごみ袋（グリーン）の大サイズを巻き付け、ひもで縛って朝8時までに出す。","collection_or_dropoff":"ごみステーション（地区別の燃やせるごみ収集日）","application_required":false,"fee":"指定ごみ袋代が必要","danger_notes":"該当なし","battery_notes":"該当なし","size_rule":"折りたたんで指定方法で出す。","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003067/1003073/1003074.html","official_page_title":"燃やせるごみの出し方｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-burn-06","municipality_id":"handa","display_name":"紙おむつ","aliases":["紙おむつ","おむつ","オムツ"],"category":"燃やせるごみ","conditions":"中身が分かるようにする。","how_to_dispose":"透明・半透明の袋に入れ、袋に「おむつ」と記載するなどして、燃やせるごみの収集日に出す。","collection_or_dropoff":"ごみステーション（地区別の燃やせるごみ収集日）","application_required":false,"fee":"指定ごみ袋代が必要","danger_notes":"該当なし","battery_notes":"該当なし","size_rule":"通常の指定袋でなく透明・半透明袋で可。","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003067/1003073/1003074.html","official_page_title":"燃やせるごみの出し方｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-burn-07","municipality_id":"handa","display_name":"剪定枝・竹","aliases":["剪定枝","枝","竹","木の枝"],"category":"燃やせるごみ","conditions":"直径5cm未満。","how_to_dispose":"長さ60cm以下・幅40cm以下にして、指定ごみ袋（グリーン）大を巻き付け、ひもで縛って燃やせるごみの日に出す。リサイクルセンター等への持込みは資源として無料。","collection_or_dropoff":"ごみステーション（地区別の燃やせるごみ収集日）","application_required":false,"fee":"指定ごみ袋代が必要","danger_notes":"該当なし","battery_notes":"該当なし","size_rule":"直径5cm未満、長さ60cm以下、幅40cm以下。","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003067/1003073/1003074.html","official_page_title":"燃やせるごみの出し方｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-nonburn-01","municipality_id":"handa","display_name":"陶磁器","aliases":["陶磁器","茶碗","皿","植木鉢"],"category":"燃やせないごみ","conditions":"陶磁器類。","how_to_dispose":"半田市指定ごみ袋（グレー）に入れ、燃やせないごみ収集日の朝8時までに出す。","collection_or_dropoff":"ごみステーション（地区別の燃やせないごみ収集日）","application_required":false,"fee":"指定ごみ袋代が必要","danger_notes":"該当なし","battery_notes":"該当なし","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003067/1003073/1003075.html","official_page_title":"燃やせないごみの出し方｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-nonburn-02","municipality_id":"handa","display_name":"ガラス製品","aliases":["ガラス","コップ","ガラス製品"],"category":"燃やせないごみ","conditions":"割れ物はけがをしないように扱う。","how_to_dispose":"半田市指定ごみ袋（グレー）に入れ、燃やせないごみ収集日の朝8時までに出す。","collection_or_dropoff":"ごみステーション（地区別の燃やせないごみ収集日）","application_required":false,"fee":"指定ごみ袋代が必要","danger_notes":"割れたガラスは安全に包む。","battery_notes":"該当なし","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003067/1003073/1003075.html","official_page_title":"燃やせないごみの出し方｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-nonburn-03","municipality_id":"handa","display_name":"刃物","aliases":["包丁","ナイフ","刃物"],"category":"燃やせないごみ","conditions":"刃を保護して出す。","how_to_dispose":"半田市指定ごみ袋（グレー）に入れ、燃やせないごみ収集日の朝8時までに出す。","collection_or_dropoff":"ごみステーション（地区別の燃やせないごみ収集日）","application_required":false,"fee":"指定ごみ袋代が必要","danger_notes":"刃を保護して、収集作業員がけがをしない状態にする。","battery_notes":"該当なし","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003067/1003073/1003075.html","official_page_title":"燃やせないごみの出し方｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-nonburn-04","municipality_id":"handa","display_name":"金属類","aliases":["鍋","フライパン","やかん","金属","工具","ねじ"],"category":"燃やせないごみ","conditions":"指定袋に入る金属類。リサイクルセンターへ持込めば資源として無料。","how_to_dispose":"半田市指定ごみ袋（グレー）に入れ、燃やせないごみ収集日の朝8時までに出す。","collection_or_dropoff":"ごみステーション（地区別の燃やせないごみ収集日）","application_required":false,"fee":"指定ごみ袋代が必要","danger_notes":"該当なし","battery_notes":"該当なし","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003067/1003073/1003075.html","official_page_title":"燃やせないごみの出し方｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-nonburn-05","municipality_id":"handa","display_name":"電球・LED電球","aliases":["電球","LED電球","LED蛍光管"],"category":"燃やせないごみ","conditions":"蛍光管（水銀使用）ではない電球・LED製品。","how_to_dispose":"半田市指定ごみ袋（グレー）に入れ、燃やせないごみ収集日の朝8時までに出す。","collection_or_dropoff":"ごみステーション（地区別の燃やせないごみ収集日）","application_required":false,"fee":"指定ごみ袋代が必要","danger_notes":"割れないよう注意。","battery_notes":"該当なし","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003067/1003073/1003075.html","official_page_title":"燃やせないごみの出し方｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-plastic-01","municipality_id":"handa","display_name":"プラスチック製容器・包装","aliases":["プラ容器","プラスチック容器包装","カップ容器","パック容器","チューブ容器"],"category":"プラスチック製容器包装","conditions":"商品が入っていたプラスチック製の容器・包装。中身を空にして軽く洗う。汚れが落ちないものは燃やせるごみ。","how_to_dispose":"半田市指定資源回収袋（白色）に入れ、収集日の朝8時までに出す。","collection_or_dropoff":"ごみステーション（地区別のプラスチック製容器包装収集日）","application_required":false,"fee":"指定資源回収袋代が必要","danger_notes":"該当なし","battery_notes":"該当なし","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003067/1003073/1003076.html","official_page_title":"プラスチック製容器包装の出し方｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-plastic-02","municipality_id":"handa","display_name":"食品トレー","aliases":["食品トレー","トレー","白色トレー"],"category":"プラスチック製容器包装","conditions":"商品が入っていたプラスチック製の容器・包装。中身を空にして軽く洗う。汚れが落ちないものは燃やせるごみ。","how_to_dispose":"半田市指定資源回収袋（白色）に入れ、収集日の朝8時までに出す。","collection_or_dropoff":"ごみステーション（地区別のプラスチック製容器包装収集日）","application_required":false,"fee":"指定資源回収袋代が必要","danger_notes":"該当なし","battery_notes":"該当なし","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003067/1003073/1003076.html","official_page_title":"プラスチック製容器包装の出し方｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-plastic-03","municipality_id":"handa","display_name":"発泡スチロール","aliases":["発泡スチロール","緩衝材"],"category":"プラスチック製容器包装","conditions":"商品が入っていたプラスチック製の容器・包装。中身を空にして軽く洗う。汚れが落ちないものは燃やせるごみ。","how_to_dispose":"半田市指定資源回収袋（白色）に入れ、収集日の朝8時までに出す。","collection_or_dropoff":"ごみステーション（地区別のプラスチック製容器包装収集日）","application_required":false,"fee":"指定資源回収袋代が必要","danger_notes":"該当なし","battery_notes":"該当なし","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003067/1003073/1003076.html","official_page_title":"プラスチック製容器包装の出し方｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-plastic-04","municipality_id":"handa","display_name":"ペットボトルのラベル・プラ製ふた","aliases":["ペットボトルのラベル","プラふた","プラスチックのふた"],"category":"プラスチック製容器包装","conditions":"商品が入っていたプラスチック製の容器・包装。中身を空にして軽く洗う。汚れが落ちないものは燃やせるごみ。","how_to_dispose":"半田市指定資源回収袋（白色）に入れ、収集日の朝8時までに出す。","collection_or_dropoff":"ごみステーション（地区別のプラスチック製容器包装収集日）","application_required":false,"fee":"指定資源回収袋代が必要","danger_notes":"該当なし","battery_notes":"該当なし","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003067/1003073/1003076.html","official_page_title":"プラスチック製容器包装の出し方｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-paper-01","municipality_id":"handa","display_name":"紙袋・紙箱","aliases":["紙袋","お菓子箱","紙箱"],"category":"紙製容器包装・その他紙類","conditions":"中身を空にし、必要に応じて軽く洗う。汚れが落ちない紙、使用済みティッシュ・マスクは燃やせるごみ。","how_to_dispose":"半田市指定資源回収袋（白色）に入れ、収集日の朝8時までに出す。","collection_or_dropoff":"ごみステーション（地区別の紙製容器包装等収集日）","application_required":false,"fee":"指定資源回収袋代が必要","danger_notes":"該当なし","battery_notes":"該当なし","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003067/1003073/1003080.html","official_page_title":"紙製容器包装・その他紙類の出し方｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-paper-02","municipality_id":"handa","display_name":"レシート・写真・メモ紙","aliases":["レシート","写真","メモ紙"],"category":"紙製容器包装・その他紙類","conditions":"中身を空にし、必要に応じて軽く洗う。汚れが落ちない紙、使用済みティッシュ・マスクは燃やせるごみ。","how_to_dispose":"半田市指定資源回収袋（白色）に入れ、収集日の朝8時までに出す。","collection_or_dropoff":"ごみステーション（地区別の紙製容器包装等収集日）","application_required":false,"fee":"指定資源回収袋代が必要","danger_notes":"該当なし","battery_notes":"該当なし","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003067/1003073/1003080.html","official_page_title":"紙製容器包装・その他紙類の出し方｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-paper-03","municipality_id":"handa","display_name":"封筒・はがき","aliases":["封筒","窓付き封筒","ハガキ","はがき"],"category":"紙製容器包装・その他紙類","conditions":"中身を空にし、必要に応じて軽く洗う。汚れが落ちない紙、使用済みティッシュ・マスクは燃やせるごみ。","how_to_dispose":"半田市指定資源回収袋（白色）に入れ、収集日の朝8時までに出す。","collection_or_dropoff":"ごみステーション（地区別の紙製容器包装等収集日）","application_required":false,"fee":"指定資源回収袋代が必要","danger_notes":"該当なし","battery_notes":"該当なし","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003067/1003073/1003080.html","official_page_title":"紙製容器包装・その他紙類の出し方｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-paper-04","municipality_id":"handa","display_name":"シュレッダーした紙","aliases":["シュレッダーダスト","シュレッダー紙"],"category":"紙製容器包装・その他紙類","conditions":"中身を空にし、必要に応じて軽く洗う。汚れが落ちない紙、使用済みティッシュ・マスクは燃やせるごみ。","how_to_dispose":"半田市指定資源回収袋（白色）に入れ、収集日の朝8時までに出す。","collection_or_dropoff":"ごみステーション（地区別の紙製容器包装等収集日）","application_required":false,"fee":"指定資源回収袋代が必要","danger_notes":"該当なし","battery_notes":"該当なし","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003067/1003073/1003080.html","official_page_title":"紙製容器包装・その他紙類の出し方｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-pet-01","municipality_id":"handa","display_name":"ペットボトル","aliases":["ペットボトル","PETボトル"],"category":"ペットボトル","conditions":"中身を空にして軽くすすぎ、キャップとラベルを外す。","how_to_dispose":"半田市指定資源回収袋に入れて、ペットボトル収集日の朝8時までに出す。","collection_or_dropoff":"ごみステーション（全地区水曜日）","application_required":false,"fee":"指定資源回収袋代が必要","danger_notes":"該当なし","battery_notes":"該当なし","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003067/1003073/1003078.html","official_page_title":"ごみステーションに出せるごみ｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":"ラベルはプラスチック製容器包装へ。キャップは市の回収案内を確認。"},{"item_id":"hnd-fire-01","municipality_id":"handa","display_name":"スプレー缶","aliases":["スプレー缶","エアゾール缶"],"category":"発火性危険ごみ","conditions":"中身を完全に使い切る。穴はあけない。","how_to_dispose":"透明・半透明の袋に入れ「発火性危険ごみ分別シール」を貼り、燃やせないごみの日に出す。燃やせないごみ指定袋は不要。","collection_or_dropoff":"ごみステーション（燃やせないごみの日。通常の不燃ごみと分ける）","application_required":false,"fee":"無料（専用シール配布）","danger_notes":"火災防止のため必ず使い切り、穴をあけない。ガス抜きは風通しのよい屋外で行う。","battery_notes":"該当なし","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003067/1003071.html","official_page_title":"発火性危険ごみ（スプレー缶・ライター）の正しい出し方｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-fire-02","municipality_id":"handa","display_name":"カセットボンベ","aliases":["カセットボンベ","カセットガス"],"category":"発火性危険ごみ","conditions":"中身を完全に使い切る。穴はあけない。","how_to_dispose":"透明・半透明の袋に入れ「発火性危険ごみ分別シール」を貼り、燃やせないごみの日に出す。燃やせないごみ指定袋は不要。","collection_or_dropoff":"ごみステーション（燃やせないごみの日。通常の不燃ごみと分ける）","application_required":false,"fee":"無料（専用シール配布）","danger_notes":"火災防止のため必ず使い切り、穴をあけない。ガス抜きは風通しのよい屋外で行う。","battery_notes":"該当なし","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003067/1003071.html","official_page_title":"発火性危険ごみ（スプレー缶・ライター）の正しい出し方｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-fire-03","municipality_id":"handa","display_name":"使い捨てライター","aliases":["ライター","使い捨てライター"],"category":"発火性危険ごみ","conditions":"中身を完全に使い切る。穴はあけない。","how_to_dispose":"透明・半透明の袋に入れ「発火性危険ごみ分別シール」を貼り、燃やせないごみの日に出す。燃やせないごみ指定袋は不要。","collection_or_dropoff":"ごみステーション（燃やせないごみの日。通常の不燃ごみと分ける）","application_required":false,"fee":"無料（専用シール配布）","danger_notes":"火災防止のため必ず使い切り、穴をあけない。ガス抜きは風通しのよい屋外で行う。","battery_notes":"該当なし","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003067/1003071.html","official_page_title":"発火性危険ごみ（スプレー缶・ライター）の正しい出し方｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-bat-01","municipality_id":"handa","display_name":"乾電池・コイン電池","aliases":["乾電池","単三電池","単四電池","コイン電池"],"category":"電池類","conditions":"ごみステーションには出せない。","how_to_dispose":"乾電池回収容器の設置場所、公共資源回収ステーション、リサイクルセンター等へ持ち込む。","collection_or_dropoff":"回収場所へ持込み","application_required":false,"fee":"無料","danger_notes":"ごみステーションに出すと収集車・処理施設の火災原因になる。","battery_notes":"電池類。","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003094/1003100.html","official_page_title":"使用済み乾電池・充電式電池の回収｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-bat-02","municipality_id":"handa","display_name":"ボタン電池","aliases":["ボタン電池"],"category":"電池類","conditions":"ごみステーションには出せない。","how_to_dispose":"ボタン電池回収協力店へ持ち込む。","collection_or_dropoff":"回収協力店へ持込み","application_required":false,"fee":"無料","danger_notes":"ごみステーションに出さない。","battery_notes":"ボタン電池。","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003094/1003100.html","official_page_title":"使用済み乾電池・充電式電池の回収｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-bat-03","municipality_id":"handa","display_name":"モバイルバッテリー・小型充電式電池","aliases":["モバイルバッテリー","リチウムイオン電池","充電式電池","ニッケル水素電池","ニカド電池"],"category":"電池類","conditions":"ごみステーションには出せない。","how_to_dispose":"JBRC回収協力店、公共資源回収ステーション、半田市リサイクルセンター等へ持ち込む。膨張・液漏れ等はリサイクルセンター窓口の案内を確認する。","collection_or_dropoff":"回収場所へ持込み","application_required":false,"fee":"無料","danger_notes":"リチウムイオン電池等は火災の原因になるため、ごみステーションには絶対に出さない。","battery_notes":"小型充電式電池。","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003094/1003100.html","official_page_title":"使用済み乾電池・充電式電池の回収｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-fluor-01","municipality_id":"handa","display_name":"蛍光管","aliases":["蛍光管","蛍光灯","直管蛍光灯"],"category":"蛍光管（持込み）","conditions":"電球・LED製品を除く、水銀を含む蛍光管。","how_to_dispose":"割らずに半田市リサイクルセンター、公共資源回収ステーション、回収対応する販売店等へ持ち込む。","collection_or_dropoff":"持込み","application_required":false,"fee":"無料（市施設）","danger_notes":"水銀を含むため、ごみステーションに出さない。割らない。","battery_notes":"該当なし","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003067/1003070.html","official_page_title":"蛍光管の正しい出し方｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-small-01","municipality_id":"handa","display_name":"電子レンジ","aliases":["電子レンジ","レンジ"],"category":"小型家電","conditions":"電気・電池で動く家庭用機器。家電4品目は対象外。","how_to_dispose":"リサイクルセンター、公共資源回収ステーション等へ持ち込む。回収ボックスは投入口（縦8cm×横35cm）に入るもののみ。取り外せる電池は外し、PC・携帯はデータ消去を行う。","collection_or_dropoff":"持込み・回収ボックス等","application_required":false,"fee":"無料（市の回収）","danger_notes":"該当なし","battery_notes":"該当する場合は取り外せる電池を外す。","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003094/1003104.html","official_page_title":"小型家電リサイクル｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-small-02","municipality_id":"handa","display_name":"スマートフォン・携帯電話","aliases":["スマホ","スマートフォン","携帯電話"],"category":"小型家電","conditions":"電気・電池で動く家庭用機器。家電4品目は対象外。","how_to_dispose":"リサイクルセンター、公共資源回収ステーション等へ持ち込む。回収ボックスは投入口（縦8cm×横35cm）に入るもののみ。取り外せる電池は外し、PC・携帯はデータ消去を行う。","collection_or_dropoff":"持込み・回収ボックス等","application_required":false,"fee":"無料（市の回収）","danger_notes":"該当なし","battery_notes":"取り外せる電池・バッテリーは外して別途適正回収へ。","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003094/1003104.html","official_page_title":"小型家電リサイクル｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-small-03","municipality_id":"handa","display_name":"掃除機","aliases":["掃除機","クリーナー"],"category":"小型家電","conditions":"電気・電池で動く家庭用機器。家電4品目は対象外。","how_to_dispose":"リサイクルセンター、公共資源回収ステーション等へ持ち込む。回収ボックスは投入口（縦8cm×横35cm）に入るもののみ。取り外せる電池は外し、PC・携帯はデータ消去を行う。","collection_or_dropoff":"持込み・回収ボックス等","application_required":false,"fee":"無料（市の回収）","danger_notes":"該当なし","battery_notes":"取り外せる電池・バッテリーは外して別途適正回収へ。","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003094/1003104.html","official_page_title":"小型家電リサイクル｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-small-04","municipality_id":"handa","display_name":"ドライヤー","aliases":["ドライヤー"],"category":"小型家電","conditions":"電気・電池で動く家庭用機器。家電4品目は対象外。","how_to_dispose":"リサイクルセンター、公共資源回収ステーション等へ持ち込む。回収ボックスは投入口（縦8cm×横35cm）に入るもののみ。取り外せる電池は外し、PC・携帯はデータ消去を行う。","collection_or_dropoff":"持込み・回収ボックス等","application_required":false,"fee":"無料（市の回収）","danger_notes":"該当なし","battery_notes":"取り外せる電池・バッテリーは外して別途適正回収へ。","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003094/1003104.html","official_page_title":"小型家電リサイクル｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-small-05","municipality_id":"handa","display_name":"パソコン","aliases":["パソコン","PC","ノートパソコン"],"category":"小型家電","conditions":"電気・電池で動く家庭用機器。家電4品目は対象外。","how_to_dispose":"リサイクルセンター、公共資源回収ステーション等へ持ち込む。回収ボックスは投入口（縦8cm×横35cm）に入るもののみ。取り外せる電池は外し、PC・携帯はデータ消去を行う。","collection_or_dropoff":"持込み・回収ボックス等","application_required":false,"fee":"無料（市の回収）","danger_notes":"該当なし","battery_notes":"取り外せる電池・バッテリーは外して別途適正回収へ。","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003094/1003104.html","official_page_title":"小型家電リサイクル｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-oil-01","municipality_id":"handa","display_name":"食用油","aliases":["食用油","廃食用油","てんぷら油","天ぷら油"],"category":"資源（持込み）","conditions":"家庭から出た廃食用油。","how_to_dispose":"半田市リサイクルセンター等の資源回収へ持ち込む。","collection_or_dropoff":"リサイクルセンターへ持込み","application_required":false,"fee":"無料","danger_notes":"該当なし","battery_notes":"該当なし","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003083/1003085.html","official_page_title":"資源の持込み【リサイクルセンター】｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-clothes-01","municipality_id":"handa","display_name":"古着","aliases":["古着","衣類","服"],"category":"資源（持込み）","conditions":"家庭から出た再資源化可能な衣類。","how_to_dispose":"半田市リサイクルセンター等の資源回収へ持ち込む。","collection_or_dropoff":"リサイクルセンターへ持込み","application_required":false,"fee":"無料","danger_notes":"該当なし","battery_notes":"該当なし","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003083/1003085.html","official_page_title":"資源の持込み【リサイクルセンター】｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-cardboard-01","municipality_id":"handa","display_name":"ダンボール・新聞・紙パック","aliases":["ダンボール","段ボール","新聞紙","紙パック","雑誌"],"category":"資源（持込み）","conditions":"地域の集団資源回収や無料回収場所を優先。","how_to_dispose":"集団資源回収、資源無料回収場所、リサイクルセンター等へ。","collection_or_dropoff":"資源回収へ持込み","application_required":false,"fee":"無料","danger_notes":"該当なし","battery_notes":"該当なし","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003083/1003085.html","official_page_title":"資源の持込み【リサイクルセンター】｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"item_id":"hnd-bulky-01","municipality_id":"handa","display_name":"粗大ごみ（家具など）","aliases":["粗大ごみ","家具","タンス","机","椅子","ベッド","ソファ","大型ごみ","取りに来て"],"category":"粗大ごみ","conditions":"一辺でも60cm以上のもの、または石油ストーブ・ファンヒーター等は粗大ごみ扱い。ごみステーションには出せない。","how_to_dispose":"自分で知多南部広域環境センターへ搬入するか、許可業者へ依頼するか、半田市の戸別収集を予約する。戸別収集は毎週水曜日・事前予約制。","collection_or_dropoff":"戸別収集または直接搬入","application_required":true,"fee":"戸別収集は原則1点2,200円。直接搬入は10kgにつき100円。","danger_notes":"該当なし","battery_notes":"該当なし","size_rule":"指定袋に入らない大きさ、または縦・横・高さのいずれか1辺が60cm以上。石油ストーブ・石油ファンヒーター等も粗大ごみ扱い。","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003067/1003073/1003077.html","official_page_title":"粗大ごみの戸別収集｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":"ベッド枠とマットレス等、別々に1点として数える場合がある。家電4品目は戸別収集対象外。"},{"item_id":"hnd-appliance4-01","municipality_id":"handa","display_name":"家電4品目","aliases":["テレビ","エアコン","冷蔵庫","冷凍庫","洗濯機","衣類乾燥機","家電リサイクル"],"category":"家電リサイクル法対象品","conditions":"家電リサイクル法対象品目。ごみステーション、小型家電回収の対象外。","how_to_dispose":"販売店や指定引取場所等、家電リサイクル法に基づく方法で処分する。公式案内を確認する。","collection_or_dropoff":"市の通常収集対象外","application_required":true,"fee":"リサイクル料金・収集運搬料金等が必要","danger_notes":"不適正排出をしない。","battery_notes":"該当なし","size_rule":"該当なし","effective_rule":"2026年9月20日時点の半田市公式ルール。","valid_from":null,"valid_to":null,"rule_version":"v1","department":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003094/1003103.html","official_page_title":"家電4品目のリサイクル｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":"テレビ、エアコン、冷凍・冷蔵庫、洗濯機・衣類乾燥機は市の通常収集に出せない。"}],
+  procedures:[{"procedure_id":"hnd-proc-01","municipality_id":"handa","name":"転入（市外から半田市への引越し）","aliases":["転入届","半田市に引っ越してきた","引っ越してきた","市外から半田"],"conclusion":"引越した日から14日以内に、半田市役所1階市民課で転入届を行う。","deadline":"引越した日から14日以内。","how_to":"本人または同一世帯の人が市民課で届け出る。マイナンバーカードによる特例転出の場合は転出証明書が不要。","required_documents":["住民異動届","本人確認書類","転出証明書（特例転出を除く）","マイナンバーカード（持っている方）","パスポート（国外からの転入の場合）"],"fee":"無料","window_office":"半田市役所1階 市民課","district_dependent":false,"department_name":"市民経済部 市民課住民記録担当","phone":"0569-84-0632","business_hours":"平日9:00〜16:00（水曜日は19:00まで。個別ページに別記がある場合はそちらを優先）","online_available":false,"related_procedures":["hnd-proc-09","hnd-proc-11","hnd-proc-08"],"official_url":"https://www.city.handa.lg.jp/kurashi/koseki/1001642/1001643.html","official_page_title":"窓口での住民異動手続き｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"procedure_id":"hnd-proc-02","municipality_id":"handa","name":"転出（半田市から市外への引越し）","aliases":["転出届","半田市から引っ越す","市外に引っ越す"],"conclusion":"引越する日までに転出届を行う。1か月前から届出でき、マイナンバーカードがあればオンライン転出届も利用できる。","deadline":"引越する日まで。1か月前から届出可。","how_to":"市民課窓口、郵送、またはマイナポータルのオンライン転出届を利用する。","required_documents":["本人確認書類","印鑑登録証（持っている方）","代理人の場合は委任状等"],"fee":"無料","window_office":"半田市役所1階 市民課（オンライン転出は来庁不要）","district_dependent":false,"department_name":"市民経済部 市民課住民記録担当","phone":"0569-84-0632","business_hours":"平日9:00〜16:00（水曜日は19:00まで。個別ページに別記がある場合はそちらを優先）","online_available":true,"related_procedures":["hnd-proc-10"],"official_url":"https://www.city.handa.lg.jp/kurashi/koseki/1001642/1001643.html","official_page_title":"窓口での住民異動手続き｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":"オンライン転出の詳細はマイナポータル案内ページも確認。"},{"procedure_id":"hnd-proc-03","municipality_id":"handa","name":"市内転居（半田市内での引越し）","aliases":["転居届","半田市内で引っ越した","市内引越し"],"conclusion":"新住所へ引越した日から14日以内に、市民課で転居届を行う。","deadline":"新住所へ引越した日から14日以内。","how_to":"本人または同一世帯の人が市民課で届け出る。マイナポータルで来庁予定を事前入力できる。","required_documents":["住民異動届","本人確認書類","マイナンバーカード（持っている方）"],"fee":"無料","window_office":"半田市役所1階 市民課","district_dependent":false,"department_name":"市民経済部 市民課住民記録担当","phone":"0569-84-0632","business_hours":"平日9:00〜16:00（水曜日は19:00まで。個別ページに別記がある場合はそちらを優先）","online_available":true,"related_procedures":["hnd-proc-11"],"official_url":"https://www.city.handa.lg.jp/kurashi/koseki/1001642/1001643.html","official_page_title":"窓口での住民異動手続き｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"procedure_id":"hnd-proc-04","municipality_id":"handa","name":"住民票の写しの取得","aliases":["住民票","住民票がほしい","住民票が欲しい","住民票コンビニ","住民票をとる"],"conclusion":"マイナンバーカードがあればコンビニ交付が手軽。2026年9月時点はコンビニ100円、窓口200円。","deadline":"必要なとき。","how_to":"コンビニのキオスク端末、半田市役所1階市民課、オンライン・郵送等から選ぶ。コンビニは6:30〜23:00（土日祝も利用可、休止日を除く）。","required_documents":["コンビニ: マイナンバーカード","窓口: 本人確認書類（代理人は必要書類を公式ページで確認）"],"fee":"窓口200円／コンビニ100円（2027年4月1日から窓口300円／コンビニ200円）","window_office":"コンビニまたは半田市役所1階 市民課","district_dependent":false,"department_name":"市民経済部 市民課住民記録担当","phone":"0569-84-0632","business_hours":"コンビニ交付は6:30〜23:00（休止日を除く）。市役所窓口は平日9:00〜16:00、水曜日は19:00まで。","online_available":true,"related_procedures":[],"official_url":"https://www.city.handa.lg.jp/kurashi/koseki/1001649/1001700.html","official_page_title":"証明書等コンビニ交付サービス｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":"手数料は2027年4月1日に改定予定。"},{"procedure_id":"hnd-proc-05","municipality_id":"handa","name":"戸籍証明書（戸籍謄本・抄本）の取得","aliases":["戸籍謄本","戸籍抄本","戸籍証明書","戸籍がほしい"],"conclusion":"窓口のほか、条件を満たせばコンビニ交付を利用できる。","deadline":"必要なとき。","how_to":"半田市役所市民課、コンビニ交付、オンライン・郵送等。コンビニは住民票・本籍とも半田市など条件がある。","required_documents":["本人確認書類","コンビニ: マイナンバーカード"],"fee":"窓口450円／コンビニ350円","window_office":"半田市役所1階 市民課またはコンビニ等","district_dependent":false,"department_name":"市民経済部 市民課戸籍担当","phone":"0569-84-0631","business_hours":"市役所窓口は平日9:00〜16:00、水曜日は19:00まで。コンビニ交付は対象条件・利用時間を公式ページで確認。","online_available":true,"related_procedures":[],"official_url":"https://www.city.handa.lg.jp/kurashi/koseki/1001649/1001651.html","official_page_title":"窓口での証明書（住民票・戸籍謄本等）の交付申請｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"procedure_id":"hnd-proc-06","municipality_id":"handa","name":"印鑑登録証明書の取得","aliases":["印鑑証明","印鑑登録証明書","印鑑証明がほしい"],"conclusion":"印鑑登録済みなら、マイナンバーカードでコンビニ交付も利用できる。","deadline":"必要なとき。","how_to":"窓口では本人確認書類と印鑑登録証を持参。コンビニ交付はマイナンバーカードを利用。","required_documents":["窓口: 本人確認書類、印鑑登録証","コンビニ: マイナンバーカード"],"fee":"窓口200円／コンビニ100円（2027年4月1日から窓口300円／コンビニ200円）","window_office":"半田市役所1階 市民課またはコンビニ","district_dependent":false,"department_name":"市民経済部 市民課住民記録担当","phone":"0569-84-0632","business_hours":"コンビニ交付は6:30〜23:00（休止日を除く）。市役所窓口は平日9:00〜16:00、水曜日は19:00まで。","online_available":true,"related_procedures":[],"official_url":"https://www.city.handa.lg.jp/kurashi/koseki/1001658/1001660.html","official_page_title":"印鑑登録証明書の交付申請｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":"手数料は2027年4月1日に改定予定。"},{"procedure_id":"hnd-proc-07","municipality_id":"handa","name":"出生届","aliases":["出生届","赤ちゃんが生まれた","子どもが生まれた"],"conclusion":"生まれた日から14日以内に出生届を提出する。児童手当など別の手続も確認する。","deadline":"生まれた日から14日以内。","how_to":"出生地、子の本籍地、届出人住所地の市区町村役場へ提出。半田市では市民課。時間外は宿直室で受付できるが、母子手帳の出生届出済証明は後日開庁時間内に必要。","required_documents":["出生届（出生証明書付き）","親子（母子）健康手帳"],"fee":"無料","window_office":"半田市役所1階 市民課（時間外は宿直室）","district_dependent":false,"department_name":"市民経済部 市民課戸籍担当","phone":"0569-84-0631","business_hours":"平日9:00〜16:00（水曜日は19:00まで。個別ページに別記がある場合はそちらを優先）","online_available":false,"related_procedures":["hnd-proc-08"],"official_url":"https://www.city.handa.lg.jp/kurashi/koseki/1001634/1001637.html","official_page_title":"出生に関する手続き｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"procedure_id":"hnd-proc-08","municipality_id":"handa","name":"児童手当の申請","aliases":["児童手当","子どもの手当","児童手当申請"],"conclusion":"出生・転入などで受給要件が生じたら、できるだけ早く請求する。月末近くの異動は翌日から15日以内の特例期限に注意。","deadline":"原則は請求の翌月分から。月末近くの出生・転入等は異動日の翌日から15日以内なら特例あり。","how_to":"市役所窓口、郵送、電子申請で認定請求書を提出する。","required_documents":["請求者・配偶者等のマイナンバーカード、または個人番号が記載された住民票の写し","請求者の本人確認書類","請求者名義の金融機関名・支店名・普通預金口座番号が分かるもの","世帯状況等により追加書類が必要な場合あり"],"fee":"無料","window_office":"半田市役所 こども育成課","district_dependent":false,"department_name":"こども未来部 こども育成課","phone":"0569-84-0658","business_hours":"平日9:00〜16:00（水曜日は19:00まで。個別ページに別記がある場合はそちらを優先）","online_available":true,"related_procedures":[],"official_url":"https://www.city.handa.lg.jp/kosodate/kyufu/1002054.html","official_page_title":"児童手当｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"procedure_id":"hnd-proc-09","municipality_id":"handa","name":"国民健康保険の加入手続き","aliases":["国保に入る","国保加入","国民健康保険加入","会社の健康保険をやめた"],"conclusion":"国民健康保険に加入する理由が生じたら14日以内に届出を行う。","deadline":"理由が生じた日から14日以内。","how_to":"半田市役所国保年金課で加入届を行う。退職などで職場の保険を喪失した場合は資格喪失を確認できる書類等を準備する。","required_documents":["健康保険資格喪失を確認できる書類（該当時）","本人確認書類","世帯主・加入者のマイナンバー確認書類等"],"fee":"無料（保険税は別途）","window_office":"半田市役所 国保年金課","district_dependent":false,"department_name":"市民経済部 国保年金課","phone":"0569-84-0651","business_hours":"平日9:00〜16:00（水曜日は19:00まで。個別ページに別記がある場合はそちらを優先）","online_available":false,"related_procedures":[],"official_url":"https://www.city.handa.lg.jp/kurashi/kenkohoken/1001784/1001785.html","official_page_title":"国民健康保険（加入、脱退の手続き等）｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"procedure_id":"hnd-proc-10","municipality_id":"handa","name":"国民健康保険の脱退手続き","aliases":["国保をやめる","国保脱退","国民健康保険やめる","社会保険に入った"],"conclusion":"職場の健康保険などに加入したら14日以内に国民健康保険の脱退届を行う。","deadline":"理由が生じた日から14日以内。","how_to":"新しい健康保険の資格情報と半田市国保の資格情報等を準備して国保年金課へ届け出る。","required_documents":["新しい健康保険の資格情報","半田市国保の資格情報","本人確認書類","マイナンバー確認書類等"],"fee":"無料","window_office":"半田市役所 国保年金課","district_dependent":false,"department_name":"市民経済部 国保年金課","phone":"0569-84-0651","business_hours":"平日9:00〜16:00（水曜日は19:00まで。個別ページに別記がある場合はそちらを優先）","online_available":false,"related_procedures":[],"official_url":"https://www.city.handa.lg.jp/kurashi/kenkohoken/1001784/1001785.html","official_page_title":"国民健康保険（加入、脱退の手続き等）｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"procedure_id":"hnd-proc-11","municipality_id":"handa","name":"マイナンバーカードの住所・氏名変更","aliases":["マイナンバーカード住所変更","マイナンバー住所変更","氏名変更"],"conclusion":"住所や氏名が変わったら、カードの券面記載等を変更する。市外からの転入で継続利用する場合は転入届後90日以内に手続きが必要。","deadline":"転入後の継続利用は転入届をした日から90日以内。","how_to":"半田市役所1階市民課のマイナンバー窓口で手続きする。","required_documents":["マイナンバーカード","状況により暗証番号・代理人関係書類等"],"fee":"無料（失効後の再発行等は有料の場合あり）","window_office":"半田市役所1階 市民課マイナンバー窓口","district_dependent":false,"department_name":"市民経済部 市民課","phone":"0569-84-0632","business_hours":"平日9:00〜16:00（水曜日は19:00まで。個別ページに別記がある場合はそちらを優先）","online_available":false,"related_procedures":[],"official_url":"https://www.city.handa.lg.jp/kurashi/my-number/1001689/1006412.html","official_page_title":"マイナンバーカードの氏名や住所の変更｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"procedure_id":"hnd-proc-12","municipality_id":"handa","name":"死亡届","aliases":["死亡届","家族が亡くなった","亡くなった"],"conclusion":"死亡の事実を知った日から7日以内に死亡届を提出する。","deadline":"死亡の事実を知った日から7日以内。","how_to":"死亡地、本籍地、届出人所在地の市区町村役場等へ提出する。半田市での詳細は公式ページを確認。","required_documents":["死亡届（死亡診断書・死体検案書付き）","届出人に応じた必要事項"],"fee":"無料","window_office":"半田市役所1階 市民課（時間外は宿直室）","district_dependent":false,"department_name":"市民経済部 市民課戸籍担当","phone":"0569-84-0631","business_hours":"平日9:00〜16:00（水曜日は19:00まで。個別ページに別記がある場合はそちらを優先）","online_available":false,"related_procedures":["hnd-proc-13"],"official_url":"https://www.city.handa.lg.jp/kurashi/koseki/1001634/1001638.html","official_page_title":"死亡に関する手続き｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"procedure_id":"hnd-proc-13","municipality_id":"handa","name":"おくやみ手続き支援サービス","aliases":["おくやみコーナー","死亡後の手続き","家族が亡くなった後"],"conclusion":"死亡後の複数手続を整理したい場合、前開庁日の15時までに予約して市民課の支援サービスを利用できる。","deadline":"前開庁日の15時までに予約。当日予約不可。","how_to":"電話またはWEBで予約。市民課で面談し、必要な窓口案内と申請書への情報反映支援を受ける。ワンストップ窓口ではない。","required_documents":["お客様シート","本人確認書類","案内帖に記載された必要書類","窓口のご案内（ある場合）"],"fee":"無料","window_office":"半田市役所1階 市民課","district_dependent":false,"department_name":"市民経済部 市民課戸籍担当","phone":"0569-84-0631","business_hours":"電話予約は平日9:00〜16:00。利用予約は前開庁日の15:00まで。当日予約不可。予約枠は9:00・10:00・13:00・14:00。","online_available":true,"related_procedures":[],"official_url":"https://www.city.handa.lg.jp/kurashi/koseki/1001661.html","official_page_title":"おくやみ手続き支援サービス｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":"予約枠は9時・10時・13時・14時。手続全体の所要時間は平均2時間程度と案内されている。"},{"procedure_id":"hnd-proc-14","municipality_id":"handa","name":"親子（母子）健康手帳の交付","aliases":["母子手帳","親子健康手帳","妊娠届","妊娠した"],"conclusion":"産院で妊娠届出書を受け取ったら、母子モ（HA☆DE★CO）からWEB申請・予約し、親子（母子）健康手帳を受け取る。","deadline":"妊娠届出書を受け取ったら、すみやかに。予約期限あり。","how_to":"母子モを登録→アプリから妊娠届をWEB申請→交付予約→保健センターまたは市役所で面談・交付。","required_documents":["病院から受け取った妊娠届出書","外国籍の方は在留カード","妊婦支援給付金申請に必要なもの（本人来所時）"],"fee":"無料","window_office":"保健センターまたは半田市役所 子育て相談課10番窓口（完全予約制）","district_dependent":false,"department_name":"こども未来部 子育て相談課母子保健担当","phone":"0569-84-0645","business_hours":"市役所での個別交付は平日9:00〜16:00、水曜日は18:30まで（完全予約制）。集団交付日は公式日程を確認。","online_available":true,"related_procedures":[],"official_url":"https://www.city.handa.lg.jp/kosodate/ninshin/1006385.html","official_page_title":"親子（母子）健康手帳交付｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"procedure_id":"hnd-proc-15","municipality_id":"handa","name":"保育園・認定こども園等の入園申込","aliases":["保育園申し込み","保育園申込","入園申込","認定こども園"],"conclusion":"2026年度の随時入園申込はオンラインのみ。入園希望月の前々月21日から前月10日までに申請する。","deadline":"入園希望月の前々月21日〜前月10日。受付期間外は申込不可。","how_to":"公式ページの申込フォームから24時間オンライン申請し、必要書類を写真等でアップロードする。オンライン環境がない場合は保育幼稚園課へ相談。","required_documents":["申込フォームで求められる入園申込書類・保育必要性の証明等"],"fee":"無料","window_office":"オンライン申請（相談先: 半田市役所 保育幼稚園課）","district_dependent":false,"department_name":"こども未来部 保育幼稚園課","phone":"0569-84-0660","business_hours":"申込期間中はオンラインで24時間申請可能。窓口申込は不可。相談は半田市役所受付時間内。","online_available":true,"related_procedures":[],"official_url":"https://www.city.handa.lg.jp/kosodate/hoikuen-youchien/1002100/1010914.html","official_page_title":"令和8年度保育所等入園申込随時募集案内｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""},{"procedure_id":"hnd-proc-16","municipality_id":"handa","name":"子どもが急病のとき","aliases":["子どもが熱","子ども発熱","夜間 子ども 病院","小児救急","#8000"],"conclusion":"夜間に子どもの急病で受診判断に迷う場合は#8000。休日診療を受ける場合は半田市の当番医情報を確認し、発熱・かぜ症状がある場合は受診前に電話する。","deadline":"緊急時。生命に危険がある場合は119。","how_to":"小児救急電話相談 #8000（または052-962-9900）を利用する。診療可能な医療機関は救急医療情報センターでも案内。","required_documents":["特になし（受診時は保険資格情報等を準備）"],"fee":"相談電話は通話料等を除き相談料不要","window_office":"電話相談または当番医","district_dependent":false,"department_name":"愛知県小児救急電話相談／半田市休日診療案内","phone":"#8000 / 052-962-9900","business_hours":"小児救急電話相談 #8000：平日19:00〜翌8:00、土日祝・年末年始8:00〜翌8:00。救急医療情報センターは24時間365日。","online_available":false,"related_procedures":[],"official_url":"https://www.city.handa.lg.jp/kenko/iryo/1002372/1002373.html","official_page_title":"休日等の診療｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":"小児救急電話相談: 平日19時〜翌8時、土日祝・年末年始8時〜翌8時。"},{"procedure_id":"hnd-proc-17","municipality_id":"handa","name":"粗大ごみ戸別収集の予約","aliases":["粗大ごみ予約","粗大ごみ取りに来て","家具を取りに来て"],"conclusion":"自宅前等から収集してほしい場合は、毎週水曜日の戸別収集を事前予約する。","deadline":"希望する収集日までに事前予約。予約枠・締切は公式ページで確認。","how_to":"申込後、粗大ごみ処理券またはオンライン決済の案内に従い、収集日の朝8時30分までに指定場所へ出す。立会い不要。","required_documents":["予約時に品目・大きさ等を確認","処理券方式またはオンライン決済方式の案内に従う"],"fee":"原則1点2,200円","window_office":"自宅前等の予約時指定場所","district_dependent":false,"department_name":"環境水道部 環境課ごみ減量担当","phone":"0569-23-3567","business_hours":"予約方法・受付時間は公式ページで確認。収集は毎週水曜日。収集日の朝8:30までに指定場所へ出す。","online_available":true,"related_procedures":[],"official_url":"https://www.city.handa.lg.jp/machi/gomi/1003067/1003073/1003077.html","official_page_title":"粗大ごみの戸別収集｜半田市公式ウェブサイト","source_checked_at":"2026-09-20","status":"CONFIRMED_OFFICIAL","notes":""}],
+  events:[{"event_id":"move-in","display_name":"半田市へ引っ越してきたとき","aliases":["引っ越してきた","転入した","半田に来た"],"summary":"市外から半田市へ住所を移したときに確認する主な手続です。","related_procedures":[{"procedure_id":"hnd-proc-01","condition_label":"多くの方が必要"},{"procedure_id":"hnd-proc-09","condition_label":"国民健康保険に加入する場合"},{"procedure_id":"hnd-proc-11","condition_label":"マイナンバーカードを持っている場合"},{"procedure_id":"hnd-proc-08","condition_label":"児童手当の対象児童がいる場合"}],"show_waste_link":true,"source_checked_at":"2026-09-20"},{"event_id":"move-out","display_name":"半田市から引っ越すとき","aliases":["半田市から引っ越す","転出する","半田を出る"],"summary":"半田市から市外へ住所を移すときに確認する主な手続です。","related_procedures":[{"procedure_id":"hnd-proc-02","condition_label":"多くの方が必要"},{"procedure_id":"hnd-proc-10","condition_label":"国民健康保険に加入している場合"}],"show_waste_link":false,"source_checked_at":"2026-09-20"},{"event_id":"move-within-city","display_name":"半田市内で引っ越したとき","aliases":["市内で引っ越した","転居した","半田市内引越し"],"summary":"半田市内で住所を移したときに確認する主な手続です。","related_procedures":[{"procedure_id":"hnd-proc-03","condition_label":"多くの方が必要"},{"procedure_id":"hnd-proc-11","condition_label":"マイナンバーカードを持っている場合"}],"show_waste_link":true,"source_checked_at":"2026-09-20"},{"event_id":"pregnancy","display_name":"妊娠したとき","aliases":["妊娠した","妊娠届","母子手帳"],"summary":"妊娠届出書を受け取ったあと、親子（母子）健康手帳の交付や支援を確認します。","related_procedures":[{"procedure_id":"hnd-proc-14","condition_label":"まず確認"}],"show_waste_link":false,"source_checked_at":"2026-09-20"},{"event_id":"birth","display_name":"子どもが生まれたとき","aliases":["子どもが生まれた","赤ちゃんが生まれた","出産した"],"summary":"出生届と児童手当など、出生後に期限がある手続を確認します。","related_procedures":[{"procedure_id":"hnd-proc-07","condition_label":"生まれた日から14日以内"},{"procedure_id":"hnd-proc-08","condition_label":"児童手当の申請"}],"show_waste_link":false,"source_checked_at":"2026-09-20"},{"event_id":"childcare","display_name":"保育園を申し込みたいとき","aliases":["保育園に入りたい","保育園申し込み","認定こども園"],"summary":"保育園・認定こども園等への入園申込を確認します。","related_procedures":[{"procedure_id":"hnd-proc-15","condition_label":"申込期間に注意"}],"show_waste_link":false,"source_checked_at":"2026-09-20"},{"event_id":"child-sick","display_name":"子どもが急に熱を出したとき","aliases":["子どもが熱","子ども発熱","夜間子ども病院"],"summary":"夜間や休日に子どもの急病で迷ったときの相談先・受診先を確認します。","related_procedures":[{"procedure_id":"hnd-proc-16","condition_label":"緊急時の相談先"}],"show_waste_link":false,"source_checked_at":"2026-09-20"},{"event_id":"death","display_name":"家族が亡くなったとき","aliases":["家族が亡くなった","死亡した","おくやみ"],"summary":"死亡届と、その後に複数課で必要になる手続の支援サービスを確認します。","related_procedures":[{"procedure_id":"hnd-proc-12","condition_label":"死亡届"},{"procedure_id":"hnd-proc-13","condition_label":"その後の手続整理"}],"show_waste_link":false,"source_checked_at":"2026-09-20"}],
+  schedule:{"type":"fixed_weekly_by_color","source_checked_at":"2026-09-20","official_url":"https://www.city.handa.lg.jp/machi/gomi/1003067/1003073/1003078.html","town_list_url":"https://www.city.handa.lg.jp/_res/projects/default_project/_page_/001/003/078/kuikiitiran.pdf","put_out_by":"朝8時まで","holiday_rule":"祝日も通常どおり収集。年末年始は変更される場合があります。","paper_nonburn_note":"紙製容器包装等と燃やせないごみが同じ日は、午前に紙製容器包装等、午後に燃やせないごみを収集します。","districts":{"yellow":{"label":"黄色地区","weekdays":{"1":["燃やせるごみ"],"2":["プラスチック製容器包装"],"3":["ペットボトル"],"4":["燃やせるごみ"],"5":["紙製容器包装・その他紙類","燃やせないごみ"]}},"pink":{"label":"桃色地区","weekdays":{"1":["燃やせるごみ"],"2":["紙製容器包装・その他紙類","燃やせないごみ"],"3":["ペットボトル"],"4":["燃やせるごみ"],"5":["プラスチック製容器包装"]}},"green":{"label":"緑色地区","weekdays":{"1":["プラスチック製容器包装"],"2":["燃やせるごみ"],"3":["ペットボトル"],"4":["紙製容器包装・その他紙類","燃やせないごみ"],"5":["燃やせるごみ"]}},"blue":{"label":"青色地区","weekdays":{"1":["紙製容器包装・その他紙類","燃やせないごみ"],"2":["燃やせるごみ"],"3":["ペットボトル"],"4":["プラスチック製容器包装"],"5":["燃やせるごみ"]}}}}
+};
+const __nativeFetch = window.fetch.bind(window);
+window.fetch = async function(input, init) {
+  const url = typeof input === 'string' ? input : (input && input.url) || '';
+  let payload;
+  if (url.endsWith('municipalities/handa/config.json')) payload = window.__HANDA_EMBEDDED__.config;
+  else if (url.endsWith('municipalities/handa/data/waste_items.json')) payload = window.__HANDA_EMBEDDED__.waste;
+  else if (url.endsWith('municipalities/handa/data/procedures.json')) payload = window.__HANDA_EMBEDDED__.procedures;
+  else if (url.endsWith('municipalities/handa/data/life_events.json')) payload = window.__HANDA_EMBEDDED__.events;
+  else if (url.endsWith('municipalities/handa/data/collection_schedule.json')) payload = window.__HANDA_EMBEDDED__.schedule;
+  if (payload !== undefined) return new Response(JSON.stringify(payload), {status:200, headers:{'Content-Type':'application/json'}});
+  return __nativeFetch(input, init);
+};
+</script>
+<script>
+/**
+ * これどうする？ 共通ロジック（自治体非依存）
+ * UI/検索/日付ルール解決を自治体設定・データから分離する。
+ *
+ * 同等ロジックのESモジュール版が src/lib/{search,rules,freshness,deeplink}.js
+ * にある（tests/*.test.js から node:test で直接importするため）。ブラウザの
+ * <script> 非モジュール読み込みと Node ESMテストを両立するため、意図的に
+ * 2箇所に軽量な複製がある。
+ */
+
+// カタカナ→ひらがな正規化（簡易生活者語マッチ用）
+function normalize(s) {
+  if (!s) return "";
+  return s
+    .toString()
+    .normalize("NFKC")
+    .trim()
+    .toLowerCase()
+    .replace(/[ァ-ヶ]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0x60))
+    .replace(/\s+/g, "");
+}
+
+// 長音符・中黒・句読点などの表記揺れを吸収する緩い正規化（意味を変えない差異のみ）。
+function normalizeLoose(s) {
+  return normalize(s)
+    .replace(/[ー\-‐‑‒–—―]/g, "")
+    .replace(/[・･]/g, "")
+    .replace(/[。、！？「」『』（）()]/g, "");
+}
+
+// 決定論的・依存ライブラリなしのLevenshtein編集距離（誤字候補検出用）。
+function levenshtein(a, b) {
+  const m = a.length;
+  const n = b.length;
+  if (m === 0) return n;
+  if (n === 0) return m;
+  let prev = new Array(n + 1);
+  let curr = new Array(n + 1);
+  for (let j = 0; j <= n; j++) prev[j] = j;
+  for (let i = 1; i <= m; i++) {
+    curr[0] = i;
+    for (let j = 1; j <= n; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      curr[j] = Math.min(curr[j - 1] + 1, prev[j] + 1, prev[j - 1] + cost);
+    }
+    [prev, curr] = [curr, prev];
+  }
+  return prev[n];
+}
+
+/**
+ * 同一 display_name で複数の valid_from/valid_to レコードを持つ品目群から、
+ * 指定日時点で有効なレコードだけを残す。
+ * @param {Array} items
+ * @param {string} onDateStr YYYY-MM-DD
+ */
+function resolveActiveWasteItems(items, onDateStr) {
+  const onDate = onDateStr ? new Date(onDateStr) : new Date();
+  return items.filter((it) => {
+    const from = it.valid_from ? new Date(it.valid_from) : null;
+    const to = it.valid_to ? new Date(it.valid_to) : null;
+    if (from && onDate < from) return false;
+    if (to && onDate > to) return false;
+    return true;
+  });
+}
+
+function haystacksOf(name, aliases) {
+  return [name, ...(aliases || [])];
+}
+
+const GENERIC_INTENT_QUERIES = new Set([
+  "どこに捨てる", "どこへ捨てる", "どう捨てる",
+  "処分したい", "捨てたい", "出したい",
+  "ほしい", "欲しい", "取りたい", "とりたい",
+  "申請したい", "手続きしたい", "入りたい", "やめたい",
+  "取りに来て", "どうしたらいい", "どうする",
+].map(normalize));
+
+const INTENT_SUFFIX_RULES = [
+  { suffix: "どこに捨てる", canonical: [] },
+  { suffix: "どこへ捨てる", canonical: [] },
+  { suffix: "どう捨てる", canonical: [] },
+  { suffix: "を処分したい", canonical: [] },
+  { suffix: "処分したい", canonical: [] },
+  { suffix: "を捨てたい", canonical: [] },
+  { suffix: "捨てたい", canonical: [] },
+  { suffix: "を出したい", canonical: [] },
+  { suffix: "出したい", canonical: [] },
+  { suffix: "がほしい", canonical: ["がほしい", "が欲しい"] },
+  { suffix: "ほしい", canonical: ["がほしい", "が欲しい"] },
+  { suffix: "が欲しい", canonical: ["がほしい", "が欲しい"] },
+  { suffix: "欲しい", canonical: ["がほしい", "が欲しい"] },
+  { suffix: "を取りたい", canonical: ["をとる", "取得"] },
+  { suffix: "とりたい", canonical: ["をとる", "取得"] },
+  { suffix: "を申請したい", canonical: ["申請"] },
+  { suffix: "申請したい", canonical: ["申請"] },
+  { suffix: "の手続きしたい", canonical: ["手続き"] },
+  { suffix: "手続きしたい", canonical: ["手続き"] },
+  { suffix: "に入りたい", canonical: ["に入る", "加入"] },
+  { suffix: "入りたい", canonical: ["に入る", "加入"] },
+  { suffix: "をやめたい", canonical: ["をやめる", "脱退"] },
+  { suffix: "やめたい", canonical: ["をやめる", "脱退"] },
+  { suffix: "取りに来て", canonical: [] },
+  { suffix: "どうしたらいい", canonical: [] },
+  { suffix: "どうする", canonical: [] },
+]
+  .map((rule) => ({ suffix: normalize(rule.suffix), canonical: rule.canonical.map(normalize) }))
+  .sort((a, b) => b.suffix.length - a.suffix.length);
+
+function expandIntentQueries(query) {
+  const normalized = normalize(query);
+  if (!normalized || GENERIC_INTENT_QUERIES.has(normalized)) return [];
+  const variants = [{ query: normalized, penalty: 0 }];
+  const seen = new Set([normalized]);
+  const rule = INTENT_SUFFIX_RULES.find((r) => normalized.endsWith(r.suffix));
+  if (!rule) return variants;
+
+  const root = normalized.slice(0, -rule.suffix.length);
+  if (root.length < 2) return variants;
+  for (const canonicalSuffix of rule.canonical) {
+    const rewritten = root + canonicalSuffix;
+    if (seen.has(rewritten)) continue;
+    seen.add(rewritten);
+    variants.push({ query: rewritten, penalty: 2 });
+  }
+  if (!seen.has(root)) variants.push({ query: root, penalty: 25 });
+  return variants;
+}
+
+function scoreMatch(query, displayName, aliases) {
+  let bestScore = 0;
+  for (const variant of expandIntentQueries(query)) {
+    const q = normalize(variant.query);
+    const qLoose = normalizeLoose(variant.query);
+    let score = 0;
+    let isName = true;
+    for (const raw of haystacksOf(displayName, aliases)) {
+      const h = normalize(raw);
+      if (h) {
+        if (h === q) score = Math.max(score, isName ? 100 : 90);
+        else if (qLoose && normalizeLoose(raw) === qLoose) score = Math.max(score, 85);
+        else if (h.startsWith(q) || h.includes(q) || q.includes(h)) score = Math.max(score, isName ? 60 : 50);
+      }
+      isName = false;
+    }
+    bestScore = Math.max(bestScore, Math.max(0, score - variant.penalty));
+  }
+  return bestScore;
+}
+
+function narrowDominantStrongMatch(scored) {
+  scored.sort((a, b) => b.score - a.score);
+  if (scored.length > 1 && scored[0].score >= 80 && scored[0].score - scored[1].score >= 15) {
+    return scored.slice(0, 1);
+  }
+  return scored;
+}
+
+function searchWasteItems(query, items) {
+  const scored = narrowDominantStrongMatch(
+    items.map((it) => ({ it, score: scoreMatch(query, it.display_name, it.aliases) })).filter((x) => x.score > 0)
+  );
+  return scored.map((x) => x.it);
+}
+
+function searchProcedures(query, procedures) {
+  const scored = narrowDominantStrongMatch(
+    procedures.map((p) => ({ p, score: scoreMatch(query, p.name, p.aliases) })).filter((x) => x.score > 0)
+  );
+  return scored.map((x) => x.p);
+}
+
+// Tier⑤: 誤字・表記揺れ候補（Levenshtein距離ベース）。「もしかして」候補として
+// 提示するためだけの関数で、確定回答には絶対に使わない。呼び出し側は必ず
+// ユーザーのクリック等の明示操作を経てから通常の詳細カードを開くこと。
+function suggestSimilar(query, items, limit = 6) {
+  const q = normalizeLoose(query);
+  if (!q || q.length < 2) return [];
+  const scored = [];
+  for (const it of items) {
+    let best = null;
+    for (const raw of haystacksOf(it.display_name, it.aliases)) {
+      const c = normalizeLoose(raw);
+      if (!c) continue;
+      const dist = levenshtein(q, c);
+      const maxLen = Math.max(q.length, c.length);
+      const ratio = maxLen ? dist / maxLen : 1;
+      if (!best || ratio < best.ratio) best = { dist, ratio };
+    }
+    if (best && best.ratio <= 0.45 && best.dist <= 3) scored.push({ it, ...best });
+  }
+  scored.sort((a, b) => a.ratio - b.ratio || a.dist - b.dist);
+  return scored.slice(0, limit).map((x) => x.it);
+}
+
+// ---- 情報鮮度（内部運用ポリシー。自治体公式の基準ではない） ----
+
+const REVIEW_INTERVAL_DAYS = Object.freeze({ HIGH: 30, MEDIUM: 90, LOW: 365 });
+const HIGH_RISK_CATEGORIES = new Set(["電池類", "発火性危険物"]);
+
+// See src/lib/freshness.js for why this isn't a plain Set.has() or substring test.
+function isHighRiskCategory(category) {
+  if (!category) return false;
+  for (const riskCategory of HIGH_RISK_CATEGORIES) {
+    if (category === riskCategory || category.startsWith(`${riskCategory}（`)) return true;
+  }
+  return false;
+}
+
+function computeRiskLevel(item, { isDateDependent = false } = {}) {
+  if (item?.danger_notes && item.danger_notes !== "該当なし") return "HIGH";
+  if (isHighRiskCategory(item?.category)) return "HIGH";
+  if (isDateDependent) return "HIGH";
+  if (item?.application_required || item?.category === "粗大ごみ") return "MEDIUM";
+  return "LOW";
+}
+
+function computeFreshness(sourceCheckedAt, riskLevel, now = new Date()) {
+  const checked = new Date(`${sourceCheckedAt}T00:00:00+09:00`);
+  const intervalDays = REVIEW_INTERVAL_DAYS[riskLevel] ?? REVIEW_INTERVAL_DAYS.MEDIUM;
+  const nextReviewAt = new Date(checked.getTime() + intervalDays * 86400000);
+  const nowDate = now instanceof Date ? now : new Date(now);
+  const status = nowDate.getTime() > nextReviewAt.getTime() ? "REVIEW_DUE" : "CONFIRMED";
+  const daysOverdue = status === "REVIEW_DUE" ? Math.floor((nowDate - nextReviewAt) / 86400000) : 0;
+  return { status, nextReviewAt, daysOverdue, riskLevel, intervalDays };
+}
+
+function isHighRiskStale(riskLevel, freshnessStatus) {
+  return riskLevel === "HIGH" && freshnessStatus === "REVIEW_DUE";
+}
+
+// ---- Deep Link ----
+
+const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+
+function isValidDateString(s) {
+  if (typeof s !== "string" || !DATE_RE.test(s)) return false;
+  const [y, m, d] = s.split("-").map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, d));
+  return dt.getUTCFullYear() === y && dt.getUTCMonth() === m - 1 && dt.getUTCDate() === d;
+}
+
+function sanitizeAsOfDate(raw, todayStr) {
+  return isValidDateString(raw) ? raw : todayStr;
+}
+
+// 生データ配列を直接拾わない：必ず日付解決済みのactive setから探す。
+// activeにレコードが無い場合（未知ID、またはそのasof時点で有効なレコードが
+// 存在しない）は同じfail-safe（ok:false）として扱う。
+function resolveWasteDeepLink(wasteItemsAll, itemId, asOfDate) {
+  if (!itemId) return { ok: false, reason: "MISSING_ID" };
+  const exists = wasteItemsAll.some((it) => it.item_id === itemId);
+  if (!exists) return { ok: false, reason: "UNKNOWN_ID" };
+  const active = resolveActiveWasteItems(wasteItemsAll, asOfDate);
+  const record = active.find((it) => it.item_id === itemId);
+  if (!record) return { ok: false, reason: "NO_ACTIVE_RECORD_FOR_DATE" };
+  return { ok: true, item: record };
+}
+
+function resolveProcedureDeepLink(procedures, procedureId) {
+  if (!procedureId) return { ok: false, reason: "MISSING_ID" };
+  const record = procedures.find((p) => p.procedure_id === procedureId);
+  if (!record) return { ok: false, reason: "UNKNOWN_ID" };
+  return { ok: true, item: record };
+}
+
+// ---- 生活イベント（既存の手続を「何が起きたか」で束ねるだけの索引層） ----
+// display_name/aliasesの形は品目・手続と同じなので、既存のscoreMatch/
+// suggestSimilarをそのまま再利用する（別ロジックを作らない）。
+
+function searchLifeEvents(query, events) {
+  const scored = narrowDominantStrongMatch(
+    events.map((e) => ({ e, score: scoreMatch(query, e.display_name, e.aliases) })).filter((x) => x.score > 0)
+  );
+  return scored.map((x) => x.e);
+}
+
+function suggestSimilarLifeEvents(query, events, limit = 5) {
+  return suggestSimilar(query, events, limit);
+}
+
+function resolveLifeEventDeepLink(events, eventId) {
+  if (!eventId) return { ok: false, reason: "MISSING_ID" };
+  const record = events.find((e) => e.event_id === eventId);
+  if (!record) return { ok: false, reason: "UNKNOWN_ID" };
+  return { ok: true, item: record };
+}
+
+// ---- 住所（町名）→管轄窓口の解決（任意の自治体拡張） ----
+// 支所等の法定管轄データを持つ自治体だけが利用する。距離や現在地から推測せず、
+// 明示された町名との完全一致で判定する。データを持たない自治体では未使用。
+
+const NOT_LISTED_IN_BRANCH = "__NOT_LISTED_IN_BRANCH__";
+
+function getWardOffice(offices, ward) {
+  return offices.find((o) => o.office_type === "WARD_OFFICE" && o.ward === ward) || null;
+}
+
+function getOfficeById(offices, officeId) {
+  return offices.find((o) => o.office_id === officeId) || null;
+}
+
+function getBranchJurisdiction(branchJurisdiction, ward) {
+  return branchJurisdiction.find((b) => b.ward === ward) || null;
+}
+
+function wardHasBranch(branchJurisdiction, ward) {
+  return getBranchJurisdiction(branchJurisdiction, ward) !== null;
+}
+
+function resolveTownOffice(offices, branchJurisdiction, ward, town) {
+  const jurisdiction = getBranchJurisdiction(branchJurisdiction, ward);
+  if (!jurisdiction) {
+    return { kind: "WARD_OFFICE", office: getWardOffice(offices, ward) };
+  }
+  if (jurisdiction.town_names.includes(town)) {
+    return { kind: "BRANCH", office: getOfficeById(offices, jurisdiction.branch_office_id) };
+  }
+  if (jurisdiction.split_jurisdiction_towns.includes(town)) {
+    return {
+      kind: "SPLIT",
+      town,
+      wardOffice: getWardOffice(offices, ward),
+      branchOffice: getOfficeById(offices, jurisdiction.branch_office_id),
+    };
+  }
+  if (town === NOT_LISTED_IN_BRANCH) {
+    return { kind: "WARD_OFFICE", office: getWardOffice(offices, ward) };
+  }
+  return { kind: "UNKNOWN" };
+}
+
+// ---- ゼロ件時の改善フィードバック（静的サイト・自動送信なし） ----
+// mailto: を開くだけ。押した時点では何も送信されない — 送信するかどうか、
+// 何を書くかは利用者がメールアプリ側で決める。
+
+const FEEDBACK_OPERATOR_EMAIL = "koide@imagine-seek.co.jp";
+
+function buildFeedbackMailto(query, serviceLabel = "これどうする？", operatorEmail = FEEDBACK_OPERATOR_EMAIL) {
+  const subject = `[${serviceLabel}] 検索改善候補: ${query}`;
+  const body = [
+    "検索してヒットしなかった語句:",
+    query,
+    "",
+    "（このメールはこのまま送信するまで送信されません。差し支えなければ、探していたもの・地域などを補足してください）",
+  ].join("\n");
+  return `mailto:${operatorEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+// ---- Deep Link共有URL ----
+
+function buildShareUrl(basePath, params) {
+  const qs = new URLSearchParams();
+  for (const [k, v] of Object.entries(params)) {
+    if (v !== null && v !== undefined && v !== "") qs.set(k, v);
+  }
+  const query = qs.toString();
+  return query ? `${basePath}?${query}` : basePath;
+}
+
+async function loadMunicipality(configPath) {
+  const config = await (await fetch(configPath)).json();
+  const [wasteItems, procedures, lifeEvents, offices, branchJurisdiction, collectionSchedule] = await Promise.all([
+    fetch(config.data.waste_items).then((r) => r.json()),
+    fetch(config.data.procedures).then((r) => r.json()),
+    config.data.life_events ? fetch(config.data.life_events).then((r) => r.json()) : Promise.resolve([]),
+    config.data.offices ? fetch(config.data.offices).then((r) => r.json()) : Promise.resolve([]),
+    config.data.branch_jurisdiction
+      ? fetch(config.data.branch_jurisdiction).then((r) => r.json())
+      : Promise.resolve([]),
+    config.data.collection_schedule
+      ? fetch(config.data.collection_schedule).then((r) => r.json())
+      : Promise.resolve(null),
+  ]);
+  return { config, wasteItems, procedures, lifeEvents, offices, branchJurisdiction, collectionSchedule };
+}
+
+if (typeof window !== "undefined") {
+  window.KoreDousuruCore = {
+    normalize,
+    normalizeLoose,
+    levenshtein,
+    resolveActiveWasteItems,
+    searchWasteItems,
+    searchProcedures,
+    suggestSimilar,
+    computeRiskLevel,
+    computeFreshness,
+    isHighRiskStale,
+    REVIEW_INTERVAL_DAYS,
+    isValidDateString,
+    sanitizeAsOfDate,
+    resolveWasteDeepLink,
+    resolveProcedureDeepLink,
+    searchLifeEvents,
+    suggestSimilarLifeEvents,
+    resolveLifeEventDeepLink,
+    buildFeedbackMailto,
+    buildShareUrl,
+    loadMunicipality,
+    NOT_LISTED_IN_BRANCH,
+    getWardOffice,
+    getOfficeById,
+    getBranchJurisdiction,
+    wardHasBranch,
+    resolveTownOffice,
+  };
+}
+
+</script>
+<script>
+/* これどうする？ 半田市版 UIロジック */
+(function () {
+  const {
+    resolveActiveWasteItems,
+    searchWasteItems,
+    searchProcedures,
+    suggestSimilar,
+    computeRiskLevel,
+    computeFreshness,
+    isHighRiskStale,
+    sanitizeAsOfDate,
+    resolveWasteDeepLink,
+    resolveProcedureDeepLink,
+    searchLifeEvents,
+    suggestSimilarLifeEvents,
+    resolveLifeEventDeepLink,
+    buildFeedbackMailto,
+    buildShareUrl,
+    NOT_LISTED_IN_BRANCH,
+    wardHasBranch,
+    getBranchJurisdiction,
+    resolveTownOffice,
+  } = window.KoreDousuruCore;
+
+  const DEEPLINK_NOT_FOUND_MESSAGE =
+    "指定された情報を確認できませんでした。最新情報は公式案内をご確認ください。";
+
+  // 生活イベントは「該当する可能性がある確認項目」の提示であり、確定判定では
+  // ない（section 15）。全イベント共通のため、データ側に重複させず一箇所で持つ。
+  const LIFE_EVENT_CAUTION = "状況により必要になる主な手続です。該当する項目をご確認ください。";
+
+  // 曜日・時間帯による取扱差（日曜窓口・昼休み等）はV0.1ではモデル化せず、
+  // 通常平日窓口の案内に注意書きを添えるだけにとどめる（設計方針）。
+  const OFFICE_HOURS_CAUTION =
+    "曜日・時間帯によって取り扱えない業務があります。来庁前に公式ページをご確認ください。";
+  const OFFICE_UNKNOWN_TOWN_MESSAGE =
+    "この地域の管轄を確認できませんでした。公式情報でご確認ください。";
+  const OFFICE_SPLIT_TOWN_MESSAGE =
+    "この地域は窓口管轄が分かれる可能性があります。公式情報でご確認ください。";
+  const WASTE_RULE_CHANGE_NOTE = "ルールが変わった時期の出し方を確認する日";
+  const MOVE_EVENT_IDS = new Set(["move-in", "move-out", "move-within-city"]);
+  const CHILD_PROCEDURE_IDS = new Set(["hnd-proc-08", "hnd-proc-14", "hnd-proc-15", "hnd-proc-16"]);
+  const COLLECTION_DISTRICT_STORAGE_KEY = "kore-dousuru-handa-collection-district";
+
+  const state = {
+    config: null,
+    wasteItemsAll: [],
+    procedures: [],
+    lifeEvents: [],
+    offices: [],
+    branchJurisdiction: [],
+    collectionSchedule: null,
+    collectionDistrict: "",
+    asOfDate: new Date().toISOString().slice(0, 10),
+    view: "home",
+    tab: "gomi",
+    detailEvent: null,
+    deepLinkError: null,
+    singleResultMode: false,
+    homeIntent: null,
+    // お住まいの地域から管轄窓口を確認するミニウィジェットの選択状態。
+    // procId で紐付け、別の手続を開いたら自動的にリセットする
+    // （ページ内stateのみ。localStorage等への保存はV0.1では行わない）。
+    officeSelection: { procId: null, ward: "", town: "" },
+  };
+
+  const $app = document.getElementById("app");
+
+  // ---- スマホ検索UX（外付け・限定修正） ----
+  // 検索ロジック自体（searchWasteItems等の呼び出し・引数・戻り値）には触れず、
+  // 「検索確定"後"のフォーカス/スクロール制御」と「結果件数の可視化」だけを扱う。
+  // MOBILE_BREAKPOINT は既存のPC拡張ブレークポイント（style.css: @media (min-width: 900px)）
+  // と揃えたしきい値 — これより狭い幅でのみ確定後のblur+スクロールを行い、PCの挙動
+  // 検索確定後だけ結果へ誘導し、通常の画面遷移では検索欄を自動フォーカスしない。
+  const MOBILE_BREAKPOINT_QUERY = "(max-width: 899px)";
+  function isMobileViewport() {
+    return typeof window.matchMedia === "function" && window.matchMedia(MOBILE_BREAKPOINT_QUERY).matches;
+  }
+
+  // Enter/検索キーで確定した直後の1回だけ、モバイルでキーボードを閉じて
+  // 結果へスクロールするためのフラグ。app状態ではなく純粋にUI遷移の一時信号なので
+  // state ではなくモジュールスコープの変数に持つ（render()のたびに作り直されるDOMの
+  // 都合上、次のbindEvents呼び出しの中でのみ参照・消費する）。
+  let pendingMobileSearchBlur = false;
+
+  function confirmSearch(value) {
+    state.query = value;
+    state.detailWaste = null;
+    state.detailProc = null;
+    state.detailEvent = null;
+    if (isMobileViewport()) pendingMobileSearchBlur = true;
+    render();
+  }
+
+  // 検索結果の先頭（「◯件見つかりました」行、0件時は既存の見つかりませんでした行）
+  // まで、固定pxではなく対象要素の実位置を基準にスクロールする。sticky headerの
+  // 高さぶんだけ上に余白を残す。
+  function scrollToSearchFeedback() {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const el = document.getElementById("search-feedback");
+        if (!el) return;
+        const header = document.querySelector("header.app-header");
+        const headerHeight = header ? header.getBoundingClientRect().height : 0;
+        const rect = el.getBoundingClientRect();
+        const targetTop = window.scrollY + rect.top - headerHeight - 8;
+        window.scrollTo({ top: Math.max(targetTop, 0), behavior: "smooth" });
+      });
+    });
+  }
+
+  // 「小型家電（回収ボックス）／粗大ごみ（サイズによる）」のように、複数の分別区分が
+  // 条件（サイズ等）で分かれる品目は、category フィールド自体に「／」区切りで両方の
+  // 区分を詰め込んで表現している（データは正しい・削除しない）。だが一覧のカテゴリ
+  // バッジや「カテゴリから探す」チップ、結論文の主語としてそのまま出すと、1個の
+  // 区分名であるかのように誤読される・チップが読めない長さになる・文法が壊れる。
+  // 条件による分岐の詳細は conditions/size_rule/how_to_dispose に既に正しく書かれて
+  // いるので、ここでは「複合区分である」ことだけ分かる短い表示に留め、詳細は詳細画面
+  // に譲る（情報の削除ではなく、表示先を分けるだけ）。
+  function isCompoundCategory(category) {
+    return typeof category === "string" && category.includes("／");
+  }
+
+  function categoryLabelForList(category) {
+    return isCompoundCategory(category) ? "条件により区分が異なります（詳細を確認）" : category;
+  }
+
+  // 「カテゴリから探す」導線用の候補一覧。複合区分（isCompoundCategory）は単独の
+  // カテゴリとして機能しない（クリックしても実質1品目にしか絞り込めない・チップが
+  // 折り返さず読めない）ため除外し、実在する単純な区分名だけを、件数の多い順で返す。
+  // 除外した品目自体は検索・一覧（すべて表示）からは引き続き参照でき、情報は消えない。
+  function browsableCategories(items) {
+    const counts = new Map();
+    for (const it of items) {
+      if (isCompoundCategory(it.category)) continue;
+      counts.set(it.category, (counts.get(it.category) || 0) + 1);
+    }
+    return [...counts.entries()].sort((a, b) => b[1] - a[1]).map(([c]) => c);
+  }
+
+  function statusBadge(status) {
+    const cls = status === "CONFIRMED_OFFICIAL" ? "confirmed" : status === "PARTIAL" ? "partial" : "unconfirmed";
+    const label = status === "CONFIRMED_OFFICIAL" ? "公式確認済" : status === "PARTIAL" ? "一部要確認" : "要確認";
+    return `<span class="status-badge ${cls}">${label}</span>`;
+  }
+
+  function escapeHtml(s) {
+    return (s ?? "").toString().replace(/[&<>"']/g, (c) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+    })[c]);
+  }
+
+  // Escapes text, then wraps http(s) URLs as clickable links. Safe because
+  // escaping runs first, so the regex only ever sees already-neutralized text.
+  function escapeHtmlLinkify(s) {
+    return escapeHtml(s).replace(
+      /(https?:\/\/[^\s<]+)/g,
+      (url) => `<a class="official-link" href="${url}" target="_blank" rel="noopener">${url}</a>`
+    );
+  }
+
+  function renderHeader() {
+    return `
+      <header class="app-header">
+        <div class="muni-name">${escapeHtml(state.config.display_name)}版 <span class="unofficial-badge">非公式・実証版</span></div>
+        <div class="app-title">${escapeHtml(state.config.app_title)}</div>
+        <div class="search-box">
+          <input id="search-input" type="search" inputmode="search" placeholder="例：電子レンジ捨てたい・住民票ほしい" value="${escapeHtml(state.query || "")}" />
+          <button id="search-btn" aria-label="検索">検索</button>
+        </div>
+      </header>
+    `;
+  }
+
+  function renderPriorityNav() {
+    return `
+      <div class="priority-nav">
+        ${state.config.priority_nav
+          .map(
+            (n) => `<button data-nav="${n.key}"><span class="icon">${n.icon}</span>${escapeHtml(n.label)}</button>`
+          )
+          .join("")}
+      </div>
+    `;
+  }
+
+  function renderFooter() {
+    const tabs = [
+      { key: "home", label: "ホーム", icon: "🏠" },
+      { key: "gomi", label: "ごみ", icon: "🗑️" },
+      { key: "procedures", label: "手続き", icon: "📋" },
+      { key: "contact", label: "問い合わせ", icon: "☎️" },
+    ];
+    return `
+      <footer class="app-footer">
+        ${tabs
+          .map(
+            (t) => `<button data-tab="${t.key}" class="${state.view === t.key ? "active" : ""}">
+              <span class="icon">${t.icon}</span>${t.label}
+            </button>`
+          )
+          .join("")}
+      </footer>
+    `;
+  }
+
+  function wasteResultItem(it) {
+    return `
+      <div class="result-item" data-waste="${it.item_id}">
+        <div class="name">${escapeHtml(it.display_name)} ${statusBadge(it.status)}</div>
+        <div class="category">${escapeHtml(categoryLabelForList(it.category))}</div>
+      </div>
+    `;
+  }
+
+  function procResultItem(p) {
+    return `
+      <div class="result-item" data-proc="${p.procedure_id}">
+        <div class="name">${escapeHtml(p.name)} ${statusBadge(p.status)}</div>
+        <div class="category">行政手続</div>
+      </div>
+    `;
+  }
+
+  function eventResultItem(e) {
+    return `
+      <div class="result-item event-result-item" data-event="${e.event_id}">
+        <div class="name">${escapeHtml(e.display_name)}</div>
+        <div class="category">生活イベント・${(e.related_procedures || []).length}件の確認項目</div>
+      </div>
+    `;
+  }
+
+  function renderZeroResult(query) {
+    // Fuzzy/typo candidates are suggestions only — clicking one navigates to
+    // the normal, officially-confirmed detail card; nothing here is ever
+    // shown as an already-decided answer.
+    const suggestions = suggestSimilar(query, state.wasteItemsAll, 5);
+    const eventSuggestions = suggestSimilarLifeEvents(query, state.lifeEvents, 3);
+    const categories = browsableCategories(state.wasteItemsAll).slice(0, 10);
+    const feedbackUrl = buildFeedbackMailto(query, `${state.config.app_title}${state.config.display_name_full}`);
+    return `
+      <div class="zero-result">
+        <div id="search-feedback">「${escapeHtml(query)}」に一致する結果が見つかりませんでした。</div>
+        ${
+          eventSuggestions.length
+            ? `<div class="section-title" style="text-align:left;">近い生活イベントの候補があります</div>
+              <div class="fuzzy-suggestions">
+                ${eventSuggestions
+                  .map(
+                    (s) => `
+                  <button class="fuzzy-candidate" data-event="${s.event_id}">
+                    <span class="name">${escapeHtml(s.display_name)}</span>
+                  </button>`
+                  )
+                  .join("")}
+              </div>`
+            : ""
+        }
+        ${
+          suggestions.length
+            ? `<div class="section-title" style="text-align:left;">近い候補があります（似た言葉から探す）</div>
+              <div class="fuzzy-suggestions">
+                ${suggestions
+                  .map(
+                    (s) => `
+                  <button class="fuzzy-candidate" data-waste="${s.item_id}">
+                    <span class="name">${escapeHtml(s.display_name)}</span>
+                    <span class="category">${escapeHtml(categoryLabelForList(s.category))}</span>
+                  </button>`
+                  )
+                  .join("")}
+              </div>`
+            : ""
+        }
+        <div class="section-title" style="text-align:left;">カテゴリから探す</div>
+        <div class="suggestions">
+          ${categories.map((c) => `<button data-category="${escapeHtml(c)}">${escapeHtml(c)}</button>`).join("")}
+        </div>
+        <div class="official-box">
+          <strong>見つからない場合は、公式窓口へ</strong>
+          <div class="phone-block" style="margin-top:8px;">
+            ${escapeHtml(state.config.contact.name)}<br />
+            <a href="tel:${state.config.contact.phone.replace(/[^0-9]/g, "")}">${escapeHtml(state.config.contact.phone)}</a>
+            （${escapeHtml(state.config.contact.hours)}）
+          </div>
+          <a class="official-link" href="${state.config.contact.url}" target="_blank" rel="noopener">公式ページを見る</a>
+        </div>
+        <div class="feedback-box">
+          <a class="feedback-link" href="${feedbackUrl}">この検索語を改善候補として知らせる</a>
+          <div class="feedback-note">メールアプリが開きます。送信するまで情報は送られません。</div>
+          <div class="feedback-note feedback-privacy-note">氏名・住所・電話番号・マイナンバーなどの個人情報は記載しないでください。</div>
+        </div>
+      </div>
+    `;
+  }
+
+  // 内部運用ポリシー（半田市公式の基準ではない）に基づく情報鮮度判定。
+  function freshnessInfoFor(record, { isDateDependent = false } = {}) {
+    const riskLevel = computeRiskLevel(record, { isDateDependent });
+    const freshness = computeFreshness(record.source_checked_at, riskLevel);
+    return { riskLevel, freshness, stale: isHighRiskStale(riskLevel, freshness.status) };
+  }
+
+  function freshnessBannerHtml({ riskLevel, freshness }) {
+    if (freshness.status !== "REVIEW_DUE") return "";
+    return `
+      <div class="freshness-banner">
+        この情報は再確認期限を過ぎています。最新情報は公式ページでもご確認ください。
+        <span class="freshness-policy-note">（最終確認日を基準にした本サービス内部の運用方針による表示です。${escapeHtml(state.config.display_name)}公式の基準ではありません）</span>
+      </div>
+    `;
+  }
+
+  function shareBlockHtml(params) {
+    const shareUrl = buildShareUrl(location.origin + location.pathname, params);
+    return `
+      <div class="share-block">
+        <button class="share-btn" data-share-url="${escapeHtml(shareUrl)}">🔗 この情報を共有</button>
+        <input class="share-url-fallback" type="text" readonly hidden />
+      </div>
+    `;
+  }
+
+  function renderWasteCard(it) {
+    const versionCount = state.wasteItemsAll.filter((x) => x.item_id === it.item_id).length;
+    const { riskLevel, freshness, stale } = freshnessInfoFor(it, { isDateDependent: versionCount > 1 });
+    const share = shareBlockHtml({ waste: it.item_id, asof: state.asOfDate });
+
+    if (stale) {
+      // HIGH risk + past our internal review interval: do not keep asserting
+      // a possibly-outdated hazardous disposal method. Fail safe — surface
+      // the official source and contact instead of the detailed steps.
+      return `
+        <a class="back-link" data-back="1">← 検索結果に戻る</a>
+        <div class="card stale-highrisk-card">
+          <h2>${escapeHtml(it.display_name)} ${statusBadge(it.status)}</h2>
+          ${versionCount > 1 ? ruleDatePickerHtml() : ""}
+          <div class="stale-highrisk-banner">
+            <strong>⚠️ 再確認が必要な情報です</strong>
+            <div>この品目は危険物等に関わるため、内部の運用方針上、最終確認から一定期間が過ぎた情報を詳細表示せずお伝えしています。最新の出し方は必ず公式ページでご確認ください。</div>
+            <span class="freshness-policy-note">（${escapeHtml(state.config.display_name)}公式の基準ではなく、本サービス内部の運用方針による表示です）</span>
+          </div>
+          <dl>
+            <div class="row"><dt>カテゴリ</dt><dd>${escapeHtml(categoryLabelForList(it.category))}</dd></div>
+            <div class="row"><dt>公式情報</dt><dd><a class="official-link" href="${it.official_url}" target="_blank" rel="noopener">${escapeHtml(it.official_page_title)}</a></dd></div>
+            <div class="row"><dt>問い合わせ</dt><dd>${escapeHtml(it.department)}<div class="phone-block" style="margin-top:6px;">${it.phone ? `<a href="tel:${it.phone.replace(/[^0-9]/g, "")}">${escapeHtml(it.phone)}</a>` : "未確認"}</div></dd></div>
+            <div class="row"><dt>最終確認日</dt><dd>${escapeHtml(it.source_checked_at)}</dd></div>
+          </dl>
+          ${share}
+        </div>
+      `;
+    }
+
+    return `
+      <a class="back-link" data-back="1">← 検索結果に戻る</a>
+      <div class="card">
+        <h2>${escapeHtml(it.display_name)} ${statusBadge(it.status)}</h2>
+        ${versionCount > 1 ? ruleDatePickerHtml() : ""}
+        ${freshnessBannerHtml({ riskLevel, freshness })}
+        <div class="conclusion">${
+          isCompoundCategory(it.category)
+            ? `出し方は条件によって分かれます。下記の内容をよくご確認ください。${escapeHtml(it.conditions || "")}`
+            : `<strong>${escapeHtml(it.category)}</strong>として出してください。${escapeHtml(it.conditions || "")}`
+        }</div>
+        <dl>
+          <div class="row"><dt>出し方</dt><dd>${escapeHtml(it.how_to_dispose)}</dd></div>
+          <div class="row"><dt>収集/持込み</dt><dd>${escapeHtml(it.collection_or_dropoff)}</dd></div>
+          <div class="row"><dt>事前申込</dt><dd>${it.application_required ? "必要（粗大ごみ受付センター等）" : "不要"}</dd></div>
+          <div class="row"><dt>費用</dt><dd>${escapeHtml(it.fee)}</dd></div>
+          ${it.danger_notes && it.danger_notes !== "該当なし" ? `<div class="row"><dt>注意事項</dt><dd class="danger-notes">⚠️ ${escapeHtml(it.danger_notes)}</dd></div>` : ""}
+          ${it.battery_notes && it.battery_notes !== "該当なし" ? `<div class="row"><dt>電池関連</dt><dd>${escapeHtml(it.battery_notes)}</dd></div>` : ""}
+          <div class="row"><dt>サイズ基準</dt><dd>${escapeHtml(it.size_rule)}<br /><span style="color:var(--text-sub);font-size:12px;">${escapeHtml(it.effective_rule)}</span></dd></div>
+          ${versionCount > 1 ? `<div class="row"><dt>適用期間</dt><dd>${escapeHtml(it.valid_from || "")} 〜 ${escapeHtml(it.valid_to || "現在も継続")}</dd></div>` : ""}
+          <div class="row"><dt>担当</dt><dd>${escapeHtml(it.department)}<div class="phone-block" style="margin-top:6px;">${it.phone ? `<a href="tel:${it.phone.replace(/[^0-9]/g, "")}">${escapeHtml(it.phone)}</a>` : "未確認"}</div></dd></div>
+          <div class="row"><dt>公式情報</dt><dd><a class="official-link" href="${it.official_url}" target="_blank" rel="noopener">${escapeHtml(it.official_page_title)}</a></dd></div>
+          <div class="row"><dt>確認日</dt><dd>${escapeHtml(it.source_checked_at)}</dd></div>
+          ${it.notes ? `<div class="row"><dt>備考</dt><dd>${escapeHtml(it.notes)}</dd></div>` : ""}
+        </dl>
+        ${share}
+      </div>
+    `;
+  }
+
+  function renderProcCard(p) {
+    const { riskLevel, freshness } = freshnessInfoFor(p, { isDateDependent: false });
+    const share = shareBlockHtml({ procedure: p.procedure_id });
+    const documents = (p.required_documents || []).length
+      ? (p.required_documents || []).map(escapeHtml).join("<br />")
+      : "公式案内をご確認ください。";
+    return `
+      <a class="back-link" data-back="1">← 検索結果に戻る</a>
+      <div class="card procedure-card">
+        <h2>${escapeHtml(p.name)} ${statusBadge(p.status)}</h2>
+        ${freshnessBannerHtml({ riskLevel, freshness })}
+        <div class="action-lead">
+          <div class="action-lead-label">まずすること</div>
+          <div>${escapeHtml(p.conclusion)}</div>
+        </div>
+        <div class="action-grid">
+          <div class="action-item"><strong>📍 行く場所</strong><span>${escapeHtml(p.window_office)}</span></div>
+          <div class="action-item"><strong>👜 持っていくもの</strong><span>${documents}</span></div>
+          <div class="action-item"><strong>⏰ いつまで</strong><span>${escapeHtml(p.deadline)}</span></div>
+          <div class="action-item"><strong>💴 費用</strong><span>${escapeHtml(p.fee)}</span></div>
+          <div class="action-item"><strong>📱 オンライン</strong><span>${p.online_available ? "対応する方法があります" : "窓口・郵送等での手続が基本です"}</span></div>
+        </div>
+        ${p.district_dependent ? renderOfficeFinder(p) : ""}
+        <div class="procedure-method"><strong>手続方法</strong><div>${escapeHtml(p.how_to)}</div></div>
+        <details class="source-details">
+          <summary>問い合わせ先・公式情報を確認</summary>
+          <dl>
+            <div class="row"><dt>問い合わせ</dt><dd><div class="phone-block">${escapeHtml(p.department_name)}<br />${escapeHtmlLinkify(p.phone)}</div></dd></div>
+            <div class="row"><dt>受付時間</dt><dd>${escapeHtml(p.business_hours)}</dd></div>
+            <div class="row"><dt>関連手続</dt><dd>${(p.related_procedures || [])
+              .map((rid) => {
+                const rp = state.procedures.find((x) => x.procedure_id === rid);
+                return rp ? `<span class="related-link" data-proc="${rid}" style="color:var(--brand);text-decoration:underline;cursor:pointer;">${escapeHtml(rp.name)}</span>` : "";
+              })
+              .join("　")}</dd></div>
+            <div class="row"><dt>公式情報</dt><dd><a class="official-link" href="${p.official_url}" target="_blank" rel="noopener">${escapeHtml(p.official_page_title)}</a></dd></div>
+            <div class="row"><dt>確認日</dt><dd>${escapeHtml(p.source_checked_at)}</dd></div>
+            ${p.notes ? `<div class="row"><dt>注意事項</dt><dd>${escapeHtml(p.notes)}</dd></div>` : ""}
+          </dl>
+        </details>
+        ${share}
+      </div>
+    `;
+  }
+
+  // ---- お住まいの地域から管轄窓口を確認（住所→区役所・支所ナビゲーション） ----
+  // 支所は距離ではなく町名による法定管轄のため、ここでは一切の距離計算・
+  // ジオコーディング・現在地取得を行わない。公式データにない町名は
+  // 「わからない」ものとして扱い、区役所を推測で埋めない（offices.js参照）。
+
+  function officeMapUrl(office) {
+    const q = encodeURIComponent(`${office.official_name} ${office.address}`);
+    return `https://www.google.com/maps/search/?api=1&query=${q}`;
+  }
+
+  function renderOfficeCard(office, roleLabel) {
+    if (!office) {
+      return `<div class="office-result-card">窓口情報を確認できませんでした。半田市公式情報でご確認ください。</div>`;
+    }
+    return `
+      <div class="office-result-card">
+        ${roleLabel ? `<div class="office-role-label">${escapeHtml(roleLabel)}</div>` : ""}
+        <div class="office-name">${escapeHtml(office.official_name)}</div>
+        <div class="office-address">〒${escapeHtml(office.postal_code)} ${escapeHtml(office.address)}</div>
+        <div class="office-phone"><a href="tel:${office.phone.replace(/[^0-9]/g, "")}">${escapeHtml(office.phone)}</a></div>
+        <div class="office-hours">${escapeHtml(office.business_hours)}（${escapeHtml(office.closed_days)}）</div>
+        <div class="office-links">
+          <a class="official-link" href="${officeMapUrl(office)}" target="_blank" rel="noopener">地図・経路を見る</a>
+          <a class="official-link" href="${office.official_url}" target="_blank" rel="noopener">公式ページ</a>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderOfficeResult(sel) {
+    if (!sel.ward) return "";
+    const hasBranch = wardHasBranch(state.branchJurisdiction, sel.ward);
+    if (hasBranch && !sel.town) return ""; // 町名待ち
+    const result = resolveTownOffice(state.offices, state.branchJurisdiction, sel.ward, sel.town || null);
+    if (result.kind === "UNKNOWN") {
+      return `
+        <div class="office-result office-result-unknown">
+          <p>${escapeHtml(OFFICE_UNKNOWN_TOWN_MESSAGE)}</p>
+          <a class="official-link" href="${state.config.jurisdiction_table_url}" target="_blank" rel="noopener">半田市公式の行政管轄表（支所管内町名一覧）</a>
+        </div>
+      `;
+    }
+    if (result.kind === "SPLIT") {
+      return `
+        <div class="office-result office-result-split">
+          <p>${escapeHtml(OFFICE_SPLIT_TOWN_MESSAGE)}</p>
+          <a class="official-link" href="${state.config.jurisdiction_table_url}" target="_blank" rel="noopener">半田市公式の行政管轄表（支所管内町名一覧）</a>
+          ${renderOfficeCard(result.wardOffice, "区役所")}
+          ${renderOfficeCard(result.branchOffice, "支所")}
+          <p class="office-hours-caution">${escapeHtml(OFFICE_HOURS_CAUTION)}</p>
+        </div>
+      `;
+    }
+    // BRANCH または WARD_OFFICE
+    return `
+      <div class="office-result">
+        <div class="section-title" style="margin:10px 4px 6px;">あなたの管轄窓口</div>
+        ${renderOfficeCard(result.office, "")}
+        <p class="office-hours-caution">${escapeHtml(OFFICE_HOURS_CAUTION)}</p>
+      </div>
+    `;
+  }
+
+  function renderOfficeFinder(p) {
+    if (state.officeSelection.procId !== p.procedure_id) {
+      state.officeSelection = { procId: p.procedure_id, ward: "", town: "" };
+    }
+    const sel = state.officeSelection;
+    const wardOffices = state.offices.filter((o) => o.office_type === "WARD_OFFICE");
+    const wardOptions = wardOffices
+      .map((o) => `<option value="${escapeHtml(o.ward)}" ${sel.ward === o.ward ? "selected" : ""}>${escapeHtml(o.ward)}</option>`)
+      .join("");
+
+    let townSelectHtml = "";
+    if (sel.ward && wardHasBranch(state.branchJurisdiction, sel.ward)) {
+      const jurisdiction = getBranchJurisdiction(state.branchJurisdiction, sel.ward);
+      const townOptions = [
+        ...jurisdiction.town_names.map(
+          (t) => `<option value="${escapeHtml(t)}" ${sel.town === t ? "selected" : ""}>${escapeHtml(t)}</option>`
+        ),
+        ...jurisdiction.split_jurisdiction_towns.map(
+          (t) =>
+            `<option value="${escapeHtml(t)}" ${sel.town === t ? "selected" : ""}>${escapeHtml(t)}（区役所・支所で分かれています）</option>`
+        ),
+        `<option value="${NOT_LISTED_IN_BRANCH}" ${sel.town === NOT_LISTED_IN_BRANCH ? "selected" : ""}>この一覧にない（区役所が管轄です）</option>`,
+      ].join("");
+      townSelectHtml = `
+        <label class="office-finder-field">町名を選ぶ
+          <select data-office-town>
+            <option value="">町名を選ぶ</option>
+            ${townOptions}
+          </select>
+        </label>
+      `;
+    }
+
+    const resetHtml =
+      sel.ward
+        ? `<a class="back-link office-finder-reset" data-office-reset="1">← 地域を選び直す</a>`
+        : "";
+
+    return `
+      <div class="office-finder">
+        <div class="section-title" style="margin:14px 4px 8px;">お住まいの地域から管轄窓口を確認</div>
+        <div class="office-finder-controls">
+          <label class="office-finder-field">区を選ぶ
+            <select data-office-ward>
+              <option value="">区を選ぶ</option>
+              ${wardOptions}
+            </select>
+          </label>
+          ${townSelectHtml}
+        </div>
+        ${renderOfficeResult(sel)}
+        ${resetHtml}
+      </div>
+    `;
+  }
+
+  // 生活イベントは既存procedureデータへのポインタのみを持ち、期限・電話番号・
+  // 必要書類等は複製しない（Single Source of Truth）。表示時に procedure_id で
+  // 現在のprocedures配列から都度引く。
+  function renderLifeEventCard(e) {
+    const share = shareBlockHtml({ event: e.event_id });
+    const items = (e.related_procedures || [])
+      .map((rel) => {
+        const p = state.procedures.find((x) => x.procedure_id === rel.procedure_id);
+        if (!p) return "";
+        return `
+          <div class="related-proc-card">
+            <div class="related-proc-name">${escapeHtml(p.name)}</div>
+            <div class="related-proc-condition">${escapeHtml(rel.condition_label || "")}</div>
+            <div class="related-proc-deadline">期限: ${escapeHtml(p.deadline || "")}</div>
+            <button type="button" class="related-proc-confirm" data-proc="${p.procedure_id}">確認する</button>
+          </div>
+        `;
+      })
+      .join("");
+    const wasteLink = e.show_waste_link
+      ? `<button type="button" class="event-waste-link" data-nav="gomi">${escapeHtml(state.config.display_name)}のごみ・資源の出し方を確認</button>`
+      : "";
+    return `
+      <a class="back-link" data-back="1">← 検索結果に戻る</a>
+      <div class="card life-event-card">
+        <h2>${escapeHtml(e.display_name)}</h2>
+        ${e.summary ? `<div class="event-summary">${escapeHtml(e.summary)}</div>` : ""}
+        <div class="conclusion">${escapeHtml(LIFE_EVENT_CAUTION)}</div>
+        <div class="section-title" style="margin:14px 4px 8px;">まず確認すること</div>
+        <div class="related-proc-list">${items}</div>
+        ${wasteLink}
+        ${share}
+      </div>
+    `;
+  }
+
+  function currentActiveWasteItems() {
+    return resolveActiveWasteItems(state.wasteItemsAll, state.asOfDate);
+  }
+
+  function isVersionedWasteItem(itemOrId) {
+    const itemId = typeof itemOrId === "string" ? itemOrId : itemOrId?.item_id;
+    if (!itemId) return false;
+    return state.wasteItemsAll.filter((x) => x.item_id === itemId).length > 1;
+  }
+
+  function hasAnyVersionedWasteItems() {
+    const counts = new Map();
+    for (const it of state.wasteItemsAll) {
+      const next = (counts.get(it.item_id) || 0) + 1;
+      if (next > 1) return true;
+      counts.set(it.item_id, next);
+    }
+    return false;
+  }
+
+  function ruleDatePickerHtml() {
+    if (!hasAnyVersionedWasteItems()) return "";
+    return `
+      <div class="date-picker-row date-picker-human">
+        <strong>${escapeHtml(WASTE_RULE_CHANGE_NOTE)}</strong>
+        <input type="date" id="as-of-date" value="${state.asOfDate}" aria-label="確認したい日" />
+      </div>
+    `;
+  }
+
+  function homeMoveChoicesHtml() {
+    const moveEvents = state.lifeEvents.filter((e) => MOVE_EVENT_IDS.has(e.event_id));
+    if (!moveEvents.length) return "";
+    return `
+      <div class="intent-choice-panel">
+        <div class="section-title">どの引っ越しですか？</div>
+        <div class="event-chip-row">
+          ${moveEvents.map((e) => `<button data-event="${e.event_id}">${escapeHtml(e.display_name)}</button>`).join("")}
+        </div>
+      </div>
+    `;
+  }
+
+  function homeChildChoicesHtml() {
+    const childEvents = state.lifeEvents.filter((e) => ["pregnancy", "birth", "childcare", "child-sick"].includes(e.event_id));
+    const childProcedures = state.procedures.filter((p) => CHILD_PROCEDURE_IDS.has(p.procedure_id));
+    const choices = [
+      ...childEvents.map((e) => `<button data-event="${e.event_id}">${escapeHtml(e.display_name)}</button>`),
+      ...childProcedures.filter((p) => !childEvents.some((e) => (e.related_procedures || []).some((r) => r.procedure_id === p.procedure_id)))
+        .map((p) => `<button data-proc="${p.procedure_id}">${escapeHtml(p.name)}</button>`),
+    ].join("");
+    if (!choices) return "";
+    return `
+      <div class="intent-choice-panel">
+        <div class="section-title">子どものことで、何を確認しますか？</div>
+        <div class="event-chip-row">${choices}</div>
+      </div>
+    `;
+  }
+
+  function todayGarbageHtml() {
+    const schedule = state.collectionSchedule;
+    if (!schedule) return "";
+    const day = new Date().getDay();
+    const district = state.collectionDistrict ? schedule.districts?.[state.collectionDistrict] : null;
+    const items = district?.weekdays?.[String(day)] || [];
+    const answer = !district
+      ? "最初に、ごみステーション看板の枠の色を選んでください。"
+      : items.length
+        ? `今日は <strong>${items.map(escapeHtml).join(" ＋ ")}</strong> の日です。`
+        : "今日は通常の定期収集はありません。";
+    return `
+      <div class="today-garbage card">
+        <h2>今日、何ごみ？</h2>
+        <div class="today-garbage-answer">${answer}</div>
+        <label class="collection-district-label">ごみステーション看板の枠の色
+          <select id="collection-district">
+            <option value="">色を選ぶ</option>
+            ${Object.entries(schedule.districts || {}).map(([key, value]) => `<option value="${key}" ${state.collectionDistrict === key ? "selected" : ""}>${escapeHtml(value.label)}</option>`).join("")}
+          </select>
+        </label>
+        <div class="today-garbage-note">${escapeHtml(schedule.put_out_by)}。${escapeHtml(schedule.holiday_rule)}${items.includes("紙製容器包装・その他紙類") && items.includes("燃やせないごみ") ? `<br />${escapeHtml(schedule.paper_nonburn_note || "")}` : ""}</div>
+        <div class="today-garbage-links">
+          <a class="official-link" href="${schedule.town_list_url}" target="_blank" rel="noopener">色が分からない → 町名別収集区域一覧</a>
+          <a class="official-link" href="${schedule.official_url}" target="_blank" rel="noopener">半田市公式の収集曜日を確認</a>
+        </div>
+      </div>
+    `;
+  }
+
+  function render() {
+    let body = "";
+    const activeItems = currentActiveWasteItems();
+    state.singleResultMode = false;
+
+    let deepLinkNotice = "";
+    if (state.deepLinkError) {
+      deepLinkNotice = `<div class="deeplink-error">${escapeHtml(state.deepLinkError)}</div>`;
+      state.deepLinkError = null;
+    }
+
+    if (state.detailWaste) {
+      const it =
+        activeItems.find((x) => x.item_id === state.detailWaste) ||
+        state.wasteItemsAll.find((x) => x.item_id === state.detailWaste);
+      body = renderWasteCard(it);
+    } else if (state.detailProc) {
+      const p = state.procedures.find((x) => x.procedure_id === state.detailProc);
+      body = renderProcCard(p);
+    } else if (state.detailEvent) {
+      const e = state.lifeEvents.find((x) => x.event_id === state.detailEvent);
+      body = renderLifeEventCard(e);
+    } else if (state.query) {
+      const eventResults = searchLifeEvents(state.query, state.lifeEvents);
+      const wasteResults = searchWasteItems(state.query, activeItems);
+      let procResults = searchProcedures(state.query, state.procedures);
+      // A life-event card already contains its related procedures. If a single
+      // life event matches and the procedure hits are all nested under that event,
+      // suppress those duplicate rows so residents see the event checklist once.
+      if (eventResults.length === 1) {
+        const relatedIds = new Set((eventResults[0].related_procedures || []).map((rel) => rel.procedure_id));
+        procResults = procResults.filter((p) => !relatedIds.has(p.procedure_id));
+      }
+      const totalCount = eventResults.length + wasteResults.length + procResults.length;
+
+      if (totalCount === 0) {
+        body = renderZeroResult(state.query);
+      } else if (totalCount === 1) {
+        state.singleResultMode = true;
+        let detailHtml = "";
+        if (eventResults.length) detailHtml = renderLifeEventCard(eventResults[0]);
+        else if (wasteResults.length) detailHtml = renderWasteCard(wasteResults[0]);
+        else detailHtml = renderProcCard(procResults[0]);
+        body = `
+          <div id="search-feedback" class="single-result-note">「${escapeHtml(state.query)}」の答えをすぐ表示しています。</div>
+          ${detailHtml.replace("← 検索結果に戻る", "← 検索をやり直す")}
+        `;
+      } else {
+        const showDateControl = wasteResults.some((it) => isVersionedWasteItem(it));
+        body = `
+          <div id="search-feedback" class="search-result-summary">「${escapeHtml(state.query)}」で${totalCount}件見つかりました</div>
+          ${showDateControl ? ruleDatePickerHtml() : ""}
+          ${eventResults.length ? `<div class="section-title">生活イベント（${eventResults.length}件）</div><div class="result-list">${eventResults.map(eventResultItem).join("")}</div>` : ""}
+          ${wasteResults.length ? `<div class="section-title">ごみ・資源（${wasteResults.length}件）</div><div class="result-list">${wasteResults.map(wasteResultItem).join("")}</div>` : ""}
+          ${procResults.length ? `<div class="section-title">行政手続（${procResults.length}件）</div><div class="result-list">${procResults.map(procResultItem).join("")}</div>` : ""}
+        `;
+      }
+    } else if (state.view === "gomi") {
+      const filtered = state.categoryFilter
+        ? activeItems.filter((i) => i.category === state.categoryFilter)
+        : activeItems;
+      const allCategories = browsableCategories(state.wasteItemsAll);
+      body = `
+        ${ruleDatePickerHtml()}
+        <div class="category-chip-row">
+          <button data-category="" class="${!state.categoryFilter ? "active" : ""}">すべて</button>
+          ${allCategories.map((cat) => `<button data-category="${escapeHtml(cat)}" class="${state.categoryFilter === cat ? "active" : ""}">${escapeHtml(cat)}</button>`).join("")}
+        </div>
+        ${state.categoryFilter
+          ? `<div class="section-title">カテゴリ: ${escapeHtml(state.categoryFilter)}（${filtered.length}件） <a class="back-link" data-clear-category="1">すべて表示</a></div>`
+          : `<div class="section-title">ごみ・資源 品目一覧（${filtered.length}件）</div>`}
+        <div class="result-list">${filtered.map(wasteResultItem).join("")}</div>
+      `;
+    } else if (state.view === "procedures") {
+      body = `
+        <div class="section-title">行政手続（${state.procedures.length}件）</div>
+        <div class="result-list">${state.procedures.map(procResultItem).join("")}</div>
+      `;
+    } else if (state.view === "contact") {
+      body = `
+        <div class="card">
+          <h2>公式問い合わせ先</h2>
+          <div class="phone-block">
+            ${escapeHtml(state.config.contact.name)}<br />
+            <a href="tel:${state.config.contact.phone.replace(/[^0-9]/g, "")}">${escapeHtml(state.config.contact.phone)}</a>
+            （${escapeHtml(state.config.contact.hours)}）
+          </div>
+          <a class="official-link" href="${state.config.contact.url}" target="_blank" rel="noopener">公式ページ</a>
+          <p style="font-size:12px;color:var(--text-sub);margin-top:16px;">${escapeHtml(state.config.disclaimer)}</p>
+          <p class="site-copyright">© 2026 これどうする？ project</p>
+        </div>
+      `;
+    } else {
+      const dangerItems = activeItems.filter((it) => it.danger_notes && it.danger_notes !== "該当なし").slice(0, 5);
+      const lifeEventBlock = state.homeIntent === "move"
+        ? homeMoveChoicesHtml()
+        : state.homeIntent === "child"
+          ? homeChildChoicesHtml()
+          : (state.lifeEvents.length
+            ? `<div class="section-title">こんなときどうする？</div>
+              <div class="event-chip-row">${state.lifeEvents.map((e) => `<button data-event="${e.event_id}">${escapeHtml(e.display_name)}</button>`).join("")}</div>`
+            : "");
+      body = `
+        ${renderPriorityNav()}
+        ${todayGarbageHtml()}
+        <div class="beta-notice">
+          <strong>公開実証中｜困ったことを、そのままの言葉で検索できます</strong>
+          <div>行政の手続名が分からなくても大丈夫です。</div>
+        </div>
+        <div class="section-title">こんな言い方で検索できます</div>
+        <div class="quick-query-row">
+          <button data-query="タッパー捨てたい">タッパー捨てたい</button>
+          <button data-query="電子レンジ捨てたい">電子レンジ捨てたい</button>
+          <button data-query="住民票ほしい">住民票ほしい</button>
+          <button data-query="母子手帳">母子手帳</button>
+          <button data-query="子どもが熱">子どもが熱</button>
+        </div>
+        ${lifeEventBlock}
+        <div class="section-title">特に注意が必要な品目</div>
+        <div class="result-list">${dangerItems.map(wasteResultItem).join("")}</div>
+      `;
+    }
+
+    $app.innerHTML = `
+      <div class="app-shell">
+        ${renderHeader()}
+        <div class="notice-banner">${escapeHtml(state.config.disclaimer)}</div>
+        <main>${deepLinkNotice}${body}</main>
+        ${renderFooter()}
+      </div>
+    `;
+    bindEvents();
+  }
+
+  function bindEvents() {
+    const input = document.getElementById("search-input");
+    if (input) {
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") confirmSearch(input.value);
+      });
+      // <input type="search"> の "search" イベントは、モバイルの仮想キーボードが
+      // 出す Search/Go/完了 等のアクションキーで確定した際にも発火する（keydown
+      // Enterが飛ばない実装のIME/ブラウザ組み合わせがあるため、確定手段を1文字
+      // ごとの入力とは無関係に増やすだけで、検索トリガーの条件自体は変えない）。
+      input.addEventListener("search", () => confirmSearch(input.value));
+      if (pendingMobileSearchBlur) {
+        pendingMobileSearchBlur = false;
+        input.blur();
+        scrollToSearchFeedback();
+      }
+      // Initial render and unrelated navigation never force-focus the search box.
+      // The keyboard opens only after the resident explicitly taps the field.
+    }
+    const btn = document.getElementById("search-btn");
+    if (btn) btn.addEventListener("click", () => confirmSearch(input.value));
+
+    document.querySelectorAll("[data-query]").forEach((el) =>
+      el.addEventListener("click", () => {
+        state.query = el.getAttribute("data-query") || "";
+        state.detailWaste = null;
+        state.detailProc = null;
+        state.detailEvent = null;
+        state.categoryFilter = null;
+        state.homeIntent = null;
+        render();
+      })
+    );
+
+    document.querySelectorAll("[data-nav]").forEach((el) =>
+      el.addEventListener("click", () => {
+        const key = el.getAttribute("data-nav");
+        state.query = "";
+        state.detailWaste = null;
+        state.detailProc = null;
+        state.detailEvent = null;
+        state.categoryFilter = null;
+        state.homeIntent = null;
+        if (key === "gomi") state.view = "gomi";
+        else if (key === "hikkoshi") { state.view = "home"; state.homeIntent = "move"; }
+        else if (key === "juminhyo") { state.view = "procedures"; state.query = "住民票"; }
+        else if (key === "kosodate") { state.view = "home"; state.homeIntent = "child"; }
+        render();
+      })
+    );
+
+    document.querySelectorAll("[data-tab]").forEach((el) =>
+      el.addEventListener("click", () => {
+        state.view = el.getAttribute("data-tab");
+        state.query = "";
+        state.detailWaste = null;
+        state.detailProc = null;
+        state.detailEvent = null;
+        state.categoryFilter = null;
+        state.homeIntent = null;
+        render();
+      })
+    );
+
+    document.querySelectorAll("[data-category]").forEach((el) =>
+      el.addEventListener("click", () => {
+        state.query = "";
+        state.detailWaste = null;
+        state.detailProc = null;
+        state.detailEvent = null;
+        state.view = "gomi";
+        state.categoryFilter = el.getAttribute("data-category");
+        render();
+      })
+    );
+
+    document.querySelectorAll("[data-waste]").forEach((el) =>
+      el.addEventListener("click", () => {
+        state.detailWaste = el.getAttribute("data-waste");
+        state.detailEvent = null;
+        render();
+      })
+    );
+    document.querySelectorAll("[data-proc], .related-link[data-proc]").forEach((el) =>
+      el.addEventListener("click", () => {
+        state.detailProc = el.getAttribute("data-proc");
+        state.detailWaste = null;
+        state.detailEvent = null;
+        render();
+      })
+    );
+    document.querySelectorAll("[data-event]").forEach((el) =>
+      el.addEventListener("click", () => {
+        state.detailEvent = el.getAttribute("data-event");
+        state.detailWaste = null;
+        state.detailProc = null;
+        render();
+      })
+    );
+    document.querySelectorAll("[data-back]").forEach((el) =>
+      el.addEventListener("click", () => {
+        if (state.singleResultMode) state.query = "";
+        state.detailWaste = null;
+        state.detailProc = null;
+        state.detailEvent = null;
+        render();
+      })
+    );
+    document.querySelectorAll("[data-clear-category]").forEach((el) =>
+      el.addEventListener("click", () => {
+        state.categoryFilter = null;
+        render();
+      })
+    );
+    const dateInput = document.getElementById("as-of-date");
+    if (dateInput) dateInput.addEventListener("change", () => {
+      state.asOfDate = dateInput.value;
+      render();
+    });
+
+    const officeWardSelect = document.querySelector("[data-office-ward]");
+    if (officeWardSelect) officeWardSelect.addEventListener("change", () => {
+      state.officeSelection.ward = officeWardSelect.value;
+      state.officeSelection.town = "";
+      render();
+    });
+    const officeTownSelect = document.querySelector("[data-office-town]");
+    if (officeTownSelect) officeTownSelect.addEventListener("change", () => {
+      state.officeSelection.town = officeTownSelect.value;
+      render();
+    });
+    document.querySelectorAll("[data-office-reset]").forEach((el) =>
+      el.addEventListener("click", () => {
+        state.officeSelection.ward = "";
+        state.officeSelection.town = "";
+        render();
+      })
+    );
+
+    const districtSelect = document.getElementById("collection-district");
+    if (districtSelect) districtSelect.addEventListener("change", () => {
+      state.collectionDistrict = districtSelect.value;
+      try {
+        if (state.collectionDistrict) localStorage.setItem(COLLECTION_DISTRICT_STORAGE_KEY, state.collectionDistrict);
+        else localStorage.removeItem(COLLECTION_DISTRICT_STORAGE_KEY);
+      } catch {}
+      render();
+    });
+
+    document.querySelectorAll(".share-btn").forEach((el) =>
+      el.addEventListener("click", async () => {
+        const url = el.getAttribute("data-share-url");
+        const fallback = el.nextElementSibling;
+        try {
+          if (!navigator.clipboard || !navigator.clipboard.writeText) throw new Error("no clipboard api");
+          await navigator.clipboard.writeText(url);
+          const original = el.textContent;
+          el.textContent = "✅ リンクをコピーしました";
+          setTimeout(() => { el.textContent = original; }, 2000);
+        } catch {
+          // Clipboard API unavailable/blocked — fail safe to a visible,
+          // selectable URL instead of a silent no-op.
+          if (fallback) {
+            fallback.hidden = false;
+            fallback.value = url;
+            fallback.select();
+          }
+        }
+      })
+    );
+  }
+
+  // 生データ配列を直接拾わず、必ず現在の municipality/asOfDate/valid_from/valid_to
+  // を解決したactive recordからDeep Linkを解決する（988903b で修正した詳細画面の
+  // バグと同じ種類の再発防止）。不正なID・その日付で有効なレコードが無い場合は
+  // 検索画面へのfail-safeに倒し、404や空白は出さない。
+  function applyDeepLinkFromLocation(wasteItems, procedures, lifeEvents) {
+    const params = new URLSearchParams(window.location.search);
+    const todayStr = new Date().toISOString().slice(0, 10);
+    state.asOfDate = sanitizeAsOfDate(params.get("asof"), todayStr);
+
+    const wasteId = params.get("waste");
+    const procId = params.get("procedure");
+    const eventId = params.get("event");
+    if (wasteId) {
+      const result = resolveWasteDeepLink(wasteItems, wasteId, state.asOfDate);
+      if (result.ok) {
+        state.detailWaste = wasteId;
+      } else {
+        state.deepLinkError = DEEPLINK_NOT_FOUND_MESSAGE;
+      }
+    } else if (procId) {
+      const result = resolveProcedureDeepLink(procedures, procId);
+      if (result.ok) {
+        state.detailProc = procId;
+      } else {
+        state.deepLinkError = DEEPLINK_NOT_FOUND_MESSAGE;
+      }
+    } else if (eventId) {
+      const result = resolveLifeEventDeepLink(lifeEvents, eventId);
+      if (result.ok) {
+        state.detailEvent = eventId;
+      } else {
+        state.deepLinkError = DEEPLINK_NOT_FOUND_MESSAGE;
+      }
+    }
+  }
+
+  async function init() {
+    const { config, wasteItems, procedures, lifeEvents, offices, branchJurisdiction, collectionSchedule } =
+      await window.KoreDousuruCore.loadMunicipality("../../municipalities/handa/config.json");
+    state.config = config;
+    state.wasteItemsAll = wasteItems;
+    state.procedures = procedures;
+    state.lifeEvents = lifeEvents;
+    state.offices = offices;
+    state.branchJurisdiction = branchJurisdiction;
+    state.collectionSchedule = collectionSchedule;
+    try {
+      const savedDistrict = localStorage.getItem(COLLECTION_DISTRICT_STORAGE_KEY);
+      if (savedDistrict && collectionSchedule?.districts?.[savedDistrict]) state.collectionDistrict = savedDistrict;
+    } catch {}
+    applyDeepLinkFromLocation(wasteItems, procedures, lifeEvents);
+    render();
+  }
+
+  init();
+})();
+
+</script>
+</body>
+</html>
