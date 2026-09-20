@@ -4,10 +4,26 @@
   "display_name_full": "大府市版",
   "app_title": "これどうする？",
   "priority_nav": [
-    { "key": "gomi", "label": "ごみ", "icon": "🗑️" },
-    { "key": "hikkoshi", "label": "引越し", "icon": "🏠" },
-    { "key": "juminhyo", "label": "住民票", "icon": "📄" },
-    { "key": "kosodate", "label": "子育て", "icon": "👶" }
+    {
+      "key": "gomi",
+      "label": "捨てたい",
+      "icon": "🗑️"
+    },
+    {
+      "key": "hikkoshi",
+      "label": "引っ越した",
+      "icon": "🏠"
+    },
+    {
+      "key": "juminhyo",
+      "label": "住民票がほしい",
+      "icon": "📄"
+    },
+    {
+      "key": "kosodate",
+      "label": "子どものこと",
+      "icon": "👶"
+    }
   ],
   "contact": {
     "name": "大府市役所（代表）",

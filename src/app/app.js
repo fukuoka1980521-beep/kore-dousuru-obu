@@ -35,6 +35,7 @@
     tab: "gomi",
     detailEvent: null,
     deepLinkError: null,
+    singleResultMode: false,
   };
 
   const $app = document.getElementById("app");
@@ -66,8 +67,8 @@
         <div class="muni-name">${escapeHtml(state.config.display_name)}版 <span class="unofficial-badge">非公式・実証版</span></div>
         <div class="app-title">${escapeHtml(state.config.app_title)}</div>
         <div class="search-box">
-          <input id="search-input" type="search" inputmode="search" placeholder="品目名・手続き名・「引っ越した」など" value="${escapeHtml(state.query || "")}" />
-          <button id="search-btn" aria-label="検索">🔍</button>
+          <input id="search-input" type="search" inputmode="search" placeholder="例：ソファ捨てたい・住民票ほしい" value="${escapeHtml(state.query || "")}" />
+          <button id="search-btn" aria-label="検索">検索</button>
         </div>
       </header>
     `;
@@ -289,31 +290,45 @@
   function renderProcCard(p) {
     const { riskLevel, freshness } = freshnessInfoFor(p, { isDateDependent: false });
     const share = shareBlockHtml({ procedure: p.procedure_id });
+    const documents = (p.required_documents || []).length
+      ? (p.required_documents || []).map(escapeHtml).join("<br />")
+      : "公式案内をご確認ください。";
     return `
       <a class="back-link" data-back="1">← 検索結果に戻る</a>
-      <div class="card">
+      <div class="card procedure-card">
         <h2>${escapeHtml(p.name)} ${statusBadge(p.status)}</h2>
         ${freshnessBannerHtml({ riskLevel, freshness })}
-        <div class="conclusion">${escapeHtml(p.conclusion)}</div>
-        <dl>
-          <div class="row"><dt>期限</dt><dd>${escapeHtml(p.deadline)}</dd></div>
+        <div class="action-lead">
+          <div class="action-lead-label">まずすること</div>
+          <div>${escapeHtml(p.conclusion)}</div>
+        </div>
+        <div class="action-grid">
+          <div class="action-item"><strong>📍 行く場所</strong><span>${escapeHtml(p.window_office)}</span></div>
+          <div class="action-item"><strong>👜 持っていくもの</strong><span>${documents}</span></div>
+          <div class="action-item"><strong>⏰ いつまで</strong><span>${escapeHtml(p.deadline)}</span></div>
+          <div class="action-item"><strong>💴 費用</strong><span>${escapeHtml(p.fee)}</span></div>
+          <div class="action-item"><strong>📱 オンライン</strong><span>${p.online_available ? "対応する方法があります" : "窓口等での手続が基本です"}</span></div>
+        </div>
+        <dl class="procedure-method">
           <div class="row"><dt>手続方法</dt><dd>${escapeHtml(p.how_to)}</dd></div>
-          <div class="row"><dt>必要書類</dt><dd>${(p.required_documents || []).map(escapeHtml).join("<br />")}</dd></div>
-          <div class="row"><dt>費用</dt><dd>${escapeHtml(p.fee)}</dd></div>
-          <div class="row"><dt>窓口</dt><dd>${escapeHtml(p.window_office)}${p.district_dependent ? `<br /><a class="official-link" href="${state.config.ward_list_url}" target="_blank" rel="noopener">窓口一覧を見る</a>` : ""}</dd></div>
-          <div class="row"><dt>電話番号</dt><dd><div class="phone-block">${escapeHtml(p.department_name)}<br />${escapeHtmlLinkify(p.phone)}</div></dd></div>
-          <div class="row"><dt>受付時間</dt><dd>${escapeHtml(p.business_hours)}</dd></div>
-          <div class="row"><dt>オンライン可否</dt><dd>${p.online_available ? "オンライン申請/申込に対応する方法があります" : "窓口・郵送が基本です"}</dd></div>
-          <div class="row"><dt>関連手続</dt><dd>${(p.related_procedures || [])
-            .map((rid) => {
-              const rp = state.procedures.find((x) => x.procedure_id === rid);
-              return rp ? `<span class="related-link" data-proc="${rid}" style="color:var(--brand);text-decoration:underline;cursor:pointer;">${escapeHtml(rp.name)}</span>` : "";
-            })
-            .join("　")}</dd></div>
-          <div class="row"><dt>公式情報</dt><dd><a class="official-link" href="${p.official_url}" target="_blank" rel="noopener">${escapeHtml(p.official_page_title)}</a></dd></div>
-          <div class="row"><dt>確認日</dt><dd>${escapeHtml(p.source_checked_at)}</dd></div>
-          ${p.notes ? `<div class="row"><dt>注意事項</dt><dd>${escapeHtml(p.notes)}</dd></div>` : ""}
+          ${p.district_dependent ? `<div class="row"><dt>窓口一覧</dt><dd><a class="official-link" href="${state.config.ward_list_url}" target="_blank" rel="noopener">窓口一覧を見る</a></dd></div>` : ""}
         </dl>
+        <details class="source-details">
+          <summary>問い合わせ先・公式情報を確認</summary>
+          <dl>
+            <div class="row"><dt>問い合わせ</dt><dd><div class="phone-block">${escapeHtml(p.department_name)}<br />${escapeHtmlLinkify(p.phone)}</div></dd></div>
+            <div class="row"><dt>受付時間</dt><dd>${escapeHtml(p.business_hours)}</dd></div>
+            <div class="row"><dt>関連手続</dt><dd>${(p.related_procedures || [])
+              .map((rid) => {
+                const rp = state.procedures.find((x) => x.procedure_id === rid);
+                return rp ? `<span class="related-link" data-proc="${rid}" style="color:var(--brand);text-decoration:underline;cursor:pointer;">${escapeHtml(rp.name)}</span>` : "";
+              })
+              .join("　")}</dd></div>
+            <div class="row"><dt>公式情報</dt><dd><a class="official-link" href="${p.official_url}" target="_blank" rel="noopener">${escapeHtml(p.official_page_title)}</a></dd></div>
+            <div class="row"><dt>確認日</dt><dd>${escapeHtml(p.source_checked_at)}</dd></div>
+            ${p.notes ? `<div class="row"><dt>注意事項</dt><dd>${escapeHtml(p.notes)}</dd></div>` : ""}
+          </dl>
+        </details>
         ${share}
       </div>
     `;
@@ -359,9 +374,30 @@
     return resolveActiveWasteItems(state.wasteItemsAll, state.asOfDate);
   }
 
+  function hasMultiVersionWasteItems() {
+    const counts = new Map();
+    for (const it of state.wasteItemsAll) {
+      counts.set(it.item_id, (counts.get(it.item_id) || 0) + 1);
+      if (counts.get(it.item_id) > 1) return true;
+    }
+    return false;
+  }
+
+  function searchDatePickerHtml() {
+    if (!hasMultiVersionWasteItems()) return "";
+    return `
+      <div class="date-picker-row">
+        過去・変更前のルールを確認:
+        <input type="date" id="as-of-date" value="${state.asOfDate}" />
+        <span class="date-picker-note">（通常は変更不要です）</span>
+      </div>
+    `;
+  }
+
   function render() {
     let body = "";
     const activeItems = currentActiveWasteItems();
+    state.singleResultMode = false;
 
     let deepLinkNotice = "";
     if (state.deepLinkError) {
@@ -387,15 +423,19 @@
       const eventResults = searchLifeEvents(state.query, state.lifeEvents);
       const wasteResults = searchWasteItems(state.query, activeItems);
       const procResults = searchProcedures(state.query, state.procedures);
-      if (eventResults.length === 0 && wasteResults.length === 0 && procResults.length === 0) {
+      const totalStrongResults = eventResults.length + wasteResults.length + procResults.length;
+      if (totalStrongResults === 0) {
         body = renderZeroResult(state.query);
+      } else if (totalStrongResults === 1) {
+        state.singleResultMode = true;
+        if (eventResults.length) body = renderLifeEventCard(eventResults[0]);
+        else if (wasteResults.length) body = renderWasteCard(wasteResults[0]);
+        else body = renderProcCard(procResults[0]);
+        body = `<div class="single-result-note">検索結果が1件だったため、すぐ答えを表示しています。</div>${body}`
+          .replace("← 検索結果に戻る", "← 検索をやり直す");
       } else {
         body = `
-          <div class="date-picker-row">
-            検索基準日:
-            <input type="date" id="as-of-date" value="${state.asOfDate}" />
-            <span class="date-picker-note">（ルール変更日をまたいで確認したいときに変更してください。通常は変更不要です）</span>
-          </div>
+          ${searchDatePickerHtml()}
           ${eventResults.length ? `<div class="section-title">生活イベント（${eventResults.length}件）</div><div class="result-list">${eventResults.map(eventResultItem).join("")}</div>` : ""}
           ${wasteResults.length ? `<div class="section-title">ごみ・資源（${wasteResults.length}件）</div><div class="result-list">${wasteResults.map(wasteResultItem).join("")}</div>` : ""}
           ${procResults.length ? `<div class="section-title">行政手続（${procResults.length}件）</div><div class="result-list">${procResults.map(procResultItem).join("")}</div>` : ""}
@@ -407,11 +447,7 @@
         : activeItems;
       const allCategories = [...new Set(state.wasteItemsAll.map((i) => i.category))];
       body = `
-        <div class="date-picker-row">
-          検索基準日:
-          <input type="date" id="as-of-date" value="${state.asOfDate}" />
-          <span class="date-picker-note">（ルール変更日をまたいで確認したいときに変更してください。通常は変更不要です）</span>
-        </div>
+        ${searchDatePickerHtml()}
         <div class="category-chip-row">
           <button data-category="" class="${!state.categoryFilter ? "active" : ""}">すべて</button>
           ${allCategories
@@ -456,12 +492,19 @@
       body = `
         ${renderPriorityNav()}
         <div class="beta-notice">
-          <strong>公開実証中</strong>
-          <div>検索できなかった言葉や分かりにくい点があれば、下の「問い合わせ」からお知らせください。</div>
+          <strong>公開実証中｜大府で困ったら、そのままの言葉で検索できます</strong>
+          <div>行政の手続名が分からなくても大丈夫です。</div>
+        </div>
+        <div class="section-title">こんな言い方で検索できます</div>
+        <div class="quick-query-row">
+          <button data-query="ソファ捨てたい">ソファ捨てたい</button>
+          <button data-query="住民票ほしい">住民票ほしい</button>
+          <button data-query="国保に入りたい">国保に入りたい</button>
+          <button data-query="子どもが生まれた">子どもが生まれた</button>
         </div>
         ${
           state.lifeEvents.length
-            ? `<div class="section-title">生活の出来事から探す</div>
+            ? `<div class="section-title">こんなときどうする？</div>
               <div class="event-chip-row">
                 ${state.lifeEvents
                   .map((e) => `<button data-event="${e.event_id}">${escapeHtml(e.display_name)}</button>`)
@@ -501,8 +544,8 @@
           render();
         }
       });
-      input.focus();
-      input.setSelectionRange(input.value.length, input.value.length);
+      // Mobile-first: do not force-focus the search box and open the keyboard.
+      // The user taps the box only when they actually want to type.
     }
     const btn = document.getElementById("search-btn");
     if (btn) btn.addEventListener("click", () => {
@@ -522,9 +565,20 @@
         state.detailEvent = null;
         state.categoryFilter = null;
         if (key === "gomi") state.view = "gomi";
-        else if (key === "hikkoshi") { state.view = "procedures"; state.query = "転入"; }
+        else if (key === "hikkoshi") { state.view = "procedures"; state.query = "引っ越し"; }
         else if (key === "juminhyo") { state.view = "procedures"; state.query = "住民票"; }
-        else if (key === "kosodate") { state.view = "procedures"; state.query = "児童手当"; }
+        else if (key === "kosodate") { state.view = "procedures"; state.query = "子ども"; }
+        render();
+      })
+    );
+
+    document.querySelectorAll("[data-query]").forEach((el) =>
+      el.addEventListener("click", () => {
+        state.query = el.getAttribute("data-query") || "";
+        state.detailWaste = null;
+        state.detailProc = null;
+        state.detailEvent = null;
+        state.categoryFilter = null;
         render();
       })
     );
@@ -578,6 +632,7 @@
     );
     document.querySelectorAll("[data-back]").forEach((el) =>
       el.addEventListener("click", () => {
+        if (state.singleResultMode) state.query = "";
         state.detailWaste = null;
         state.detailProc = null;
         state.detailEvent = null;

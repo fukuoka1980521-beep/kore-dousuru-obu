@@ -59,15 +59,35 @@ function haystacksOf(it) {
   return [it.display_name, ...(it.aliases || [])];
 }
 
-// Tiers ①-④ only. Returns items ranked by match quality, best first.
-// Empty query -> []. Never includes fuzzy/typo-only matches (tier ⑤) —
-// those must be requested explicitly via fuzzySuggestItems().
-export function searchItems(items, query) {
-  const q = normalize(query);
-  const qLoose = normalizeLoose(query);
-  if (!q) return [];
-  const scored = [];
-  for (const it of items) {
+const INTENT_SUFFIXES = [
+  'どこに捨てる', 'どこへ捨てる', 'どう捨てる',
+  'を処分したい', '処分したい', 'を捨てたい', '捨てたい',
+  'を出したい', '出したい', 'がほしい', 'ほしい', 'が欲しい', '欲しい',
+  'を取りたい', 'とりたい', 'を申請したい', '申請したい',
+  'の手続きしたい', '手続きしたい', 'に入りたい', '入りたい',
+  'をやめたい', 'やめたい', '取りに来て', 'どうしたらいい', 'どうする',
+].map(normalize).sort((a, b) => b.length - a.length);
+
+function expandIntentQueries(query) {
+  const normalized = normalize(query);
+  if (!normalized) return [];
+  const variants = [{ query: normalized, penalty: 0 }];
+  const seen = new Set([normalized]);
+  for (const suffix of INTENT_SUFFIXES) {
+    if (!normalized.endsWith(suffix)) continue;
+    const root = normalized.slice(0, -suffix.length);
+    if (root.length < 2 || seen.has(root)) continue;
+    seen.add(root);
+    variants.push({ query: root, penalty: 10 });
+  }
+  return variants;
+}
+
+function scoreStrongMatch(it, query) {
+  let bestScore = 0;
+  for (const variant of expandIntentQueries(query)) {
+    const q = normalize(variant.query);
+    const qLoose = normalizeLoose(variant.query);
     let score = 0;
     let isName = true;
     for (const raw of haystacksOf(it)) {
@@ -82,6 +102,18 @@ export function searchItems(items, query) {
       }
       isName = false;
     }
+    bestScore = Math.max(bestScore, Math.max(0, score - variant.penalty));
+  }
+  return bestScore;
+}
+
+// Tiers ①-④ only. Returns items ranked by match quality, best first.
+// Empty query -> []. Never includes fuzzy/typo-only matches (tier ⑤) —
+// those must be requested explicitly via fuzzySuggestItems().
+export function searchItems(items, query) {
+  const scored = [];
+  for (const it of items) {
+    const score = scoreStrongMatch(it, query);
     if (score > 0) scored.push({ item: it, score });
   }
   scored.sort((a, b) => b.score - a.score);

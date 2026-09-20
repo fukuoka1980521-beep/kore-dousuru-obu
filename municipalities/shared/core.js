@@ -69,29 +69,59 @@ function haystacksOf(name, aliases) {
   return [name, ...(aliases || [])];
 }
 
+// 生活者は行政名詞だけでなく「ソファ捨てたい」「住民票ほしい」のように
+// 行動意図を付けて検索する。意味を変えない定型の末尾だけを外した候補も検索し、
+// 元の語を常に最優先にする。自由文AI判定は行わず、決定論的な安全な展開に限定する。
+const INTENT_SUFFIXES = [
+  "どこに捨てる", "どこへ捨てる", "どう捨てる",
+  "を処分したい", "処分したい", "を捨てたい", "捨てたい",
+  "を出したい", "出したい", "がほしい", "ほしい", "が欲しい", "欲しい",
+  "を取りたい", "とりたい", "を申請したい", "申請したい",
+  "の手続きしたい", "手続きしたい", "に入りたい", "入りたい",
+  "をやめたい", "やめたい", "取りに来て", "どうしたらいい", "どうする",
+].map(normalize).sort((a, b) => b.length - a.length);
+
+function expandIntentQueries(query) {
+  const normalized = normalize(query);
+  if (!normalized) return [];
+  const variants = [{ query: normalized, penalty: 0 }];
+  const seen = new Set([normalized]);
+  for (const suffix of INTENT_SUFFIXES) {
+    if (!normalized.endsWith(suffix)) continue;
+    const root = normalized.slice(0, -suffix.length);
+    if (root.length < 2 || seen.has(root)) continue;
+    seen.add(root);
+    variants.push({ query: root, penalty: 10 });
+  }
+  return variants;
+}
+
 // 優先順位: ①正規名称完全一致 ②alias完全一致 ③正規化(緩)後完全一致 ④部分一致
 // ⑤(別関数 suggestSimilar) fuzzy/誤字候補。ここでは⑤は返さない — 低信頼一致を
 // 確定回答として混ぜないため。
 function scoreMatch(query, displayName, aliases) {
-  const q = normalize(query);
-  const qLoose = normalizeLoose(query);
-  if (!q) return 0;
-  let score = 0;
-  let isName = true;
-  for (const raw of haystacksOf(displayName, aliases)) {
-    const h = normalize(raw);
-    if (h) {
-      if (h === q) {
-        score = Math.max(score, isName ? 100 : 90); // ① / ②
-      } else if (qLoose && normalizeLoose(raw) === qLoose) {
-        score = Math.max(score, 85); // ③
-      } else if (h.startsWith(q) || h.includes(q) || q.includes(h)) {
-        score = Math.max(score, isName ? 60 : 50); // ④
+  let bestScore = 0;
+  for (const variant of expandIntentQueries(query)) {
+    const q = normalize(variant.query);
+    const qLoose = normalizeLoose(variant.query);
+    let score = 0;
+    let isName = true;
+    for (const raw of haystacksOf(displayName, aliases)) {
+      const h = normalize(raw);
+      if (h) {
+        if (h === q) {
+          score = Math.max(score, isName ? 100 : 90); // ① / ②
+        } else if (qLoose && normalizeLoose(raw) === qLoose) {
+          score = Math.max(score, 85); // ③
+        } else if (h.startsWith(q) || h.includes(q) || q.includes(h)) {
+          score = Math.max(score, isName ? 60 : 50); // ④
+        }
       }
+      isName = false;
     }
-    isName = false;
+    bestScore = Math.max(bestScore, Math.max(0, score - variant.penalty));
   }
-  return score;
+  return bestScore;
 }
 
 function searchWasteItems(query, items) {
