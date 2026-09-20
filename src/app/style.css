@@ -324,6 +324,98 @@ footer.app-footer button .icon { font-size: 20px; }
   background: var(--bg);
 }
 
+
+/* FEYNMAN action-first UX: everyday language first, implementation metadata later. */
+.search-box button {
+  background: var(--brand);
+  color: #fff;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.priority-nav button {
+  min-height: 74px;
+  line-height: 1.25;
+}
+.quick-query-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 2px 4px 4px;
+}
+.quick-query-row button {
+  border: 1px solid var(--brand);
+  background: #fff;
+  color: var(--brand-dark);
+  border-radius: 999px;
+  padding: 8px 13px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.single-result-note {
+  margin: 8px 4px 4px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #eef7f1;
+  color: var(--text-sub);
+  font-size: 12px;
+}
+.action-lead {
+  font-size: 15px;
+  line-height: 1.65;
+  background: #eef7f1;
+  border-left: 4px solid var(--brand);
+  padding: 11px 12px;
+  border-radius: 8px;
+  margin: 12px 0;
+}
+.action-lead-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--brand-dark);
+  margin-bottom: 2px;
+}
+.action-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin: 10px 0 12px;
+}
+.action-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 11px 12px;
+  background: #fff;
+}
+.action-item strong {
+  font-size: 13px;
+}
+.action-item span {
+  font-size: 14px;
+  line-height: 1.55;
+  overflow-wrap: break-word;
+}
+.procedure-method {
+  margin-top: 4px !important;
+}
+.source-details {
+  margin-top: 12px;
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+}
+.source-details summary {
+  cursor: pointer;
+  color: var(--brand);
+  font-weight: 700;
+  font-size: 13px;
+  padding: 4px 0 8px;
+}
+
 /* Desktop: the mobile-first shell stays intact below this width, but on a
    PC viewport a fixed 480px column reads as an oversized empty margin.
    Widen the column and let result lists breathe into two columns — no
