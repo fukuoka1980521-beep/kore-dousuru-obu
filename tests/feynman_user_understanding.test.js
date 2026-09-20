@@ -23,8 +23,9 @@
  *    UI layer) — the shown items were just the first 5 records in JSON file
  *    order. Relabeled to "特に注意が必要な品目" and backed by an actual
  *    filter on real danger_notes content.
- * 4. 検索基準日 date picker had zero explanation on both the gomi tab and the
- *    search-results view. Added the same short note to both.
+ * 4. The search reference date is an implementation detail while Obu has no
+ *    multi-version waste rules. It is now hidden by default and only appears
+ *    when a real item_id has multiple rule versions.
  */
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -109,9 +110,12 @@ test("the '特に注意が必要な品目' home section is honest: it is filtere
   }
 });
 
-test("gomi tab and search-results both explain what the 検索基準日 (search reference date) picker is for", () => {
-  const occurrences = appSrc.match(/<span class="date-picker-note">/g) || [];
-  assert.equal(occurrences.length, 2, "expected the explanatory note on both the gomi-tab and search-results date pickers");
+test("search reference date stays hidden until real multi-version waste history exists", () => {
+  assert.match(appSrc, /function hasMultiVersionWasteItems\(\)/);
+  assert.match(appSrc, /if \(!hasMultiVersionWasteItems\(\)\) return ""/);
+  assert.match(appSrc, /\$\{searchDatePickerHtml\(\)\}/);
+  const rawVisiblePickers = appSrc.match(/検索基準日:/g) || [];
+  assert.equal(rawVisiblePickers.length, 0, "old always-visible search-date label must not remain");
 });
 
 test("life event card renders the event-specific summary text (previously stored in data but never rendered)", () => {
