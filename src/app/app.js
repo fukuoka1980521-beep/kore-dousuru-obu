@@ -492,7 +492,7 @@
       body = `
         ${renderPriorityNav()}
         <div class="beta-notice">
-          <strong>大府で困ったら、そのままの言葉で検索できます</strong>
+          <strong>公開実証中｜大府で困ったら、そのままの言葉で検索できます</strong>
           <div>行政の手続名が分からなくても大丈夫です。</div>
         </div>
         <div class="section-title">こんな言い方で検索できます</div>
