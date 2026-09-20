@@ -59,27 +59,67 @@ function haystacksOf(it) {
   return [it.display_name, ...(it.aliases || [])];
 }
 
-const INTENT_SUFFIXES = [
+const GENERIC_INTENT_QUERIES = new Set([
   'どこに捨てる', 'どこへ捨てる', 'どう捨てる',
-  'を処分したい', '処分したい', 'を捨てたい', '捨てたい',
-  'を出したい', '出したい', 'がほしい', 'ほしい', 'が欲しい', '欲しい',
-  'を取りたい', 'とりたい', 'を申請したい', '申請したい',
-  'の手続きしたい', '手続きしたい', 'に入りたい', '入りたい',
-  'をやめたい', 'やめたい', '取りに来て', 'どうしたらいい', 'どうする',
-].map(normalize).sort((a, b) => b.length - a.length);
+  '処分したい', '捨てたい', '出したい',
+  'ほしい', '欲しい', '取りたい', 'とりたい',
+  '申請したい', '手続きしたい', '入りたい', 'やめたい',
+  '取りに来て', 'どうしたらいい', 'どうする',
+].map(normalize));
+
+const INTENT_SUFFIX_RULES = [
+  { suffix: 'どこに捨てる', canonical: [] },
+  { suffix: 'どこへ捨てる', canonical: [] },
+  { suffix: 'どう捨てる', canonical: [] },
+  { suffix: 'を処分したい', canonical: [] },
+  { suffix: '処分したい', canonical: [] },
+  { suffix: 'を捨てたい', canonical: [] },
+  { suffix: '捨てたい', canonical: [] },
+  { suffix: 'を出したい', canonical: [] },
+  { suffix: '出したい', canonical: [] },
+  { suffix: 'がほしい', canonical: ['がほしい', 'が欲しい'] },
+  { suffix: 'ほしい', canonical: ['がほしい', 'が欲しい'] },
+  { suffix: 'が欲しい', canonical: ['がほしい', 'が欲しい'] },
+  { suffix: '欲しい', canonical: ['がほしい', 'が欲しい'] },
+  { suffix: 'を取りたい', canonical: ['をとる', '取得'] },
+  { suffix: 'とりたい', canonical: ['をとる', '取得'] },
+  { suffix: 'を申請したい', canonical: ['申請'] },
+  { suffix: '申請したい', canonical: ['申請'] },
+  { suffix: 'の手続きしたい', canonical: ['手続き'] },
+  { suffix: '手続きしたい', canonical: ['手続き'] },
+  { suffix: 'に入りたい', canonical: ['に入る', '加入'] },
+  { suffix: '入りたい', canonical: ['に入る', '加入'] },
+  { suffix: 'をやめたい', canonical: ['をやめる', '脱退'] },
+  { suffix: 'やめたい', canonical: ['をやめる', '脱退'] },
+  { suffix: '取りに来て', canonical: [] },
+  { suffix: 'どうしたらいい', canonical: [] },
+  { suffix: 'どうする', canonical: [] },
+]
+  .map((rule) => ({
+    suffix: normalize(rule.suffix),
+    canonical: rule.canonical.map(normalize),
+  }))
+  .sort((a, b) => b.suffix.length - a.suffix.length);
 
 function expandIntentQueries(query) {
   const normalized = normalize(query);
-  if (!normalized) return [];
+  if (!normalized || GENERIC_INTENT_QUERIES.has(normalized)) return [];
+
   const variants = [{ query: normalized, penalty: 0 }];
   const seen = new Set([normalized]);
-  for (const suffix of INTENT_SUFFIXES) {
-    if (!normalized.endsWith(suffix)) continue;
-    const root = normalized.slice(0, -suffix.length);
-    if (root.length < 2 || seen.has(root)) continue;
-    seen.add(root);
-    variants.push({ query: root, penalty: 10 });
+  const rule = INTENT_SUFFIX_RULES.find((r) => normalized.endsWith(r.suffix));
+  if (!rule) return variants;
+
+  const root = normalized.slice(0, -rule.suffix.length);
+  if (root.length < 2) return variants;
+
+  for (const canonicalSuffix of rule.canonical) {
+    const rewritten = root + canonicalSuffix;
+    if (seen.has(rewritten)) continue;
+    seen.add(rewritten);
+    variants.push({ query: rewritten, penalty: 2 });
   }
+  if (!seen.has(root)) variants.push({ query: root, penalty: 10 });
   return variants;
 }
 
@@ -117,6 +157,13 @@ export function searchItems(items, query) {
     if (score > 0) scored.push({ item: it, score });
   }
   scored.sort((a, b) => b.score - a.score);
+  if (
+    scored.length > 1 &&
+    scored[0].score >= 80 &&
+    scored[0].score - scored[1].score >= 15
+  ) {
+    return [scored[0].item];
+  }
   return scored.map((s) => s.item);
 }
 
