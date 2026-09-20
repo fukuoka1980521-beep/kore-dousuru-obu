@@ -119,7 +119,7 @@ function expandIntentQueries(query) {
     seen.add(rewritten);
     variants.push({ query: rewritten, penalty: 2 });
   }
-  if (!seen.has(root)) variants.push({ query: root, penalty: 10 });
+  if (!seen.has(root)) variants.push({ query: root, penalty: 25 });
   return variants;
 }
 
