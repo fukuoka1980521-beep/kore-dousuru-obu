@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <meta name="theme-color" content="#0f766e">\n<meta name="robots" content="noindex,nofollow,noarchive">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <title>適応病名ナビ</title>
@@ -30,12 +33,12 @@ footer{max-width:760px;margin:auto;padding:0 18px 35px;color:var(--muted);font-s
 </head>
 <body>
 <main>
-<div class="head"><div><div class="eyebrow">PRIVATE MEDICATION REFERENCE</div><h1>適応病名ナビ</h1></div></div>
+<div class="head"><div><div class="eyebrow">PRIVATE MEDICATION REFERENCE ・ v0.3.1</div><h1>適応病名ナビ</h1></div></div>
 <section class="panel">
 <h2>薬の名前を入力</h2><p class="lead">販売名・一般名のどちらでも検索できます。未収載薬はJAPIC公開検索へ1タップで移動できます。</p>
 <input id="q" type="search" placeholder="例：ロキソニン、アムロジピン" autocomplete="off">
 <div id="suggestions" class="suggestions" aria-label="薬名候補"></div>
-<div id="chips" class="chips"></div>
+<div id="chips" class="chips"></div><div class="note" style="margin-top:10px">v0.3.1：ロキソニンテープ50mg／100mgの適応・用法・副作用を追加済み</div>
 </section>
 <div id="status" class="status"></div>
 <div id="out"></div>
@@ -59,7 +62,7 @@ loadMaster();render();
 
 async function loadMaster(){
   try{
-    const r=await fetch("./drug-master.json",{cache:"no-store"});
+    const r=await fetch("./drug-master.json?v=20260923-1645",{cache:"no-store"});
     if(!r.ok)throw new Error("HTTP "+r.status);
     const data=await r.json();
     MASTER=(data.drugs||[]).map((raw,i)=>{
