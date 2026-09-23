@@ -21,6 +21,10 @@ input{width:100%;min-height:52px;border:2px solid #bdcfca;border-radius:15px;fon
 a.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 14px;background:var(--b);color:#fff;text-decoration:none;border-radius:12px;font-weight:800}
 .note{margin-top:11px;padding:10px;background:#f5f7f6;border-radius:11px;color:var(--muted);font-size:11px;line-height:1.5}
 .empty{margin-top:14px;padding:20px;text-align:center;background:#fff;border:1px dashed #b8c9c5;border-radius:18px}.empty h2{font-size:18px}
+.suggestions{display:none;margin-top:10px;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:auto;max-height:390px}.suggestions.show{display:block}
+.srow{display:block;width:100%;padding:11px 12px;text-align:left;border:0;border-bottom:1px solid #edf1f0;background:#fff;color:var(--text)}.srow:last-child{border-bottom:0}.srow:active{background:#eef8f6}.srow b{font-size:14px}.srow small{display:block;margin-top:3px;color:var(--muted);line-height:1.35}
+.badge{display:inline-block;margin-left:6px;padding:2px 6px;border-radius:999px;background:#eef3f2;color:#50605d;font-size:10px;font-weight:800}.masterbox{padding:16px}.masterbox .drug{margin-bottom:7px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+button.btn{border:0;cursor:pointer}
 footer{max-width:760px;margin:auto;padding:0 18px 35px;color:var(--muted);font-size:10px;line-height:1.55}
 </style>
 </head>
@@ -30,6 +34,7 @@ footer{max-width:760px;margin:auto;padding:0 18px 35px;color:var(--muted);font-s
 <section class="panel">
 <h2>薬の名前を入力</h2><p class="lead">販売名・一般名のどちらでも検索できます。未収載薬はJAPIC公開検索へ1タップで移動できます。</p>
 <input id="q" type="search" placeholder="例：ロキソニン、アムロジピン" autocomplete="off">
+<div id="suggestions" class="suggestions" aria-label="薬名候補"></div>
 <div id="chips" class="chips"></div>
 </section>
 <div id="status" class="status"></div>
@@ -43,16 +48,94 @@ const D=[
 {id:"cal",n:["カロナール錠200","カロナール錠300","カロナール錠500","カロナール","アセトアミノフェン"],g:"アセトアミノフェン",c:"解熱鎮痛剤",r:"2026年8月25日改訂",i:["各種疾患及び症状における鎮痛","急性上気道炎（急性気管支炎を伴うものを含む）の解熱・鎮痛","小児科領域における解熱・鎮痛"],d:"【各種疾患・症状の鎮痛】成人：1回300～1000mg、4～6時間以上あける。1日総量4000mgまで。\n【急性上気道炎】成人：1回300～500mgを頓用。原則1日2回まで、1日最大1500mg。\n【小児】1回10～15mg/kg、4～6時間以上あける。1日60mg/kgまで（成人用量を超えない）。",a:["ショック、アナフィラキシー","中毒性表皮壊死融解症（TEN）、皮膚粘膜眼症候群","喘息発作の誘発","劇症肝炎、肝機能障害、黄疸","顆粒球減少症","間質性肺炎","間質性腎炎、急性腎障害"],x:["重篤な肝障害のある患者","本剤の成分に対し過敏症の既往歴のある患者"],m:["リチウム製剤、チアジド系利尿剤等：併用注意。詳細は最新添付文書10.2を確認"],u:"https://www.pmda.go.jp/PmdaSearch/iyakuDetail/172190_1141007F1063_5_07"},
 {id:"all",n:["アレグラ錠30mg","アレグラ錠60mg","アレグラ","フェキソフェナジン"],g:"フェキソフェナジン塩酸塩",c:"アレルギー性疾患治療剤",r:"2024年5月改訂（第3版）",i:["アレルギー性鼻炎","蕁麻疹","皮膚疾患（湿疹・皮膚炎、皮膚そう痒症、アトピー性皮膚炎）に伴うそう痒"],d:"成人：通常1回60mgを1日2回。\n7歳以上12歳未満：通常1回30mgを1日2回。\n12歳以上の小児：通常1回60mgを1日2回。\n症状により適宜増減。",a:["ショック、アナフィラキシー","肝機能障害、黄疸","無顆粒球症、白血球減少、好中球減少"],x:["本剤の成分に対し過敏症の既往歴のある患者"],m:["エリスロマイシン：本剤血漿中濃度上昇の報告","水酸化アルミニウム・水酸化マグネシウム含有製剤：作用減弱のおそれ","アパルタミド：本剤血漿中濃度低下・作用減弱のおそれ"],u:"https://www.pmda.go.jp/PmdaSearch/iyakuDetail/780069_4490023F1024_1_25"}
 ];
-const q=document.getElementById("q"),out=document.getElementById("out"),st=document.getElementById("status"),chips=document.getElementById("chips");
+const q=document.getElementById("q"),out=document.getElementById("out"),st=document.getElementById("status"),chips=document.getElementById("chips"),suggestions=document.getElementById("suggestions");
+let MASTER=[],MASTER_META=null,masterReady=false,masterFailed=false,inputTimer=null;
 ["ロキソニン","アムロジピン","カロナール","アレグラ"].forEach(v=>{const b=document.createElement("button");b.className="chip";b.textContent=v;b.onclick=()=>{q.value=v;render()};chips.appendChild(b)});
-q.addEventListener("input",render);render();
+q.addEventListener("input",()=>{clearTimeout(inputTimer);inputTimer=setTimeout(render,70)});
+q.addEventListener("keydown",e=>{if(e.key==="Enter"){const first=suggestions.querySelector(".srow");if(first){e.preventDefault();first.click()}}});
+document.addEventListener("click",e=>{if(!suggestions.contains(e.target)&&e.target!==q)suggestions.classList.remove("show")});
+loadMaster();render();
+
+async function loadMaster(){
+  try{
+    const r=await fetch("./drug-master.json",{cache:"no-store"});
+    if(!r.ok)throw new Error("HTTP "+r.status);
+    const data=await r.json();
+    MASTER=(data.drugs||[]).map(d=>{
+      const gn=genericDisplay(d.generic);
+      return {...d,_name:norm(d.name),_base:norm(d.base),_generic:norm(gn),_kana:norm(d.kana),_s:norm([d.name,d.base,gn,d.kana,d.yj].join(" "))};
+    });
+    MASTER_META=data.meta||null;masterReady=true;masterFailed=false;render();
+  }catch(err){console.error(err);masterReady=false;masterFailed=true;render()}
+}
+function genericDisplay(s){return String(s||"").replace(/^【般】/,"").trim()}
+function sourceDate(){
+  const d=String(MASTER_META?.source_date||"");
+  return /^\d{8}$/.test(d)?d.slice(0,4)+"/"+d.slice(4,6)+"/"+d.slice(6,8):d;
+}
+function searchMaster(raw){
+  const z=norm(raw);if(z.length<2||!masterReady)return [];
+  const exact=[],prefix=[],contains=[];
+  for(const d of MASTER){
+    const fs=[d._name,d._base,d._generic,d._kana].filter(Boolean);
+    if(fs.some(v=>v===z))exact.push(d);
+    else if(fs.some(v=>v.startsWith(z)))prefix.push(d);
+    else if(d._s.includes(z))contains.push(d);
+  }
+  const seen=new Set(),out=[];
+  for(const d of [...exact,...prefix,...contains]){
+    if(seen.has(d.code))continue;seen.add(d.code);out.push(d);if(out.length>=20)break;
+  }
+  return out;
+}
+function renderSuggestions(){
+  const z=norm(q.value);
+  if(z.length<2||!masterReady){suggestions.classList.remove("show");suggestions.innerHTML="";return []}
+  const rs=searchMaster(q.value);
+  if(!rs.length){suggestions.classList.remove("show");suggestions.innerHTML="";return rs}
+  suggestions.innerHTML=rs.map(d=>{
+    const g=genericDisplay(d.generic);
+    const end=d.abolished&&d.abolished!=="99999999"?'<span class="badge">経過措置等 '+esc(fmtDate(d.abolished))+'</span>':"";
+    return '<button class="srow" type="button" data-code="'+esc(d.code)+'"><b>'+esc(d.name)+'</b>'+end+'<small>'+(g?'一般名：'+esc(g)+'　':'')+(d.yj?'YJ：'+esc(d.yj):'')+'</small></button>';
+  }).join("");
+  suggestions.querySelectorAll(".srow").forEach(b=>b.onclick=()=>{const d=MASTER.find(x=>x.code===b.dataset.code);if(d){q.value=d.name;suggestions.classList.remove("show");showMaster(d)}});
+  suggestions.classList.add("show");return rs;
+}
+function fmtDate(s){const d=String(s||"");return /^\d{8}$/.test(d)?d.slice(0,4)+"/"+d.slice(4,6)+"/"+d.slice(6,8):d}
 function norm(s){return String(s||"").normalize("NFKC").toLowerCase().replace(/[\s　・･\/／()（）「」『』]/g,"")}
 function esc(s){return String(s??"").replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c]))}
 function list(a,cls=""){return a&&a.length?'<ul class="'+cls+'">'+a.map(x=>"<li>"+esc(x)+"</li>").join("")+"</ul>":'<div>収載なし</div>'}
-function render(){const z=norm(q.value);out.innerHTML="";if(!z){st.textContent="確認済み4薬剤群はアプリ内表示。その他の薬は登録不要のJAPIC公開検索へ直接つなぎます。";return}st.textContent="";
-const ms=D.filter(d=>[...d.n,d.g,d.c].some(n=>norm(n).includes(z)||z.includes(norm(n))&&norm(n).length>=4));
-if(!ms.length){const japic='https://iyakusearch.japic.or.jp/package_insert/result?medical='+encodeURIComponent(q.value);out.innerHTML='<div class="empty"><h2>「'+esc(q.value)+'」はアプリ内要約に未収載です</h2><p>推測表示はせず、登録不要の公開検索へつなぎます。</p><div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center"><a class="btn" target="_blank" rel="noopener" href="'+japic+'">JAPICでこの薬を検索</a><a class="btn" target="_blank" rel="noopener" href="https://www.pmda.go.jp/PmdaSearch/iyakuSearch/">PMDAで検索</a></div><div class="note" style="margin-top:14px">JAPICでは製品名・一般名・効能又は効果・用法及び用量・使用上の注意等を確認できます。自動大量取得は行いません。</div></div>';return}
-ms.slice(0,8).forEach(d=>out.appendChild(card(d)))}
+function render(){
+  const z=norm(q.value);out.innerHTML="";
+  const rs=renderSuggestions();
+  if(!z){
+    st.textContent=masterReady?"薬名索引 "+Number(MASTER_META?.count||MASTER.length).toLocaleString()+"件（支払基金 "+sourceDate()+"版）":"薬名索引を読み込み中…";
+    if(masterFailed)st.textContent="薬名索引の読込に失敗しました。JAPIC/PMDA検索は利用できます。";
+    return;
+  }
+  const ms=D.filter(d=>[...d.n,d.g,d.c].some(n=>norm(n).includes(z)||(z.includes(norm(n))&&norm(n).length>=4)));
+  if(ms.length){
+    st.textContent=masterReady?"全件索引から候補を表示中｜確認済み要約あり":"確認済み要約あり";
+    ms.slice(0,8).forEach(d=>out.appendChild(card(d)));return;
+  }
+  if(!masterReady){
+    st.textContent=masterFailed?"全件索引を読み込めませんでした":"薬名索引を読み込み中…";fallback(q.value);return;
+  }
+  st.textContent=rs.length?rs.length+"件の候補を表示（最大20件）":"該当候補なし";
+  if(rs.length===1&&norm(rs[0].name)===z){showMaster(rs[0]);return}
+  if(!rs.length)fallback(q.value);
+}
+function fallback(v){
+  const japic='https://iyakusearch.japic.or.jp/package_insert/result?medical='+encodeURIComponent(v);
+  out.innerHTML='<div class="empty"><h2>「'+esc(v)+'」の候補がありません</h2><p>推測せず、公式情報検索へつなぎます。</p><div class="actions" style="justify-content:center"><a class="btn" target="_blank" rel="noopener" href="'+japic+'">JAPICで検索</a><a class="btn" target="_blank" rel="noopener" href="https://www.pmda.go.jp/PmdaSearch/iyakuSearch/">PMDAで検索</a></div></div>';
+}
+function showMaster(d){
+  suggestions.classList.remove("show");
+  const g=genericDisplay(d.generic),japic='https://iyakusearch.japic.or.jp/package_insert/result?medical='+encodeURIComponent(d.name);
+  const end=d.abolished&&d.abolished!=="99999999"?'<br><b>経過措置等：</b>'+esc(fmtDate(d.abolished)):"";
+  st.textContent="支払基金の医薬品マスターから選択";
+  out.innerHTML='<article class="card"><div class="masterbox"><h2 class="drug">'+esc(d.name)+'</h2><div class="meta">'+(g?'<b>一般名：</b>'+esc(g)+'<br>':'')+(d.yj?'<b>YJコード：</b>'+esc(d.yj)+'<br>':'')+'<b>医薬品コード：</b>'+esc(d.code)+end+'</div><div class="note">この薬は全件索引には収載されていますが、適応・用法・副作用等のアプリ内要約は未検証です。医学情報を推測せず、JAPIC/PMDAの最新原文で確認します。</div><div class="actions"><a class="btn" target="_blank" rel="noopener" href="'+japic+'">適応・用法・副作用を確認</a><a class="btn" target="_blank" rel="noopener" href="https://www.pmda.go.jp/PmdaSearch/iyakuSearch/">PMDA検索</a></div></div></article>';
+}
 function card(d){const e=document.createElement("article");e.className="card";e.innerHTML='<div class="cardhead"><h2 class="drug">'+esc(d.n[0])+'</h2><div class="meta"><b>一般名：</b>'+esc(d.g)+'<br><b>分類：</b>'+esc(d.c)+'<br><b>改訂：</b>'+esc(d.r)+'</div></div><div class="ind"><div class="k">最優先表示｜適応病名・効能効果</div>'+list(d.i)+'</div><div class="tabs"><button class="tab on" data-t="d">用法</button><button class="tab" data-t="a">副作用</button><button class="tab" data-t="x">禁忌</button><button class="tab" data-t="m">相互作用</button></div><div class="content"></div>';
 const c=e.querySelector(".content"),bs=[...e.querySelectorAll(".tab")];function sel(t){bs.forEach(b=>b.classList.toggle("on",b.dataset.t===t));let h=t==="d"?esc(d.d):t==="a"?'<div class="danger"><div class="k">重大な副作用</div>'+list(d.a)+'</div>':t==="x"?list(d.x):list(d.m);c.innerHTML=h+'<div class="source"><a class="btn" target="_blank" rel="noopener" href="'+d.u+'">PMDA原文を確認</a></div><div class="note">表示内容と最新原文に差がある場合はPMDA原文を優先してください。</div>'}bs.forEach(b=>b.onclick=()=>sel(b.dataset.t));sel("d");return e}
 </script>
