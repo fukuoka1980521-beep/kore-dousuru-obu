@@ -126,16 +126,31 @@ def main() -> None:
             f"抽出件数が少なすぎます: {len(rows)}件（最低{EXPECTED_MIN}件）"
         )
 
+    # モバイル検索で使わない列は配信しない。
+    # 配列順: [製品名, カナ, YJコード, 一般名処方標準名, 経過措置等終了日]
+    # 有効品の abolished=99999999 は空文字へ圧縮する。
+    compact_rows = [
+        [
+            item["name"],
+            item["kana"],
+            item["yj"],
+            item["generic"],
+            "" if item["abolished"] in ("", "99999999") else item["abolished"],
+        ]
+        for item in rows
+    ]
+
     payload = {
         "meta": {
             "source": "社会保険診療報酬支払基金 医薬品マスター",
             "source_url": INDEX_URL,
             "source_date": source_date,
-            "count": len(rows),
+            "count": len(compact_rows),
             "malformed_rows": malformed,
+            "schema": ["name", "kana", "yj", "generic", "abolished"],
             "generated_at": datetime.now(timezone.utc).isoformat(),
         },
-        "drugs": rows,
+        "drugs": compact_rows,
     }
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
