@@ -61,7 +61,10 @@ async function loadMaster(){
     const r=await fetch("./drug-master.json",{cache:"no-store"});
     if(!r.ok)throw new Error("HTTP "+r.status);
     const data=await r.json();
-    MASTER=(data.drugs||[]).map(d=>{
+    MASTER=(data.drugs||[]).map((raw,i)=>{
+      const d=Array.isArray(raw)
+        ? {id:i,name:raw[0]||"",kana:raw[1]||"",yj:raw[2]||"",generic:raw[3]||"",abolished:raw[4]||""}
+        : {...raw,id:i};
       const gn=genericDisplay(d.generic);
       return {...d,_name:norm(d.name),_base:norm(d.base),_generic:norm(gn),_kana:norm(d.kana),_s:norm([d.name,d.base,gn,d.kana,d.yj].join(" "))};
     });
@@ -84,7 +87,7 @@ function searchMaster(raw){
   }
   const seen=new Set(),out=[];
   for(const d of [...exact,...prefix,...contains]){
-    if(seen.has(d.code))continue;seen.add(d.code);out.push(d);if(out.length>=20)break;
+    if(seen.has(d.id))continue;seen.add(d.id);out.push(d);if(out.length>=20)break;
   }
   return out;
 }
@@ -96,9 +99,9 @@ function renderSuggestions(){
   suggestions.innerHTML=rs.map(d=>{
     const g=genericDisplay(d.generic);
     const end=d.abolished&&d.abolished!=="99999999"?'<span class="badge">経過措置等 '+esc(fmtDate(d.abolished))+'</span>':"";
-    return '<button class="srow" type="button" data-code="'+esc(d.code)+'"><b>'+esc(d.name)+'</b>'+end+'<small>'+(g?'一般名：'+esc(g)+'　':'')+(d.yj?'YJ：'+esc(d.yj):'')+'</small></button>';
+    return '<button class="srow" type="button" data-i="'+d.id+'"><b>'+esc(d.name)+'</b>'+end+'<small>'+(g?'一般名：'+esc(g)+'　':'')+(d.yj?'YJ：'+esc(d.yj):'')+'</small></button>';
   }).join("");
-  suggestions.querySelectorAll(".srow").forEach(b=>b.onclick=()=>{const d=MASTER.find(x=>x.code===b.dataset.code);if(d){q.value=d.name;suggestions.classList.remove("show");const verified=D.some(v=>v.n.some(n=>norm(n)===norm(d.name)));if(verified){render();suggestions.classList.remove("show")}else{showMaster(d)}}});
+  suggestions.querySelectorAll(".srow").forEach(b=>b.onclick=()=>{const d=MASTER[Number(b.dataset.i)];if(d){q.value=d.name;suggestions.classList.remove("show");const verified=D.some(v=>v.n.some(n=>norm(n)===norm(d.name)));if(verified){render();suggestions.classList.remove("show")}else{showMaster(d)}}});
   suggestions.classList.add("show");return rs;
 }
 function fmtDate(s){const d=String(s||"");return /^\d{8}$/.test(d)?d.slice(0,4)+"/"+d.slice(4,6)+"/"+d.slice(6,8):d}
@@ -134,7 +137,7 @@ function showMaster(d){
   const g=genericDisplay(d.generic),japic='https://iyakusearch.japic.or.jp/package_insert/result?medical='+encodeURIComponent(d.name);
   const end=d.abolished&&d.abolished!=="99999999"?'<br><b>経過措置等：</b>'+esc(fmtDate(d.abolished)):"";
   st.textContent="支払基金の医薬品マスターから選択";
-  out.innerHTML='<article class="card"><div class="masterbox"><h2 class="drug">'+esc(d.name)+'</h2><div class="meta">'+(g?'<b>一般名：</b>'+esc(g)+'<br>':'')+(d.yj?'<b>YJコード：</b>'+esc(d.yj)+'<br>':'')+'<b>医薬品コード：</b>'+esc(d.code)+end+'</div><div class="note">この薬は全件索引には収載されていますが、適応・用法・副作用等のアプリ内要約は未検証です。医学情報を推測せず、JAPIC/PMDAの最新原文で確認します。</div><div class="actions"><a class="btn" target="_blank" rel="noopener" href="'+japic+'">適応・用法・副作用を確認</a><a class="btn" target="_blank" rel="noopener" href="https://www.pmda.go.jp/PmdaSearch/iyakuSearch/">PMDA検索</a></div></div></article>';
+  out.innerHTML='<article class="card"><div class="masterbox"><h2 class="drug">'+esc(d.name)+'</h2><div class="meta">'+(g?'<b>一般名：</b>'+esc(g)+'<br>':'')+(d.yj?'<b>YJコード：</b>'+esc(d.yj):'')+end+'</div><div class="note">この薬は全件索引には収載されていますが、適応・用法・副作用等のアプリ内要約は未検証です。医学情報を推測せず、JAPIC/PMDAの最新原文で確認します。</div><div class="actions"><a class="btn" target="_blank" rel="noopener" href="'+japic+'">適応・用法・副作用を確認</a><a class="btn" target="_blank" rel="noopener" href="https://www.pmda.go.jp/PmdaSearch/iyakuSearch/">PMDA検索</a></div></div></article>';
 }
 function card(d){const e=document.createElement("article");e.className="card";e.innerHTML='<div class="cardhead"><h2 class="drug">'+esc(d.n[0])+'</h2><div class="meta"><b>一般名：</b>'+esc(d.g)+'<br><b>分類：</b>'+esc(d.c)+'<br><b>改訂：</b>'+esc(d.r)+'</div></div><div class="ind"><div class="k">最優先表示｜適応病名・効能効果</div>'+list(d.i)+'</div><div class="tabs"><button class="tab on" data-t="d">用法</button><button class="tab" data-t="a">副作用</button><button class="tab" data-t="x">禁忌</button><button class="tab" data-t="m">相互作用</button></div><div class="content"></div>';
 const c=e.querySelector(".content"),bs=[...e.querySelectorAll(".tab")];function sel(t){bs.forEach(b=>b.classList.toggle("on",b.dataset.t===t));let h=t==="d"?esc(d.d):t==="a"?'<div class="danger"><div class="k">重大な副作用</div>'+list(d.a)+'</div>':t==="x"?list(d.x):list(d.m);c.innerHTML=h+'<div class="source"><a class="btn" target="_blank" rel="noopener" href="'+d.u+'">PMDA原文を確認</a></div><div class="note">表示内容と最新原文に差がある場合はPMDA原文を優先してください。</div>'}bs.forEach(b=>b.onclick=()=>sel(b.dataset.t));sel("d");return e}
