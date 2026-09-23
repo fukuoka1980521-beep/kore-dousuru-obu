@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f766e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>適応病名ナビ</title>
+<style>
+:root{--b:#0f766e;--bg:#f4f7f6;--card:#fff;--text:#16211f;--muted:#64716e;--line:#dce5e2;--danger:#fff1f1}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}
+main{max-width:760px;margin:auto;padding:18px 14px 48px}.head{display:flex;justify-content:space-between;align-items:center}.eyebrow{font-size:10px;letter-spacing:.12em;color:var(--muted)}h1{font-size:25px;margin:3px 0 16px}
+.panel,.card{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:0 5px 20px rgba(0,0,0,.04)}
+.panel{padding:16px}.panel h2{font-size:17px;margin:0 0 5px}.lead{font-size:13px;color:var(--muted);margin:0 0 12px}
+input{width:100%;min-height:52px;border:2px solid #bdcfca;border-radius:15px;font-size:18px;padding:0 14px;background:#fff}input:focus{outline:3px solid #c9efea;border-color:var(--b)}
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.chip,.tab{border:1px solid var(--line);background:#fff;border-radius:999px;min-height:39px;padding:0 12px;font-weight:700}.chip:active,.tab:active{transform:scale(.98)}
+.status{font-size:13px;margin:12px 2px;color:var(--muted)}.card{overflow:hidden;margin-top:14px}.cardhead{padding:17px}.drug{font-size:20px;margin:0 0 8px}.meta{font-size:13px;line-height:1.7;color:#43504d}
+.ind{padding:16px;background:#e8f7f4;border-top:1px solid #c8e8e2;border-bottom:1px solid #c8e8e2}.k{font-size:12px;font-weight:800;color:#0b5f58;margin-bottom:8px}.ind ul,.content ul{margin:0;padding-left:1.2em}.ind li,.content li{margin:6px 0;line-height:1.55}
+.tabs{display:flex;gap:6px;padding:12px;border-bottom:1px solid var(--line);overflow:auto}.tab{white-space:nowrap}.tab.on{background:var(--b);color:#fff;border-color:var(--b)}
+.content{padding:16px;white-space:pre-line;line-height:1.65;font-size:14px}.danger{background:var(--danger);padding:11px 13px;border-radius:13px}.source{margin-top:15px}
+a.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 14px;background:var(--b);color:#fff;text-decoration:none;border-radius:12px;font-weight:800}
+.note{margin-top:11px;padding:10px;background:#f5f7f6;border-radius:11px;color:var(--muted);font-size:11px;line-height:1.5}
+.empty{margin-top:14px;padding:20px;text-align:center;background:#fff;border:1px dashed #b8c9c5;border-radius:18px}.empty h2{font-size:18px}
+footer{max-width:760px;margin:auto;padding:0 18px 35px;color:var(--muted);font-size:10px;line-height:1.55}
+</style>
+</head>
+<body>
+<main>
+<div class="head"><div><div class="eyebrow">PRIVATE MEDICATION REFERENCE</div><h1>適応病名ナビ</h1></div></div>
+<section class="panel">
+<h2>薬の名前を入力</h2><p class="lead">販売名・一般名のどちらでも検索できます。</p>
+<input id="q" type="search" placeholder="例：ロキソニン、アムロジピン" autocomplete="off">
+<div id="chips" class="chips"></div>
+</section>
+<div id="status" class="status"></div>
+<div id="out"></div>
+</main>
+<footer>出典：PMDA公開情報をもとに整理・加工。このアプリは診断・処方・服薬変更を行うものではありません。実際の使用判断は最新の電子化された添付文書と医師・薬剤師の確認を優先してください。</footer>
+<script>
+const D=[
+{id:"lox",n:["ロキソニン錠60mg","ロキソニン細粒10%","ロキソニン","ロキソプロフェン"],g:"ロキソプロフェンナトリウム水和物",c:"鎮痛・抗炎症・解熱剤",r:"2025年3月改訂（第4版）",i:["関節リウマチ、変形性関節症、腰痛症、肩関節周囲炎、頸肩腕症候群、歯痛の消炎・鎮痛","手術後、外傷後、抜歯後の鎮痛・消炎","急性上気道炎（急性気管支炎を伴うものを含む）の解熱・鎮痛"],d:"【消炎・鎮痛】通常、成人にロキソプロフェンナトリウム（無水物として）1回60mgを1日3回。頓用は1回60～120mg。\n【急性上気道炎の解熱・鎮痛】通常、成人に1回60mgを頓用。原則1日2回まで、1日最大180mg。\n年齢・症状により適宜増減。空腹時の投与は避けることが望ましい。",a:["ショック、アナフィラキシー","無顆粒球症、白血球減少、溶血性貧血、再生不良性貧血、血小板減少","中毒性表皮壊死融解症（TEN）、皮膚粘膜眼症候群（Stevens-Johnson症候群）","急性腎障害、ネフローゼ症候群、間質性腎炎","消化性潰瘍、消化管出血、消化管穿孔","劇症肝炎、肝機能障害、黄疸","喘息発作、無菌性髄膜炎"],x:["消化性潰瘍のある患者","重篤な血液の異常、肝機能障害、腎機能障害、心機能不全のある患者","本剤の成分に対し過敏症の既往歴のある患者","アスピリン喘息またはその既往歴のある患者","妊娠後期の女性"],m:["ワルファリン等のクマリン系抗凝血剤：抗凝血作用増強のおそれ","第Xa因子阻害剤：出血リスク増大のおそれ","スルホニル尿素系血糖降下剤：血糖降下作用増強のおそれ","ニューキノロン系抗菌剤：痙攣誘発作用増強のおそれ","メトトレキサート、リチウム製剤：血中濃度上昇のおそれ"],u:"https://www.pmda.go.jp/PmdaSearch/iyakuDetail/430574_1149019C1149_1_13"},
+{id:"nor",n:["ノルバスク錠2.5mg","ノルバスク錠5mg","ノルバスク錠10mg","ノルバスク","アムロジピン"],g:"アムロジピンベシル酸塩",c:"持続性Ca拮抗薬",r:"2026年5月改訂",i:["高血圧症","狭心症"],d:"【高血圧症】通常、成人にはアムロジピンとして2.5～5mgを1日1回。効果不十分の場合は1日1回10mgまで増量可。\n【狭心症】通常、成人には5mgを1日1回。症状に応じ適宜増減。",a:["劇症肝炎、肝機能障害、黄疸","無顆粒球症、白血球減少、血小板減少","房室ブロック","横紋筋融解症"],x:["ジヒドロピリジン系化合物に対し過敏症の既往歴のある患者"],m:["他の降圧作用を有する薬剤：降圧作用増強のおそれ","CYP3A4阻害剤：本剤血中濃度上昇のおそれ","その他は最新添付文書10.2を確認"],u:"https://www.pmda.go.jp/PmdaSearch/iyakuDetail/671450_2171022F1029_4_07"},
+{id:"cal",n:["カロナール錠200","カロナール錠300","カロナール錠500","カロナール","アセトアミノフェン"],g:"アセトアミノフェン",c:"解熱鎮痛剤",r:"2026年8月25日改訂",i:["各種疾患及び症状における鎮痛","急性上気道炎（急性気管支炎を伴うものを含む）の解熱・鎮痛","小児科領域における解熱・鎮痛"],d:"【各種疾患・症状の鎮痛】成人：1回300～1000mg、4～6時間以上あける。1日総量4000mgまで。\n【急性上気道炎】成人：1回300～500mgを頓用。原則1日2回まで、1日最大1500mg。\n【小児】1回10～15mg/kg、4～6時間以上あける。1日60mg/kgまで（成人用量を超えない）。",a:["ショック、アナフィラキシー","中毒性表皮壊死融解症（TEN）、皮膚粘膜眼症候群","喘息発作の誘発","劇症肝炎、肝機能障害、黄疸","顆粒球減少症","間質性肺炎","間質性腎炎、急性腎障害"],x:["重篤な肝障害のある患者","本剤の成分に対し過敏症の既往歴のある患者"],m:["リチウム製剤、チアジド系利尿剤等：併用注意。詳細は最新添付文書10.2を確認"],u:"https://www.pmda.go.jp/PmdaSearch/iyakuDetail/172190_1141007F1063_5_07"},
+{id:"all",n:["アレグラ錠30mg","アレグラ錠60mg","アレグラ","フェキソフェナジン"],g:"フェキソフェナジン塩酸塩",c:"アレルギー性疾患治療剤",r:"2024年5月改訂（第3版）",i:["アレルギー性鼻炎","蕁麻疹","皮膚疾患（湿疹・皮膚炎、皮膚そう痒症、アトピー性皮膚炎）に伴うそう痒"],d:"成人：通常1回60mgを1日2回。\n7歳以上12歳未満：通常1回30mgを1日2回。\n12歳以上の小児：通常1回60mgを1日2回。\n症状により適宜増減。",a:["ショック、アナフィラキシー","肝機能障害、黄疸","無顆粒球症、白血球減少、好中球減少"],x:["本剤の成分に対し過敏症の既往歴のある患者"],m:["エリスロマイシン：本剤血漿中濃度上昇の報告","水酸化アルミニウム・水酸化マグネシウム含有製剤：作用減弱のおそれ","アパルタミド：本剤血漿中濃度低下・作用減弱のおそれ"],u:"https://www.pmda.go.jp/PmdaSearch/iyakuDetail/780069_4490023F1024_1_25"}
+];
+const q=document.getElementById("q"),out=document.getElementById("out"),st=document.getElementById("status"),chips=document.getElementById("chips");
+["ロキソニン","アムロジピン","カロナール","アレグラ"].forEach(v=>{const b=document.createElement("button");b.className="chip";b.textContent=v;b.onclick=()=>{q.value=v;render()};chips.appendChild(b)});
+q.addEventListener("input",render);render();
+function norm(s){return String(s||"").normalize("NFKC").toLowerCase().replace(/[\s　・･\/／()（）「」『』]/g,"")}
+function esc(s){return String(s??"").replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c]))}
+function list(a,cls=""){return a&&a.length?'<ul class="'+cls+'">'+a.map(x=>"<li>"+esc(x)+"</li>").join("")+"</ul>":'<div>収載なし</div>'}
+function render(){const z=norm(q.value);out.innerHTML="";if(!z){st.textContent="現在は動作確認用の4薬剤群を収載。未収載薬は推測表示しません。";return}st.textContent="";
+const ms=D.filter(d=>[...d.n,d.g,d.c].some(n=>norm(n).includes(z)||z.includes(norm(n))&&norm(n).length>=4));
+if(!ms.length){out.innerHTML='<div class="empty"><h2>「'+esc(q.value)+'」は初期版に未収載です</h2><p>似た薬を推測表示しません。全件版へ拡張予定です。</p><a class="btn" target="_blank" rel="noopener" href="https://www.pmda.go.jp/PmdaSearch/iyakuSearch/">PMDA公式検索を開く</a></div>';return}
+ms.slice(0,8).forEach(d=>out.appendChild(card(d)))}
+function card(d){const e=document.createElement("article");e.className="card";e.innerHTML='<div class="cardhead"><h2 class="drug">'+esc(d.n[0])+'</h2><div class="meta"><b>一般名：</b>'+esc(d.g)+'<br><b>分類：</b>'+esc(d.c)+'<br><b>改訂：</b>'+esc(d.r)+'</div></div><div class="ind"><div class="k">最優先表示｜適応病名・効能効果</div>'+list(d.i)+'</div><div class="tabs"><button class="tab on" data-t="d">用法</button><button class="tab" data-t="a">副作用</button><button class="tab" data-t="x">禁忌</button><button class="tab" data-t="m">相互作用</button></div><div class="content"></div>';
+const c=e.querySelector(".content"),bs=[...e.querySelectorAll(".tab")];function sel(t){bs.forEach(b=>b.classList.toggle("on",b.dataset.t===t));let h=t==="d"?esc(d.d):t==="a"?'<div class="danger"><div class="k">重大な副作用</div>'+list(d.a)+'</div>':t==="x"?list(d.x):list(d.m);c.innerHTML=h+'<div class="source"><a class="btn" target="_blank" rel="noopener" href="'+d.u+'">PMDA原文を確認</a></div><div class="note">表示内容と最新原文に差がある場合はPMDA原文を優先してください。</div>'}bs.forEach(b=>b.onclick=()=>sel(b.dataset.t));sel("d");return e}
+</script>
+</body></html>
