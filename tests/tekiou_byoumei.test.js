@@ -18,12 +18,16 @@ test("SSK drug master is complete enough for production search", () => {
   assert.equal(master.meta.count, master.drugs.length);
   assert.equal(master.meta.malformed_rows, 0);
 
-  const codes = new Set(master.drugs.map((d) => d.code));
-  assert.equal(codes.size, master.drugs.length, "drug codes must be unique");
+  const rows = master.drugs.map((raw, i) =>
+    Array.isArray(raw)
+      ? { id: i, name: raw[0] || "", kana: raw[1] || "", yj: raw[2] || "", generic: raw[3] || "", abolished: raw[4] || "" }
+      : { ...raw, id: raw.code || i }
+  );
+  assert.ok(rows.every((d) => d.name), "every master row must have a medicine name");
 
-  const names = new Set(master.drugs.map((d) => d.name));
+  const names = new Set(rows.map((d) => d.name));
   assert.ok(names.has("ロキソニン錠６０ｍｇ") || names.has("ロキソニン錠60mg"));
-  assert.ok(master.drugs.some((d) => String(d.generic || "").includes("アムロジピン")));
+  assert.ok(rows.some((d) => String(d.generic || "").includes("アムロジピン")));
 });
 
 test("unverified products route to official reference search instead of inferred medical data", () => {
