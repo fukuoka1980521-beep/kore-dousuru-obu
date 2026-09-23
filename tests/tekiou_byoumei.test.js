@@ -34,3 +34,15 @@ test("unverified products route to official reference search instead of inferred
   assert.match(html, /iyakusearch\.japic\.or\.jp\/package_insert\/result\?medical=/);
   assert.match(html, /医学情報を推測せず/);
 });
+
+
+test("Loxonin Tape is a separately verified dosage-form group", () => {
+  assert.match(html, /id:"loxtape"/);
+  assert.match(html, /"ロキソニンテープ50mg"/);
+  assert.match(html, /"ロキソニンテープ100mg"/);
+  assert.match(html, /"ロキソニンテープ"/);
+  assert.match(html, /変形性関節症の消炎・鎮痛/);
+  assert.match(html, /1日1回、患部に貼付する。/);
+  assert.match(html, /ショック","アナフィラキシー/);
+  assert.match(html, /850028_2649735S2024_1_14/);
+});
