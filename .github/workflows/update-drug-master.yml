@@ -40,5 +40,6 @@ jobs:
             echo "No drug-master change."
           else
             git commit -m "Update SSK drug master index"
+            git pull --rebase origin master
             git push
           fi
