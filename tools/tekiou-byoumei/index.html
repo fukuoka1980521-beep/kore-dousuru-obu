@@ -28,14 +28,14 @@ footer{max-width:760px;margin:auto;padding:0 18px 35px;color:var(--muted);font-s
 <main>
 <div class="head"><div><div class="eyebrow">PRIVATE MEDICATION REFERENCE</div><h1>適応病名ナビ</h1></div></div>
 <section class="panel">
-<h2>薬の名前を入力</h2><p class="lead">販売名・一般名のどちらでも検索できます。</p>
+<h2>薬の名前を入力</h2><p class="lead">販売名・一般名のどちらでも検索できます。未収載薬はJAPIC公開検索へ1タップで移動できます。</p>
 <input id="q" type="search" placeholder="例：ロキソニン、アムロジピン" autocomplete="off">
 <div id="chips" class="chips"></div>
 </section>
 <div id="status" class="status"></div>
 <div id="out"></div>
 </main>
-<footer>出典：PMDA公開情報をもとに整理・加工。このアプリは診断・処方・服薬変更を行うものではありません。実際の使用判断は最新の電子化された添付文書と医師・薬剤師の確認を優先してください。</footer>
+<footer>アプリ内要約の出典：PMDA公開情報をもとに整理・加工。未収載薬はJAPIC/PMDA公開検索へ接続。このアプリは診断・処方・服薬変更を行うものではありません。実際の使用判断は最新の電子化された添付文書と医師・薬剤師の確認を優先してください。</footer>
 <script>
 const D=[
 {id:"lox",n:["ロキソニン錠60mg","ロキソニン細粒10%","ロキソニン","ロキソプロフェン"],g:"ロキソプロフェンナトリウム水和物",c:"鎮痛・抗炎症・解熱剤",r:"2025年3月改訂（第4版）",i:["関節リウマチ、変形性関節症、腰痛症、肩関節周囲炎、頸肩腕症候群、歯痛の消炎・鎮痛","手術後、外傷後、抜歯後の鎮痛・消炎","急性上気道炎（急性気管支炎を伴うものを含む）の解熱・鎮痛"],d:"【消炎・鎮痛】通常、成人にロキソプロフェンナトリウム（無水物として）1回60mgを1日3回。頓用は1回60～120mg。\n【急性上気道炎の解熱・鎮痛】通常、成人に1回60mgを頓用。原則1日2回まで、1日最大180mg。\n年齢・症状により適宜増減。空腹時の投与は避けることが望ましい。",a:["ショック、アナフィラキシー","無顆粒球症、白血球減少、溶血性貧血、再生不良性貧血、血小板減少","中毒性表皮壊死融解症（TEN）、皮膚粘膜眼症候群（Stevens-Johnson症候群）","急性腎障害、ネフローゼ症候群、間質性腎炎","消化性潰瘍、消化管出血、消化管穿孔","劇症肝炎、肝機能障害、黄疸","喘息発作、無菌性髄膜炎"],x:["消化性潰瘍のある患者","重篤な血液の異常、肝機能障害、腎機能障害、心機能不全のある患者","本剤の成分に対し過敏症の既往歴のある患者","アスピリン喘息またはその既往歴のある患者","妊娠後期の女性"],m:["ワルファリン等のクマリン系抗凝血剤：抗凝血作用増強のおそれ","第Xa因子阻害剤：出血リスク増大のおそれ","スルホニル尿素系血糖降下剤：血糖降下作用増強のおそれ","ニューキノロン系抗菌剤：痙攣誘発作用増強のおそれ","メトトレキサート、リチウム製剤：血中濃度上昇のおそれ"],u:"https://www.pmda.go.jp/PmdaSearch/iyakuDetail/430574_1149019C1149_1_13"},
@@ -49,9 +49,9 @@ q.addEventListener("input",render);render();
 function norm(s){return String(s||"").normalize("NFKC").toLowerCase().replace(/[\s　・･\/／()（）「」『』]/g,"")}
 function esc(s){return String(s??"").replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c]))}
 function list(a,cls=""){return a&&a.length?'<ul class="'+cls+'">'+a.map(x=>"<li>"+esc(x)+"</li>").join("")+"</ul>":'<div>収載なし</div>'}
-function render(){const z=norm(q.value);out.innerHTML="";if(!z){st.textContent="現在は動作確認用の4薬剤群を収載。未収載薬は推測表示しません。";return}st.textContent="";
+function render(){const z=norm(q.value);out.innerHTML="";if(!z){st.textContent="確認済み4薬剤群はアプリ内表示。その他の薬は登録不要のJAPIC公開検索へ直接つなぎます。";return}st.textContent="";
 const ms=D.filter(d=>[...d.n,d.g,d.c].some(n=>norm(n).includes(z)||z.includes(norm(n))&&norm(n).length>=4));
-if(!ms.length){out.innerHTML='<div class="empty"><h2>「'+esc(q.value)+'」は初期版に未収載です</h2><p>似た薬を推測表示しません。全件版へ拡張予定です。</p><a class="btn" target="_blank" rel="noopener" href="https://www.pmda.go.jp/PmdaSearch/iyakuSearch/">PMDA公式検索を開く</a></div>';return}
+if(!ms.length){const japic='https://iyakusearch.japic.or.jp/package_insert/result?medical='+encodeURIComponent(q.value);out.innerHTML='<div class="empty"><h2>「'+esc(q.value)+'」はアプリ内要約に未収載です</h2><p>推測表示はせず、登録不要の公開検索へつなぎます。</p><div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center"><a class="btn" target="_blank" rel="noopener" href="'+japic+'">JAPICでこの薬を検索</a><a class="btn" target="_blank" rel="noopener" href="https://www.pmda.go.jp/PmdaSearch/iyakuSearch/">PMDAで検索</a></div><div class="note" style="margin-top:14px">JAPICでは製品名・一般名・効能又は効果・用法及び用量・使用上の注意等を確認できます。自動大量取得は行いません。</div></div>';return}
 ms.slice(0,8).forEach(d=>out.appendChild(card(d)))}
 function card(d){const e=document.createElement("article");e.className="card";e.innerHTML='<div class="cardhead"><h2 class="drug">'+esc(d.n[0])+'</h2><div class="meta"><b>一般名：</b>'+esc(d.g)+'<br><b>分類：</b>'+esc(d.c)+'<br><b>改訂：</b>'+esc(d.r)+'</div></div><div class="ind"><div class="k">最優先表示｜適応病名・効能効果</div>'+list(d.i)+'</div><div class="tabs"><button class="tab on" data-t="d">用法</button><button class="tab" data-t="a">副作用</button><button class="tab" data-t="x">禁忌</button><button class="tab" data-t="m">相互作用</button></div><div class="content"></div>';
 const c=e.querySelector(".content"),bs=[...e.querySelectorAll(".tab")];function sel(t){bs.forEach(b=>b.classList.toggle("on",b.dataset.t===t));let h=t==="d"?esc(d.d):t==="a"?'<div class="danger"><div class="k">重大な副作用</div>'+list(d.a)+'</div>':t==="x"?list(d.x):list(d.m);c.innerHTML=h+'<div class="source"><a class="btn" target="_blank" rel="noopener" href="'+d.u+'">PMDA原文を確認</a></div><div class="note">表示内容と最新原文に差がある場合はPMDA原文を優先してください。</div>'}bs.forEach(b=>b.onclick=()=>sel(b.dataset.t));sel("d");return e}
