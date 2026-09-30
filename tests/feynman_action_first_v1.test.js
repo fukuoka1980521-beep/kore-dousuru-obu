@@ -20,10 +20,9 @@ test("mobile UI does not force-focus the search box", () => {
   assert.doesNotMatch(appSrc, /input\.focus\(\)/);
 });
 
-test("home offers natural-language quick searches", () => {
-  for (const q of ["ソファ捨てたい", "住民票ほしい", "国保に入りたい", "子どもが生まれた"]) {
-    assert.match(appSrc, new RegExp(`data-query="${q}"`));
-  }
+test("home offers natural-language quick searches from municipality config", () => {
+  assert.match(appSrc, /state\.config\.quick_queries/);
+  assert.deepEqual(config.quick_queries, ["ソファ捨てたい", "住民票ほしい", "国保に入りたい", "子どもが生まれた"]);
 });
 
 test("a single strong result is rendered directly instead of forcing an extra tap", () => {

@@ -12,7 +12,7 @@ const taxonomy = JSON.parse(
 
 test("coverage taxonomy keeps municipality-specific facts out of the common layer", () => {
   const text = JSON.stringify(taxonomy);
-  assert.equal(/大府市|名古屋市|半田市/.test(text), false);
+  assert.equal(/大府市|名古屋市|半田市|東海市/.test(text), false);
   const ids = taxonomy.map((x) => x.need_id);
   assert.equal(new Set(ids).size, ids.length);
   for (const required of ["roads_damage", "water_leak", "water_outage", "pension_exemption", "high_cost_medical", "public_housing"]) {
@@ -90,7 +90,7 @@ test("official source seeds are municipality-bound and only use official sources
     fs.readFileSync(path.resolve(testDir, "..", "tools", "coverage", "official-source-seeds.json"), "utf8")
   );
   assert.ok(seeds.length >= 21);
-  const validMunicipalities = new Set(["handa", "nagoya", "obu"]);
+  const validMunicipalities = new Set(["handa", "nagoya", "obu", "tokai"]);
   for (const seed of seeds) {
     assert.ok(validMunicipalities.has(seed.municipality_id));
     assert.ok(["PASS_RULES_MODELED", "PASS_NONE_FOUND", "NEEDS_AUTHORITY_CONFIRMATION", "SOURCE_CONFLICT"].includes(seed.local_gate));
@@ -98,7 +98,7 @@ test("official source seeds are municipality-bound and only use official sources
     for (const source of seed.official_sources) {
       const url = new URL(source.url);
       assert.equal(url.protocol, "https:");
-      assert.ok(["www.city.handa.lg.jp", "www.city.nagoya.jp", "www.water.city.nagoya.jp", "www.city.obu.aichi.jp", "www.nenkin.go.jp", "jsite.mhlw.go.jp"].includes(url.hostname));
+      assert.ok(["www.city.handa.lg.jp", "www.city.nagoya.jp", "www.water.city.nagoya.jp", "www.city.obu.aichi.jp", "www.city.tokai.aichi.jp", "www.nenkin.go.jp", "jsite.mhlw.go.jp"].includes(url.hostname));
       if (seed.municipality_id === "handa") assert.equal(/city\.nagoya\.jp|city\.obu\.aichi\.jp/.test(url.hostname), false);
       if (seed.municipality_id === "nagoya") assert.equal(/city\.handa\.lg\.jp|city\.obu\.aichi\.jp/.test(url.hostname), false);
       if (seed.municipality_id === "obu") assert.equal(/city\.handa\.lg\.jp|city\.nagoya\.jp/.test(url.hostname), false);
@@ -119,6 +119,9 @@ test("noise/odor remains fail-closed where resident routing is not fully verifie
   assert.equal(byMunicipality.handa, "NEEDS_AUTHORITY_CONFIRMATION");
   assert.equal(byMunicipality.obu, "NEEDS_AUTHORITY_CONFIRMATION");
   assert.equal(byMunicipality.nagoya, "PASS_RULES_MODELED");
+  const tokaiSeeds = JSON.parse(fs.readFileSync(path.resolve(testDir, "..", "tools", "coverage", "tokai-source-seeds.json"), "utf8"));
+  const tokaiNoise = tokaiSeeds.find((x) => x.need_id === "noise_odor_neighbor");
+  assert.equal(tokaiNoise.local_gate, "PASS_RULES_MODELED");
 });
 
 
@@ -143,8 +146,10 @@ test("every authority-confirmation seed carries an executable question and conta
     fs.readFileSync(path.resolve(testDir, "..", "tools", "coverage", "official-source-seeds.json"), "utf8")
   );
   const pending = seeds.filter((x) => x.local_gate === "NEEDS_AUTHORITY_CONFIRMATION");
-  assert.equal(pending.length, 3);
-  for (const seed of pending) {
+  const tokaiSeeds = JSON.parse(fs.readFileSync(path.resolve(testDir, "..", "tools", "coverage", "tokai-source-seeds.json"), "utf8"));
+  const allPending = [...pending, ...tokaiSeeds.filter((x) => x.local_gate === "NEEDS_AUTHORITY_CONFIRMATION")];
+  assert.equal(allPending.length, 5);
+  for (const seed of allPending) {
     assert.ok(seed.authority_question?.length > 20);
     assert.ok(seed.authority_contact?.length > 5);
     assert.ok(seed.why_needed?.length > 10);

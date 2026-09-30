@@ -1,0 +1,489 @@
+[
+  {
+    "need_id": "water_leak",
+    "municipality_id": "tokai",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokai.aichi.jp/kurashi/1001927/1001928/1001936.html",
+        "title": "漏水かな?と思ったら",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "道路側（市管理）と屋内側（個人管理）の境界をモデル化。"
+  },
+  {
+    "need_id": "noise_odor_neighbor",
+    "municipality_id": "tokai",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokai.aichi.jp/kurashi/1001699/1001762/1006259.html",
+        "title": "騒音・振動・悪臭にお困りの方へ",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "家庭生活由来と事業者由来で相談先を分岐。"
+  },
+  {
+    "need_id": "pension_exemption",
+    "municipality_id": "tokai",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokai.aichi.jp/kurashi/1001581/1001592/1006135.html",
+        "title": "年金保険料の免除制度(保険料免除・納付猶予制度)",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "免除・納付猶予をモデル化。学生納付特例は別制度として案内。"
+  },
+  {
+    "need_id": "high_cost_medical",
+    "municipality_id": "tokai",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokai.aichi.jp/kurashi/1001581/1001582/1001585.html",
+        "title": "国民健康保険給付",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "東海市国保加入者向け。国保以外の保険者へ横展開しない。"
+  },
+  {
+    "need_id": "livelihood_housing",
+    "municipality_id": "tokai",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokai.aichi.jp/health/1002694/1002695/index.html",
+        "title": "生活困窮者自立支援制度",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "相談と住居確保給付金等の個別判定を分離。"
+  },
+  {
+    "need_id": "public_housing",
+    "municipality_id": "tokai",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokai.aichi.jp/kurashi/1001815/1001816/1001817.html",
+        "title": "市営住宅の案内",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "募集は不定期のため固定締切を持たない。"
+  },
+  {
+    "need_id": "mental_health",
+    "municipality_id": "tokai",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokai.aichi.jp/health/1002518/1002522/1002521.html",
+        "title": "こころの健康相談",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "知多保健所等の公的相談先へ接続。"
+  },
+  {
+    "need_id": "dv",
+    "municipality_id": "tokai",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokai.aichi.jp/kurashi/1002062/1002141.html",
+        "title": "女性のための悩みごと相談",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "緊急時110と相談窓口を分離。"
+  },
+  {
+    "need_id": "legal_debt",
+    "municipality_id": "tokai",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokai.aichi.jp/kurashi/1002062/1002069.html",
+        "title": "市民相談",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "弁護士相談は予約制・年度1回。"
+  },
+  {
+    "need_id": "elder_care",
+    "municipality_id": "tokai",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokai.aichi.jp/health/1002623/1002624/1002520.html",
+        "title": "相談窓口",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "高齢者相談支援センターへ地域別接続。"
+  },
+  {
+    "need_id": "disability_support",
+    "municipality_id": "tokai",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokai.aichi.jp/health/1002643/1005597/1006439.html",
+        "title": "障がい者の相談支援",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "障がい種別で相談先が分かれる。"
+  },
+  {
+    "need_id": "single_parent",
+    "municipality_id": "tokai",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokai.aichi.jp/kosodate/1002083/1002086/1002087.html",
+        "title": "ひとり親世帯への援助",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "児童扶養手当等は事前確認後に申請。"
+  },
+  {
+    "need_id": "childcare_temp",
+    "municipality_id": "tokai",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokai.aichi.jp/kosodate/1002180/1010917.html",
+        "title": "一時的保育",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "年齢・利用理由・申込期限を分岐。"
+  },
+  {
+    "need_id": "childcare_sick",
+    "municipality_id": "tokai",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokai.aichi.jp/kosodate/1002180/1010918.html",
+        "title": "病児・病後児保育",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "医師判断・体温等の利用条件をモデル化。"
+  },
+  {
+    "need_id": "pediatric_emergency",
+    "municipality_id": "tokai",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokai.aichi.jp/iza/1003214/1003215/1003216.html",
+        "title": "休日当番医",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "119と#8000、救急医療情報センターを分離。"
+  },
+  {
+    "need_id": "labor",
+    "municipality_id": "tokai",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokai.aichi.jp/kurashi/1002008/1003100/1002016.html",
+        "title": "労働相談",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "市相談は完全予約制・対象者条件あり。"
+  },
+  {
+    "need_id": "startup",
+    "municipality_id": "tokai",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokai.aichi.jp/business/1002969/1008231/1008256.html",
+        "title": "個別創業支援事業(個別相談)",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "一般相談と特定創業支援の証明要件を分離。"
+  },
+  {
+    "need_id": "crime_victim",
+    "municipality_id": "tokai",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokai.aichi.jp/kurashi/1001884/1003328/1007387.html",
+        "title": "東海市犯罪被害者等支援",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "緊急時110、総合窓口、支援金判定を分離。"
+  },
+  {
+    "need_id": "hikikomori",
+    "municipality_id": "tokai",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokai.aichi.jp/health/1002518/1002522/1007129.html",
+        "title": "ほっとプラザのLINE窓口",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "若者・ひきこもりと学校在籍の不登校相談を分岐。"
+  },
+  {
+    "need_id": "move_in",
+    "municipality_id": "tokai",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokai.aichi.jp/kurashi/1001502/1001512/1006102.html",
+        "title": "転入(市外からの引越)",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "住み始めて14日以内・事前届不可。"
+  },
+  {
+    "need_id": "move_out",
+    "municipality_id": "tokai",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokai.aichi.jp/kurashi/1001502/1001512/1006103.html",
+        "title": "転出(市外への引越)",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "窓口・郵送・オンラインの条件をモデル化。"
+  },
+  {
+    "need_id": "resident_record",
+    "municipality_id": "tokai",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokai.aichi.jp/kurashi/1001502/1001531/1001515.html",
+        "title": "住民票の写し・除票の写し・住民票記載事項証明書",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "本人・同一世帯・代理人、コンビニ可否を分離。"
+  },
+  {
+    "need_id": "birth",
+    "municipality_id": "tokai",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokai.aichi.jp/kurashi/1001502/1001503/1006059.html",
+        "title": "出生届",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "出生の日を含む14日以内。"
+  },
+  {
+    "need_id": "death",
+    "municipality_id": "tokai",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokai.aichi.jp/kurashi/1001502/1001503/1006060.html",
+        "title": "死亡届",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "死亡届7日以内と予約制おくやみ窓口を分離。"
+  },
+  {
+    "need_id": "nhi_join",
+    "municipality_id": "tokai",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokai.aichi.jp/kurashi/1001581/1001582/1001584.html",
+        "title": "国民健康保険に加入するとき",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "異動日から14日以内。"
+  },
+  {
+    "need_id": "nhi_leave",
+    "municipality_id": "tokai",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokai.aichi.jp/kurashi/1001581/1001582/1006134.html",
+        "title": "国民健康保険をやめるとき",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "異動日から14日以内。"
+  },
+  {
+    "need_id": "oversized_waste",
+    "municipality_id": "tokai",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokai.aichi.jp/kurashi/1001699/1001700/1001706/1001718.html",
+        "title": "有料粗大ごみ収集",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "3営業日前まで・2t車1車5,500円・事業系対象外。"
+  },
+  {
+    "need_id": "roads_damage",
+    "municipality_id": "tokai",
+    "research_state": "OFFICIAL_SOURCE_PARTIAL",
+    "local_gate": "NEEDS_AUTHORITY_CONFIRMATION",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "場所",
+      "危険度"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokai.aichi.jp/shisei/1003386/1003445/1003456.html",
+        "title": "土木維持課",
+        "role": "LOCAL_EVIDENCE"
+      },
+      {
+        "url": "https://www.city.tokai.aichi.jp/shisei/1003386/1003390/1003394.html",
+        "title": "交通防犯課",
+        "role": "LOCAL_EVIDENCE"
+      }
+    ],
+    "authority_question": "市道の穴・側溝破損など一般の道路危険箇所を市民が発見した場合、土木維持課への電話連絡でよいか。道路照明灯・防犯灯・道路反射鏡は交通防犯課または管理番号記載先へ分けて案内してよいか。",
+    "authority_contact": "東海市 都市建設部 土木維持課 052-613-7826／0562-38-6413",
+    "why_needed": "担当課と設備別管理は確認できるが、市民向けの一般道路損傷通報フローを一つの現行公式ページで確定できない。",
+    "notes": "道路・側溝と交通安全施設を同一導線にまとめず、正式な通報先確認後に実装する。"
+  },
+  {
+    "need_id": "water_outage",
+    "municipality_id": "tokai",
+    "research_state": "OFFICIAL_SOURCE_PARTIAL",
+    "local_gate": "NEEDS_AUTHORITY_CONFIRMATION",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "近隣も出ないか",
+      "集合住宅か",
+      "緊急性"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokai.aichi.jp/kurashi/1001927/1001928/1001936.html",
+        "title": "漏水かな?と思ったら",
+        "role": "LOCAL_EVIDENCE"
+      },
+      {
+        "url": "https://www.city.tokai.aichi.jp/shisei/1003345/1003360/1009415.html",
+        "title": "市役所ダイヤルイン番号について",
+        "role": "LOCAL_EVIDENCE"
+      }
+    ],
+    "authority_question": "平常時に家庭で急に水が出なくなった場合、近隣も断水しているか・集合住宅か等を確認した後の正式な市の連絡先と切り分け手順は何か。受水槽方式の集合住宅はまず管理会社へ案内してよいか。",
+    "authority_contact": "東海市 水道部 水道課 052-613-7869／0562-38-6450",
+    "why_needed": "漏水時の管理区分と水道担当連絡先は確認できるが、突発的な出水不能の恒常的な住民向けFAQを確認できない。",
+    "notes": "断水・水が出ないは漏水と別ニーズとしてfail-closed。"
+  }
+]
