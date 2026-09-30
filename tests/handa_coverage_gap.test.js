@@ -20,7 +20,7 @@ test("Handa loads researched gap records before UI initialization", () => {
 });
 
 test("Handa only includes gaps whose resident route is verified", () => {
-  assert.equal(records.length, 11);
+  assert.equal(records.length, 20);
   assert.equal(records.some((x) => /断水|水が出ない/.test(x.name)), false);
   assert.equal(records.some((x) => /騒音|悪臭/.test(x.name)), false);
   for (const record of records) {
@@ -41,7 +41,16 @@ test("Handa records contain the expected resident-language entry points", () => 
     ["ひきこもり", "hnd-gap-hikikomori"],
     ["不登校", "hnd-gap-school-refusal"],
     ["障害者相談", "hnd-gap-disability-support"],
-    ["子どもの発達", "hnd-gap-development-support"]
+    ["子どもの発達", "hnd-gap-development-support"],
+    ["DV", "hnd-gap-dv"],
+    ["メンタル", "hnd-gap-mental-health"],
+    ["ひとり親", "hnd-gap-single-parent"],
+    ["家賃払えない", "hnd-gap-livelihood-housing"],
+    ["法律相談", "hnd-gap-legal"],
+    ["一時保育", "hnd-gap-childcare-temp"],
+    ["認知症", "hnd-gap-elder-care"],
+    ["創業", "hnd-gap-startup"],
+    ["病児保育", "hnd-gap-childcare-sick"]
   ];
   for (const [query, id] of expected) {
     const hit = records.find((r) => r.name.includes(query) || (r.aliases || []).includes(query));

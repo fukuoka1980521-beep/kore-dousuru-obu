@@ -33,6 +33,29 @@ test("strong official match is COVERED", () => {
   assert.equal(result.status, "COVERED");
   assert.equal(result.hit.id, "x-1");
 });
+test("equal-score coverage prefers CONFIRMED_OFFICIAL records over unverified life-event pointers", () => {
+  const need = taxonomy.find((x) => x.need_id === "birth");
+  const result = matchNeed(need, [
+    {
+      event_id: "birth",
+      display_name: "子どもが生まれたとき",
+      aliases: ["赤ちゃんが生まれた"],
+      __source_type: "life_event",
+      __source_file: "life_events.json"
+    },
+    {
+      procedure_id: "proc-birth",
+      name: "出生届",
+      aliases: ["赤ちゃんが生まれた"],
+      status: "CONFIRMED_OFFICIAL",
+      __source_type: "procedure",
+      __source_file: "procedures.json"
+    }
+  ]);
+  assert.equal(result.status, "COVERED");
+  assert.equal(result.hit.id, "proc-birth");
+});
+
 test("weak or unverified match remains PARTIAL", () => {
   const need = taxonomy.find((x) => x.need_id === "public_housing");
   const weak = matchNeed(need, [{

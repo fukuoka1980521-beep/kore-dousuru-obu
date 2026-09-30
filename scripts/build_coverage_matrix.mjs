@@ -77,7 +77,27 @@ export function matchNeed(need, records) {
         matchLevel = "WEAK";
       }
     }
-    if (score && (!best || score > best.score)) {
+    const confirmed = record.status === "CONFIRMED_OFFICIAL";
+    const bestConfirmed = best?.record?.status === "CONFIRMED_OFFICIAL";
+    const levelRank = matchLevel === "STRONG" ? 2 : matchLevel === "WEAK" ? 1 : 0;
+    const bestLevelRank = best?.matchLevel === "STRONG" ? 2 : best?.matchLevel === "WEAK" ? 1 : 0;
+    if (
+      score &&
+      (
+        !best ||
+        levelRank > bestLevelRank ||
+        (
+          levelRank === bestLevelRank &&
+          confirmed &&
+          !bestConfirmed
+        ) ||
+        (
+          levelRank === bestLevelRank &&
+          confirmed === bestConfirmed &&
+          score > best.score
+        )
+      )
+    ) {
       best = { score, matchedTerm, matchLevel, record };
     }
   }
