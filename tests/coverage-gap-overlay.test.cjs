@@ -16,7 +16,7 @@ vm.runInContext(fs.readFileSync("src/app/coverage-gap-overlay.js", "utf8"), cont
 
 const overlay = context.window.__KORE_DOUSURU_COVERAGE_GAP_OVERLAY__;
 assert(overlay, "coverage gap overlay missing");
-assert.strictEqual(overlay.records.length, 11);
+assert.strictEqual(overlay.records.length, 13);
 
 const expected = {
   "道路に穴": "obu-gap-roads-damage",
@@ -33,7 +33,9 @@ const expected = {
   "給料未払い": "obu-gap-labor",
   "ひきこもり": "obu-gap-hikikomori",
   "障害者相談": "obu-gap-disability-support",
-  "子どもの発達": "obu-gap-development-support"
+  "子どもの発達": "obu-gap-development-support",
+  "子どもが熱": "obu-gap-pediatric-emergency",
+  "粗大ごみ収集": "obu-gap-oversized-waste"
 };
 for (const [query, id] of Object.entries(expected)) {
   const result = overlay.search(query);
