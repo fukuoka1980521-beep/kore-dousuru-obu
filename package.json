@@ -9,6 +9,9 @@
     "test": "node --test tests/*.test.js",
     "check:sync": "node scripts/check_public_sync.js",
     "inquiry:queue": "node scripts/authority_inquiry.mjs queue",
-    "inquiry:prepare": "node scripts/authority_inquiry.mjs prepare"
+    "inquiry:prepare": "node scripts/authority_inquiry.mjs prepare",
+    "municipality:scaffold": "node scripts/municipality_pack.mjs scaffold",
+    "municipality:audit": "node scripts/municipality_pack.mjs audit",
+    "municipality:promote": "node scripts/municipality_pack.mjs promote"
   }
 }

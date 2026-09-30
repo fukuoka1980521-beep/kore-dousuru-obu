@@ -1,0 +1,55 @@
+name: Municipality Pack (developer only)
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: scaffold or audit
+        required: true
+        default: audit
+        type: choice
+        options:
+          - scaffold
+          - audit
+      municipality_id:
+        description: Municipality ID
+        required: true
+        type: string
+      display_name:
+        description: Display name (required for scaffold)
+        required: false
+        type: string
+      official_base_url:
+        description: Official base URL (required for scaffold)
+        required: false
+        type: string
+      representative_phone:
+        description: Representative phone
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  municipality-pack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Run pack tool
+        shell: bash
+        run: |
+          if [ "${{ inputs.action }}" = "scaffold" ]; then
+            node scripts/municipality_pack.mjs scaffold --id="${{ inputs.municipality_id }}" --name="${{ inputs.display_name }}" --official-base="${{ inputs.official_base_url }}" --phone="${{ inputs.representative_phone }}"
+          else
+            node scripts/municipality_pack.mjs audit --id="${{ inputs.municipality_id }}"
+          fi
+      - name: Upload pack output
+        uses: actions/upload-artifact@v4
+        with:
+          name: municipality-pack-${{ inputs.municipality_id }}
+          path: tools/municipality-packs/drafts/${{ inputs.municipality_id }}/
+          retention-days: 14

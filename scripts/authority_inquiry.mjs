@@ -9,12 +9,28 @@ function readJson(file) {
   return JSON.parse(fs.readFileSync(file, "utf8"));
 }
 
+function loadDraftSeeds(root) {
+  const dir = path.join(root, "tools", "municipality-packs", "drafts");
+  if (!fs.existsSync(dir)) return [];
+  return fs.readdirSync(dir, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .flatMap((entry) => {
+      const file = path.join(dir, entry.name, "source-seeds.draft.json");
+      return fs.existsSync(file) ? readJson(file) : [];
+    });
+}
+
 export function loadSeeds(root = repoRoot) {
   const dir = path.join(root, "tools", "coverage");
-  return fs.readdirSync(dir)
+  const published = fs.readdirSync(dir)
     .filter((name) => name === "official-source-seeds.json" || name.endsWith("-source-seeds.json"))
     .sort()
     .flatMap((name) => readJson(path.join(dir, name)));
+  const byKey = new Map();
+  for (const seed of loadDraftSeeds(root)) byKey.set(seed.municipality_id + ":" + seed.need_id, seed);
+  for (const seed of published) byKey.set(seed.municipality_id + ":" + seed.need_id, seed);
+  return [...byKey.values()];
 }
 
 export function pendingAuthoritySeeds(root = repoRoot) {

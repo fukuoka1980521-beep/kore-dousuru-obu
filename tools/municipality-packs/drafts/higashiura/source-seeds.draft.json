@@ -1,0 +1,457 @@
+[
+  {
+    "need_id": "roads_damage",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_RESEARCH_REQUIRED",
+    "local_gate": "OFFICIAL_RESEARCH_REQUIRED",
+    "checked_at": null,
+    "required_context": [
+      "場所",
+      "危険度"
+    ],
+    "official_sources": [],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": ""
+  },
+  {
+    "need_id": "water_leak",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_RESEARCH_REQUIRED",
+    "local_gate": "OFFICIAL_RESEARCH_REQUIRED",
+    "checked_at": null,
+    "required_context": [
+      "道路側か宅地内か",
+      "緊急性"
+    ],
+    "official_sources": [],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": ""
+  },
+  {
+    "need_id": "water_outage",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_RESEARCH_REQUIRED",
+    "local_gate": "OFFICIAL_RESEARCH_REQUIRED",
+    "checked_at": null,
+    "required_context": [
+      "近隣も出ないか",
+      "集合住宅か",
+      "緊急性"
+    ],
+    "official_sources": [],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": ""
+  },
+  {
+    "need_id": "noise_odor_neighbor",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_RESEARCH_REQUIRED",
+    "local_gate": "OFFICIAL_RESEARCH_REQUIRED",
+    "checked_at": null,
+    "required_context": [
+      "発生源",
+      "継続性"
+    ],
+    "official_sources": [],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": ""
+  },
+  {
+    "need_id": "pension_exemption",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_RESEARCH_REQUIRED",
+    "local_gate": "OFFICIAL_RESEARCH_REQUIRED",
+    "checked_at": null,
+    "required_context": [
+      "年齢",
+      "所得",
+      "失業等の事情"
+    ],
+    "official_sources": [],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": ""
+  },
+  {
+    "need_id": "high_cost_medical",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_RESEARCH_REQUIRED",
+    "local_gate": "OFFICIAL_RESEARCH_REQUIRED",
+    "checked_at": null,
+    "required_context": [
+      "加入している健康保険",
+      "年齢"
+    ],
+    "official_sources": [],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": ""
+  },
+  {
+    "need_id": "livelihood_housing",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_RESEARCH_REQUIRED",
+    "local_gate": "OFFICIAL_RESEARCH_REQUIRED",
+    "checked_at": null,
+    "required_context": [
+      "収入状況",
+      "離職等の事情"
+    ],
+    "official_sources": [],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": ""
+  },
+  {
+    "need_id": "public_housing",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_RESEARCH_REQUIRED",
+    "local_gate": "OFFICIAL_RESEARCH_REQUIRED",
+    "checked_at": null,
+    "required_context": [
+      "世帯状況",
+      "所得"
+    ],
+    "official_sources": [],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": ""
+  },
+  {
+    "need_id": "mental_health",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_RESEARCH_REQUIRED",
+    "local_gate": "OFFICIAL_RESEARCH_REQUIRED",
+    "checked_at": null,
+    "required_context": [],
+    "official_sources": [],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": ""
+  },
+  {
+    "need_id": "dv",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_RESEARCH_REQUIRED",
+    "local_gate": "OFFICIAL_RESEARCH_REQUIRED",
+    "checked_at": null,
+    "required_context": [
+      "今すぐ危険か"
+    ],
+    "official_sources": [],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": ""
+  },
+  {
+    "need_id": "legal_debt",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_RESEARCH_REQUIRED",
+    "local_gate": "OFFICIAL_RESEARCH_REQUIRED",
+    "checked_at": null,
+    "required_context": [
+      "相談分野"
+    ],
+    "official_sources": [],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": ""
+  },
+  {
+    "need_id": "elder_care",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_RESEARCH_REQUIRED",
+    "local_gate": "OFFICIAL_RESEARCH_REQUIRED",
+    "checked_at": null,
+    "required_context": [
+      "居住地域"
+    ],
+    "official_sources": [],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": ""
+  },
+  {
+    "need_id": "disability_support",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_RESEARCH_REQUIRED",
+    "local_gate": "OFFICIAL_RESEARCH_REQUIRED",
+    "checked_at": null,
+    "required_context": [
+      "本人か家族か",
+      "年齢",
+      "発達相談か福祉サービス相談か"
+    ],
+    "official_sources": [],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": ""
+  },
+  {
+    "need_id": "single_parent",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_RESEARCH_REQUIRED",
+    "local_gate": "OFFICIAL_RESEARCH_REQUIRED",
+    "checked_at": null,
+    "required_context": [
+      "子の年齢",
+      "所得"
+    ],
+    "official_sources": [],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": ""
+  },
+  {
+    "need_id": "childcare_temp",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_RESEARCH_REQUIRED",
+    "local_gate": "OFFICIAL_RESEARCH_REQUIRED",
+    "checked_at": null,
+    "required_context": [
+      "子の年齢",
+      "利用理由"
+    ],
+    "official_sources": [],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": ""
+  },
+  {
+    "need_id": "childcare_sick",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_RESEARCH_REQUIRED",
+    "local_gate": "OFFICIAL_RESEARCH_REQUIRED",
+    "checked_at": null,
+    "required_context": [
+      "子の年齢",
+      "病状",
+      "保護者が家庭保育できない理由"
+    ],
+    "official_sources": [],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": ""
+  },
+  {
+    "need_id": "pediatric_emergency",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_RESEARCH_REQUIRED",
+    "local_gate": "OFFICIAL_RESEARCH_REQUIRED",
+    "checked_at": null,
+    "required_context": [
+      "緊急性",
+      "子の年齢",
+      "症状",
+      "時間帯"
+    ],
+    "official_sources": [],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": ""
+  },
+  {
+    "need_id": "labor",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_RESEARCH_REQUIRED",
+    "local_gate": "OFFICIAL_RESEARCH_REQUIRED",
+    "checked_at": null,
+    "required_context": [
+      "雇用関係"
+    ],
+    "official_sources": [],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": ""
+  },
+  {
+    "need_id": "startup",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_RESEARCH_REQUIRED",
+    "local_gate": "OFFICIAL_RESEARCH_REQUIRED",
+    "checked_at": null,
+    "required_context": [
+      "事業段階"
+    ],
+    "official_sources": [],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": ""
+  },
+  {
+    "need_id": "crime_victim",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_RESEARCH_REQUIRED",
+    "local_gate": "OFFICIAL_RESEARCH_REQUIRED",
+    "checked_at": null,
+    "required_context": [
+      "緊急性"
+    ],
+    "official_sources": [],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": ""
+  },
+  {
+    "need_id": "hikikomori",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_RESEARCH_REQUIRED",
+    "local_gate": "OFFICIAL_RESEARCH_REQUIRED",
+    "checked_at": null,
+    "required_context": [
+      "年齢",
+      "本人か家族か",
+      "学校在籍か"
+    ],
+    "official_sources": [],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": ""
+  },
+  {
+    "need_id": "move_in",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_RESEARCH_REQUIRED",
+    "local_gate": "OFFICIAL_RESEARCH_REQUIRED",
+    "checked_at": null,
+    "required_context": [
+      "転入日"
+    ],
+    "official_sources": [],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": ""
+  },
+  {
+    "need_id": "move_out",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_RESEARCH_REQUIRED",
+    "local_gate": "OFFICIAL_RESEARCH_REQUIRED",
+    "checked_at": null,
+    "required_context": [
+      "転出予定日"
+    ],
+    "official_sources": [],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": ""
+  },
+  {
+    "need_id": "resident_record",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_RESEARCH_REQUIRED",
+    "local_gate": "OFFICIAL_RESEARCH_REQUIRED",
+    "checked_at": null,
+    "required_context": [
+      "必要な記載事項"
+    ],
+    "official_sources": [],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": ""
+  },
+  {
+    "need_id": "birth",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_RESEARCH_REQUIRED",
+    "local_gate": "OFFICIAL_RESEARCH_REQUIRED",
+    "checked_at": null,
+    "required_context": [
+      "出生日"
+    ],
+    "official_sources": [],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": ""
+  },
+  {
+    "need_id": "death",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_RESEARCH_REQUIRED",
+    "local_gate": "OFFICIAL_RESEARCH_REQUIRED",
+    "checked_at": null,
+    "required_context": [
+      "死亡日"
+    ],
+    "official_sources": [],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": ""
+  },
+  {
+    "need_id": "nhi_join",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_RESEARCH_REQUIRED",
+    "local_gate": "OFFICIAL_RESEARCH_REQUIRED",
+    "checked_at": null,
+    "required_context": [
+      "資格喪失日"
+    ],
+    "official_sources": [],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": ""
+  },
+  {
+    "need_id": "nhi_leave",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_RESEARCH_REQUIRED",
+    "local_gate": "OFFICIAL_RESEARCH_REQUIRED",
+    "checked_at": null,
+    "required_context": [
+      "新保険の資格取得日"
+    ],
+    "official_sources": [],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": ""
+  },
+  {
+    "need_id": "oversized_waste",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_RESEARCH_REQUIRED",
+    "local_gate": "OFFICIAL_RESEARCH_REQUIRED",
+    "checked_at": null,
+    "required_context": [
+      "品目",
+      "大きさ"
+    ],
+    "official_sources": [],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": ""
+  }
+]
