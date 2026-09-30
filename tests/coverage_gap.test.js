@@ -122,6 +122,9 @@ test("noise/odor remains fail-closed where resident routing is not fully verifie
   const tokaiSeeds = JSON.parse(fs.readFileSync(path.resolve(testDir, "..", "tools", "coverage", "tokai-source-seeds.json"), "utf8"));
   const tokaiNoise = tokaiSeeds.find((x) => x.need_id === "noise_odor_neighbor");
   assert.equal(tokaiNoise.local_gate, "PASS_RULES_MODELED");
+  const chitaSeeds = JSON.parse(fs.readFileSync(path.resolve(testDir, "..", "tools", "coverage", "chita-source-seeds.json"), "utf8"));
+  const chitaNoise = chitaSeeds.find((x) => x.need_id === "noise_odor_neighbor");
+  assert.equal(chitaNoise.local_gate, "NEEDS_AUTHORITY_CONFIRMATION");
 });
 
 
@@ -145,10 +148,12 @@ test("every authority-confirmation seed carries an executable question and conta
   const seeds = JSON.parse(
     fs.readFileSync(path.resolve(testDir, "..", "tools", "coverage", "official-source-seeds.json"), "utf8")
   );
-  const pending = seeds.filter((x) => x.local_gate === "NEEDS_AUTHORITY_CONFIRMATION");
-  const tokaiSeeds = JSON.parse(fs.readFileSync(path.resolve(testDir, "..", "tools", "coverage", "tokai-source-seeds.json"), "utf8"));
-  const allPending = [...pending, ...tokaiSeeds.filter((x) => x.local_gate === "NEEDS_AUTHORITY_CONFIRMATION")];
-  assert.equal(allPending.length, 5);
+  const coverageDir = path.resolve(testDir, "..", "tools", "coverage");
+  const additionalSeeds = fs.readdirSync(coverageDir)
+    .filter((name) => name.endsWith("-source-seeds.json") && name !== "official-source-seeds.json")
+    .flatMap((name) => JSON.parse(fs.readFileSync(path.join(coverageDir, name), "utf8")));
+  const allPending = [...seeds, ...additionalSeeds].filter((x) => x.local_gate === "NEEDS_AUTHORITY_CONFIRMATION");
+  assert.equal(allPending.length, 7);
   for (const seed of allPending) {
     assert.ok(seed.authority_question?.length > 20);
     assert.ok(seed.authority_contact?.length > 5);
@@ -156,6 +161,14 @@ test("every authority-confirmation seed carries an executable question and conta
   }
 });
 
+
+test("local municipality packs and source seeds are auto-discovered", () => {
+  const script = fs.readFileSync(path.resolve(testDir, "..", "scripts", "build_coverage_matrix.mjs"), "utf8");
+  assert.match(script, /discoverLocalMunicipalityPacks/);
+  assert.match(script, /loadAdditionalSeedFiles/);
+  assert.doesNotMatch(script, /function loadTokai/);
+  assert.doesNotMatch(script, /function loadChita/);
+});
 
 test("Nagoya coverage includes the natural-language support overlay", () => {
   const script = fs.readFileSync(path.resolve(testDir, "..", "scripts", "build_coverage_matrix.mjs"), "utf8");
