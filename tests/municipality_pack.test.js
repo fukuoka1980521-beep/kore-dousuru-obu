@@ -58,3 +58,17 @@ test("authority confirmation stays fail-closed",function(){
   const out=buildPromotionArtifacts({manifest:s.manifest,seeds:s.seeds,procedures:s.procedures,taxonomy:taxonomy,audit:a});
   assert.equal(out.publicProcedures.length,taxonomy.length-1);
 });
+
+
+test("municipality pack workflow remains developer-triggered only",function(){
+  const yml=fs.readFileSync(path.join(root,".github","workflows","municipality-pack.yml"),"utf8");
+  assert.match(yml,/workflow_dispatch:/);
+  assert.doesNotMatch(yml,/^\s*push:/m);
+  assert.doesNotMatch(yml,/^\s*pull_request:/m);
+  assert.match(yml,/permissions:\s*\n\s*contents: read/);
+});
+
+test("shared public app does not expose municipality pack controls",function(){
+  const app=fs.readFileSync(path.join(root,"src","app","app.js"),"utf8");
+  assert.doesNotMatch(app,/municipality:scaffold|municipality_pack|Municipality Pack \(developer only\)/i);
+});
