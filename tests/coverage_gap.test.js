@@ -127,3 +127,23 @@ test("every authority-confirmation seed carries an executable question and conta
     assert.ok(seed.why_needed?.length > 10);
   }
 });
+
+
+test("Nagoya coverage includes the natural-language support overlay", () => {
+  const script = fs.readFileSync(path.resolve(testDir, "..", "scripts", "build_coverage_matrix.mjs"), "utf8");
+  assert.match(script, /path\.join\(root, "src", "app", "support-overlay\.js"\)/);
+  assert.match(script, /__KORE_DOUSURU_SUPPORT_OVERLAY__/);
+});
+
+test("generic neighbor dispute alone cannot falsely mark noise/odor as COVERED", () => {
+  const need = taxonomy.find((x) => x.need_id === "noise_odor_neighbor");
+  const result = matchNeed(need, [{
+    procedure_id: "legal-only",
+    name: "無料法律相談",
+    aliases: ["近隣トラブル"],
+    status: "CONFIRMED_OFFICIAL",
+    __source_type: "support_overlay",
+    __source_file: "fixture.js"
+  }]);
+  assert.equal(result.status, "PARTIAL");
+});

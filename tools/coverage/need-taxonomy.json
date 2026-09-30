@@ -2,7 +2,7 @@
   {"need_id":"roads_damage","label":"道路・側溝・街路灯などの危険箇所","strong_terms":["道路の穴","道路陥没","道路破損","道路補修","側溝","街路灯","カーブミラー"],"weak_terms":["道路"],"required_context":["場所","危険度"],"risk":"SAFETY","scope":"MUNICIPAL"},
   {"need_id":"water_leak","label":"水漏れ・漏水","strong_terms":["漏水","水漏れ","水道管破裂"],"weak_terms":["水道管"],"required_context":["道路側か宅地内か","緊急性"],"risk":"SAFETY","scope":"MUNICIPAL"},
   {"need_id":"water_outage","label":"断水・急に水が出ない","strong_terms":["断水","水が出ない","急に水が出ない"],"weak_terms":["水の出が悪い"],"required_context":["近隣も出ないか","集合住宅か","緊急性"],"risk":"SAFETY","scope":"MUNICIPAL"},
-  {"need_id":"noise_odor_neighbor","label":"騒音・悪臭・近隣トラブル","strong_terms":["騒音","悪臭","近隣トラブル","近隣問題"],"weak_terms":["近隣"],"required_context":["発生源","継続性"],"risk":"QUALITY_OF_LIFE","scope":"MUNICIPAL"},
+  {"need_id":"noise_odor_neighbor","label":"騒音・悪臭・近隣トラブル","strong_terms":["騒音","悪臭"],"weak_terms":["近隣トラブル","近隣問題","近隣"],"required_context":["発生源","継続性"],"risk":"QUALITY_OF_LIFE","scope":"MUNICIPAL"},
   {"need_id":"pension_exemption","label":"国民年金保険料の免除・納付猶予","strong_terms":["国民年金保険料免除","年金免除","納付猶予","学生納付特例"],"weak_terms":["国民年金"],"required_context":["年齢","所得","失業等の事情"],"risk":"FINANCIAL","scope":"NATIONAL_WITH_LOCAL_WINDOW"},
   {"need_id":"high_cost_medical","label":"高額療養費・医療費負担","strong_terms":["高額療養費","医療費が高い","入院費が高い","限度額適用認定"],"weak_terms":[],"required_context":["加入している健康保険","年齢"],"risk":"FINANCIAL","scope":"INSURANCE_DEPENDENT"},
   {"need_id":"livelihood_housing","label":"家賃・生活費・住まいを失いそう","strong_terms":["家賃払えない","家賃を払えない","住まいを失いそう","生活費がない","住居確保給付金"],"weak_terms":["生活困窮","住まい"],"required_context":["収入状況","離職等の事情"],"risk":"FINANCIAL","scope":"MUNICIPAL"},

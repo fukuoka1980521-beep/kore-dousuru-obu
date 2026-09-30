@@ -169,9 +169,15 @@ function loadNagoya(root) {
     ["life_events.json", "life_event"]
   ];
   const records = files.flatMap(([name, type]) => tagged(readJsonIfExists(path.join(base, name)), type, path.join("municipalities", "nagoya", "data", name)));
+  const supportFile = path.join(root, "src", "app", "support-overlay.js");
+  const supports = loadBrowserScriptRecords(supportFile, "__KORE_DOUSURU_SUPPORT_OVERLAY__");
   const gapFile = path.join(root, "src", "app", "coverage-gap-overlay.js");
   const gaps = loadBrowserScriptRecords(gapFile, "__KORE_DOUSURU_COVERAGE_GAP_OVERLAY__");
-  return [...records, ...tagged(gaps, "coverage_gap_overlay", path.relative(root, gapFile))];
+  return [
+    ...records,
+    ...tagged(supports, "support_overlay", path.relative(root, supportFile)),
+    ...tagged(gaps, "coverage_gap_overlay", path.relative(root, gapFile))
+  ];
 }
 function riskWeight(risk) {
   return ({ SAFETY: 5, FINANCIAL: 4, DEADLINE: 4, CARE: 3, QUALITY_OF_LIFE: 2, BUSINESS: 2, ADMIN: 1 })[risk] || 1;
