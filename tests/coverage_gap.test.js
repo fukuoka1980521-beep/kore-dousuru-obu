@@ -106,3 +106,24 @@ test("leak and outage are separate needs so one route cannot falsely cover the o
   assert.equal(leak.strong_terms.includes("断水"), false);
   assert.ok(outage.strong_terms.includes("断水"));
 });
+
+
+test("coverage CLI supports --key=value so the intended source worktree is not silently ignored", () => {
+  const script = fs.readFileSync(path.resolve(testDir, "..", "scripts", "build_coverage_matrix.mjs"), "utf8");
+  assert.match(script, /startsWith\("--nagoya-root="\)/);
+  assert.match(script, /startsWith\("--out="\)/);
+});
+
+
+test("every authority-confirmation seed carries an executable question and contact", () => {
+  const seeds = JSON.parse(
+    fs.readFileSync(path.resolve(testDir, "..", "tools", "coverage", "official-source-seeds.json"), "utf8")
+  );
+  const pending = seeds.filter((x) => x.local_gate === "NEEDS_AUTHORITY_CONFIRMATION");
+  assert.equal(pending.length, 3);
+  for (const seed of pending) {
+    assert.ok(seed.authority_question?.length > 20);
+    assert.ok(seed.authority_contact?.length > 5);
+    assert.ok(seed.why_needed?.length > 10);
+  }
+});

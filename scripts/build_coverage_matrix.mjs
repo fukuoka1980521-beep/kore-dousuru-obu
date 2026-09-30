@@ -1,5 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
+import vm from "node:vm";
+import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -21,6 +23,20 @@ function readJson(file) {
 
 function readJsonIfExists(file) {
   return fs.existsSync(file) ? readJson(file) : [];
+}
+
+function gitIdentity(root) {
+  const run = (...args) => execFileSync("git", ["-C", root, ...args], { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim();
+  try {
+    return {
+      root: path.resolve(root),
+      head: run("rev-parse", "HEAD"),
+      branch: run("rev-parse", "--abbrev-ref", "HEAD"),
+      dirty: run("status", "--porcelain").length > 0
+    };
+  } catch {
+    return { root: path.resolve(root), head: null, branch: null, dirty: null };
+  }
 }
 
 function idOf(record) {
@@ -86,6 +102,24 @@ export function matchNeed(need, records) {
 function tagged(records, sourceType, sourceFile) {
   return records.map((record) => ({ ...record, __source_type: sourceType, __source_file: sourceFile }));
 }
+
+function loadBrowserScriptRecords(file, globalName) {
+  if (!fs.existsSync(file)) return [];
+  const context = {
+    window: {
+      KoreDousuruCore: {
+        loadMunicipality: async () => ({ config: {}, wasteItems: [], procedures: [], lifeEvents: [], offices: [], branchJurisdiction: [] }),
+        searchProcedures: () => []
+      }
+    }
+  };
+  vm.createContext(context);
+  vm.runInContext(fs.readFileSync(file, "utf8"), context, { filename: file });
+  const value = context.window[globalName];
+  const records = Array.isArray(value) ? value : value?.records;
+  return records ? JSON.parse(JSON.stringify(records)) : [];
+}
+
 function extractJsonArray(text, regex, label) {
   const match = text.match(regex);
   if (!match) throw new Error(`Could not extract ${label}`);
@@ -97,9 +131,12 @@ function loadHanda(root) {
   const html = fs.readFileSync(file, "utf8");
   const procedures = extractJsonArray(html, /procedures:(\[[\s\S]*?\]),\s*events:/, "Handa procedures");
   const events = extractJsonArray(html, /events:(\[[\s\S]*?\]),\s*schedule:/, "Handa events");
+  const gapFile = path.join(root, "handa", "coverage-gap-records.js");
+  const gaps = loadBrowserScriptRecords(gapFile, "__HANDA_COVERAGE_GAP_RECORDS__");
   return [
     ...tagged(procedures, "procedure", "handa/index.html#embedded-procedures"),
-    ...tagged(events, "life_event", "handa/index.html#embedded-events")
+    ...tagged(events, "life_event", "handa/index.html#embedded-events"),
+    ...tagged(gaps, "coverage_gap_record", path.relative(root, gapFile))
   ];
 }
 
@@ -114,10 +151,13 @@ function loadObu(root) {
     "Obu support overlay"
   );
   const eventsFile = path.join(root, "municipalities", "obu", "data", "life_events.json");
+  const gapFile = path.join(root, "src", "app", "coverage-gap-overlay.js");
+  const gaps = loadBrowserScriptRecords(gapFile, "__KORE_DOUSURU_COVERAGE_GAP_OVERLAY__");
   return [
     ...tagged(procedures, "procedure", path.relative(root, proceduresFile)),
     ...tagged(supports, "support_overlay", path.relative(root, overlayFile)),
-    ...tagged(readJsonIfExists(eventsFile), "life_event", path.relative(root, eventsFile))
+    ...tagged(readJsonIfExists(eventsFile), "life_event", path.relative(root, eventsFile)),
+    ...tagged(gaps, "coverage_gap_overlay", path.relative(root, gapFile))
   ];
 }
 
@@ -128,7 +168,10 @@ function loadNagoya(root) {
     ["support_guides.json", "support_guide"],
     ["life_events.json", "life_event"]
   ];
-  return files.flatMap(([name, type]) => tagged(readJsonIfExists(path.join(base, name)), type, path.join("municipalities", "nagoya", "data", name)));
+  const records = files.flatMap(([name, type]) => tagged(readJsonIfExists(path.join(base, name)), type, path.join("municipalities", "nagoya", "data", name)));
+  const gapFile = path.join(root, "src", "app", "coverage-gap-overlay.js");
+  const gaps = loadBrowserScriptRecords(gapFile, "__KORE_DOUSURU_COVERAGE_GAP_OVERLAY__");
+  return [...records, ...tagged(gaps, "coverage_gap_overlay", path.relative(root, gapFile))];
 }
 function riskWeight(risk) {
   return ({ SAFETY: 5, FINANCIAL: 4, DEADLINE: 4, CARE: 3, QUALITY_OF_LIFE: 2, BUSINESS: 2, ADMIN: 1 })[risk] || 1;
@@ -211,6 +254,12 @@ function toMarkdown(result) {
       .join(", ");
     lines.push(`- **${row.label}** — ${gaps}; 必要Context: ${(row.required_context || []).join(" / ") || "なし"}`);
   }
+  if (result.authority_confirmation_candidates.length) {
+    lines.push("", "## 行政確認候補", "");
+    for (const item of result.authority_confirmation_candidates) {
+      lines.push(`- **${item.municipality_id} / ${item.need_id}** — ${item.question}（確認先: ${item.contact}）`);
+    }
+  }
   lines.push("", "## 判定凡例", "", "- ○ COVERED: 公式確認済みレコードに強一致", "- △ PARTIAL: 弱一致、または公式確認状態が十分でない", "- × MISSING_IN_APP: 現在の収録データに一致なし", "- 実装可: 公式根拠と自治体固有ルール確認が揃い、実装候補に進める", "- 要行政確認: 公式情報だけでは住民向け導線を安全に確定できない", "- 要公式調査: 公式根拠の調査が未完了", "");
   return lines.join("\n");
 }
@@ -219,7 +268,9 @@ function parseArgs(argv) {
   const out = { nagoyaRoot: path.resolve(repoRoot, "..", "kore-dousuru-nagoya"), outDir: path.join(repoRoot, "artifacts", "coverage") };
   for (let i = 0; i < argv.length; i += 1) {
     if (argv[i] === "--nagoya-root") out.nagoyaRoot = path.resolve(argv[++i]);
+    else if (argv[i].startsWith("--nagoya-root=")) out.nagoyaRoot = path.resolve(argv[i].slice("--nagoya-root=".length));
     else if (argv[i] === "--out") out.outDir = path.resolve(argv[++i]);
+    else if (argv[i].startsWith("--out=")) out.outDir = path.resolve(argv[i].slice("--out=".length));
   }
   return out;
 }
@@ -235,9 +286,22 @@ export function run({ nagoyaRoot, outDir }) {
   const result = {
     generated_at: new Date().toISOString(),
     taxonomy_version: "v0.1",
+    source_identity: {
+      obu_and_handa: gitIdentity(repoRoot),
+      nagoya: gitIdentity(nagoyaRoot)
+    },
     source_counts: Object.fromEntries(Object.entries(sources).map(([k, v]) => [k, v.length])),
     semantics: { missing: "MISSING_IN_APP means not found in current app data, not that the public service does not exist." },
     research_seed_count: seeds.length,
+    authority_confirmation_candidates: seeds
+      .filter((seed) => seed.local_gate === "NEEDS_AUTHORITY_CONFIRMATION")
+      .map((seed) => ({
+        need_id: seed.need_id,
+        municipality_id: seed.municipality_id,
+        question: seed.authority_question,
+        contact: seed.authority_contact,
+        why_needed: seed.why_needed
+      })),
     matrix: buildMatrix(taxonomy, sources, seeds)
   };
   fs.mkdirSync(outDir, { recursive: true });
@@ -249,7 +313,9 @@ export function run({ nagoyaRoot, outDir }) {
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const result = run(parseArgs(process.argv.slice(2)));
   console.log(JSON.stringify({
+    source_identity: result.source_identity,
     source_counts: result.source_counts,
+    authority_confirmation_candidates: result.authority_confirmation_candidates,
     top_gaps: result.matrix.slice(0, 10).map((x) => ({
       need_id: x.need_id,
       label: x.label,
