@@ -1,0 +1,471 @@
+[
+  {
+    "need_id": "roads_damage",
+    "municipality_id": "tokoname",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokoname.aichi.jp/shisei/1007127/1007317.html",
+        "title": "公式LINEの多機能化｜常滑市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "常滑市の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "water_leak",
+    "municipality_id": "tokoname",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokoname.aichi.jp/kurashi/suido/1000944/1000945.html",
+        "title": "漏水｜常滑市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "常滑市の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "water_outage",
+    "municipality_id": "tokoname",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokoname.aichi.jp/faq/faqsuido/1001785.html",
+        "title": "よくある質問 9.水が出ないのですが？｜常滑市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "屋内バルブ確認、近隣も断水なら水道課、3階以上の集合住宅は管理人という公式FAQを確認。"
+  },
+  {
+    "need_id": "noise_odor_neighbor",
+    "municipality_id": "tokoname",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokoname.aichi.jp/kurashi/sodan/1000976/1000978.html",
+        "title": "公害関係の苦情相談・除草の指導｜常滑市",
+        "role": "LOCAL_PRIMARY"
+      },
+      {
+        "url": "https://www.city.tokoname.aichi.jp/kurashi/sodan/1000976/1000984.html",
+        "title": "人権相談、人権啓発｜常滑市",
+        "role": "LOCAL_RULE"
+      }
+    ],
+    "notes": "公害苦情は生活環境課、近隣間の騒音は人権相談の対象として公式に確認。"
+  },
+  {
+    "need_id": "pension_exemption",
+    "municipality_id": "tokoname",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokoname.aichi.jp/kurashi/nenkin/1000536/1004716.html",
+        "title": "免除制度｜常滑市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "常滑市の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "high_cost_medical",
+    "municipality_id": "tokoname",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokoname.aichi.jp/kurashi/kokuho/1000560/1003642/1000564.html",
+        "title": "高額療養費｜常滑市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "常滑市の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "livelihood_housing",
+    "municipality_id": "tokoname",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokoname.aichi.jp/kurashi/sodan/1000976/1004872.html",
+        "title": "くらし・ひきこもり相談｜常滑市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "常滑市の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "public_housing",
+    "municipality_id": "tokoname",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokoname.aichi.jp/kurashi/sumai/1000897/1003616.html",
+        "title": "市営住宅の入居者随時募集（先着順）｜常滑市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "常滑市の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "mental_health",
+    "municipality_id": "tokoname",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokoname.aichi.jp/kurashi/sodan/1000976/1000983.html",
+        "title": "各種相談窓口一覧｜常滑市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "常滑市の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "dv",
+    "municipality_id": "tokoname",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokoname.aichi.jp/kurashi/sodan/1000976/1000985.html",
+        "title": "女性のための相談室｜常滑市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "常滑市の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "legal_debt",
+    "municipality_id": "tokoname",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokoname.aichi.jp/kurashi/sodan/1000976/1000980.html",
+        "title": "法律相談｜常滑市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "常滑市の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "elder_care",
+    "municipality_id": "tokoname",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokoname.aichi.jp/shisetsu/byoin/1002500.html",
+        "title": "高齢者相談支援センター｜常滑市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "常滑市の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "disability_support",
+    "municipality_id": "tokoname",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokoname.aichi.jp/kurashi/shogaisya/1000814/1000815.html",
+        "title": "障がい者相談｜常滑市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "常滑市の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "single_parent",
+    "municipality_id": "tokoname",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokoname.aichi.jp/kurashi/kodomo/1000644/1000647.html",
+        "title": "児童扶養手当｜常滑市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "常滑市の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "childcare_temp",
+    "municipality_id": "tokoname",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokoname.aichi.jp/kurashi/kodomo/1000715/1000732.html",
+        "title": "一時保育｜常滑市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "常滑市の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "childcare_sick",
+    "municipality_id": "tokoname",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokoname.aichi.jp/kurashi/kodomo/1000652/1000663.html",
+        "title": "病児・病後児保育事業｜常滑市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "常滑市の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "pediatric_emergency",
+    "municipality_id": "tokoname",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokoname.aichi.jp/kurashi/kenko/1009199.html",
+        "title": "医療の適正受診にご協力ください｜常滑市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "常滑市の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "labor",
+    "municipality_id": "tokoname",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokoname.aichi.jp/kurashi/sodan/1000976/1000983.html",
+        "title": "各種相談窓口一覧｜常滑市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "常滑市の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "startup",
+    "municipality_id": "tokoname",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokoname.aichi.jp/jigyosha/kinrosya/1002345.html",
+        "title": "創業支援｜常滑市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "常滑市の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "crime_victim",
+    "municipality_id": "tokoname",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokoname.aichi.jp/kurashi/sodan/1000976/1005049.html",
+        "title": "犯罪被害者支援｜常滑市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "常滑市の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "hikikomori",
+    "municipality_id": "tokoname",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokoname.aichi.jp/kurashi/sodan/1000976/1004872.html",
+        "title": "くらし・ひきこもり相談｜常滑市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "常滑市の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "move_in",
+    "municipality_id": "tokoname",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokoname.aichi.jp/kurashi/todokede/1000480/1000481.html",
+        "title": "転入届｜常滑市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "常滑市の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "move_out",
+    "municipality_id": "tokoname",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokoname.aichi.jp/kurashi/todokede/1000480/1000482.html",
+        "title": "転出届｜常滑市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "常滑市の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "resident_record",
+    "municipality_id": "tokoname",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokoname.aichi.jp/kurashi/todokede/1000498/1000500.html",
+        "title": "住民票の写し｜常滑市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "常滑市の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "birth",
+    "municipality_id": "tokoname",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokoname.aichi.jp/kurashi/todokede/1000475/1000477.html",
+        "title": "出生届｜常滑市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "常滑市の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "death",
+    "municipality_id": "tokoname",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokoname.aichi.jp/kurashi/todokede/1000475/1000479.html",
+        "title": "死亡届｜常滑市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "常滑市の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "nhi_join",
+    "municipality_id": "tokoname",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokoname.aichi.jp/kurashi/kokuho/1000549/1000551.html",
+        "title": "国民健康保険への加入｜常滑市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "常滑市の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "nhi_leave",
+    "municipality_id": "tokoname",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokoname.aichi.jp/kurashi/kokuho/1000549/1000552.html",
+        "title": "国民健康保険からの脱退｜常滑市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "常滑市の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "oversized_waste",
+    "municipality_id": "tokoname",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.tokoname.aichi.jp/kurashi/1003969/1004079/1004098.html",
+        "title": "ご自身でごみ出しが困難な方｜常滑市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "常滑市の現行公式情報を確認し、住民向け導線をモデル化。"
+  }
+]
