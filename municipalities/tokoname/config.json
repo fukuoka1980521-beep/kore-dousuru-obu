@@ -1,0 +1,62 @@
+{
+  "municipality_id": "tokoname",
+  "display_name": "常滑市",
+  "display_name_full": "常滑市版",
+  "app_title": "これどうする？",
+  "search_placeholder": "例：道路の穴・子どもが熱・粗大ごみ",
+  "home_intro_title": "公開実証中｜常滑市で困ったら、そのままの言葉で検索できます",
+  "home_intro_text": "行政の手続名が分からなくても、困りごとから次の公的な行動を確認できます。",
+  "features": {
+    "waste_enabled": false
+  },
+  "priority_nav": [
+    {
+      "key": "hikkoshi",
+      "label": "引っ越した",
+      "icon": "🏠",
+      "view": "procedures",
+      "query": "引っ越し"
+    },
+    {
+      "key": "juminhyo",
+      "label": "住民票がほしい",
+      "icon": "📄",
+      "view": "procedures",
+      "query": "住民票"
+    },
+    {
+      "key": "kosodate",
+      "label": "子どものこと",
+      "icon": "👶",
+      "view": "procedures",
+      "query": "子ども"
+    },
+    {
+      "key": "soudan",
+      "label": "相談したい",
+      "icon": "💬",
+      "view": "procedures",
+      "query": "相談"
+    }
+  ],
+  "quick_queries": [
+    "道路の穴",
+    "子どもが熱",
+    "水が出ない",
+    "粗大ごみ"
+  ],
+  "contact": {
+    "name": "常滑市役所（代表）",
+    "phone": "0569-35-5111",
+    "hours": "月〜金 9:00〜16:30（祝日・年末年始を除く）",
+    "url": "https://www.city.tokoname.aichi.jp/"
+  },
+  "ward_list_url": "https://www.city.tokoname.aichi.jp/shisetsu/byoin/1002500.html",
+  "data": {
+    "waste_items": "../municipalities/tokoname/data/waste_items.json",
+    "procedures": "../municipalities/tokoname/data/procedures.json",
+    "life_events": "../municipalities/tokoname/data/life_events.json"
+  },
+  "disclaimer": "本サイトは常滑市の公式サイトではありません。最終的な判断は必ず常滑市公式情報・窓口でご確認ください。",
+  "not_official_notice": "常滑市の市章・公式キャラクターは使用していません。"
+}
