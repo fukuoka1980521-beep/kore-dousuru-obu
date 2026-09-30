@@ -1,0 +1,631 @@
+[
+  {
+    "need_id": "roads_damage",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "場所",
+      "危険度"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.town.aichi-higashiura.lg.jp/soshiki/dobokukanri/ijishuzen/ijishuzen/gyomu/doro/doro/1452566169505.html",
+        "title": "道路の穴ぼこなどを見つけたら｜東浦町",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "water_leak",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "道路側か宅地内か",
+      "緊急性"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.town.aichi-higashiura.lg.jp/soshiki/mizu/haisuikyusui/gyomu/1452566977727.html",
+        "title": "水道の漏水・故障｜東浦町",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "water_outage",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_SOURCE_PARTIAL",
+    "local_gate": "NEEDS_AUTHORITY_CONFIRMATION",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "近隣も出ないか",
+      "集合住宅か",
+      "緊急性"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.town.aichi-higashiura.lg.jp/soshiki/mizu/haisuikyusui/gyomu/1452566977727.html",
+        "title": "水道の漏水・故障｜東浦町",
+        "role": "LOCAL_EVIDENCE"
+      }
+    ],
+    "authority_question": "平常時に家庭で急に水が出なくなった場合、止水栓・近隣の断水状況・集合住宅かを確認した後の正式な町の連絡先と切り分け手順は何か。受水槽方式の集合住宅はまず管理会社へ案内してよいか。",
+    "authority_contact": "東浦町 水循環管理課 配水給水係 0562-83-3111",
+    "why_needed": "漏水・故障時の宅地内/公道の対応は確認できるが、突発的な出水不能の住民向け恒常フローを現行公式ページだけで確定できない。",
+    "notes": "公式情報だけでは住民向け導線を安全に確定できないためfail-closed。"
+  },
+  {
+    "need_id": "noise_odor_neighbor",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_SOURCE_PARTIAL",
+    "local_gate": "NEEDS_AUTHORITY_CONFIRMATION",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "発生源",
+      "継続性"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.town.aichi-higashiura.lg.jp/soshiki/kankyo/kankyomana/gyomu/1452566156345.html",
+        "title": "騒音・振動・悪臭関係等届出書様式｜東浦町",
+        "role": "LOCAL_EVIDENCE"
+      }
+    ],
+    "authority_question": "工場・事業場や建設作業等の騒音・振動・悪臭について住民から相談・苦情がある場合、環境課が受付窓口でよいか。また、家庭生活由来の騒音や同一建物内・民地間の近隣トラブルは町の対象外として管理会社・当事者間等へ案内してよいか。",
+    "authority_contact": "東浦町 環境課 環境マネジメント係 0562-83-3111",
+    "why_needed": "工場・事業場等に対する規制と届出所管は確認できるが、一般住民の苦情受付条件と生活騒音・民事境界を公式情報だけで確定できない。",
+    "notes": "公式情報だけでは住民向け導線を安全に確定できないためfail-closed。"
+  },
+  {
+    "need_id": "pension_exemption",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "年齢",
+      "所得",
+      "失業等の事情"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.town.aichi-higashiura.lg.jp/soshiki/hokeniryo/hokennenkin/gyomu/hoken/nenkin/5011001.html",
+        "title": "国民年金保険料免除・納付猶予について｜東浦町",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "high_cost_medical",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "加入している健康保険",
+      "年齢"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.town.aichi-higashiura.lg.jp/kurashi/hoken_nenkin/kokuho/1476940510642.html",
+        "title": "高額療養費｜東浦町",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "livelihood_housing",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "収入状況",
+      "離職等の事情"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.town.aichi-higashiura.lg.jp/soshiki/fukushi/shakaikorei/gyomu/seikatsuhogo/1452566105563.html",
+        "title": "生活に困った方へ｜東浦町",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "public_housing",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "世帯状況",
+      "所得"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.town.aichi-higashiura.lg.jp/kurashi/sumai/jutaku/1454930958055.html",
+        "title": "町営住宅｜東浦町",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "mental_health",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.town.aichi-higashiura.lg.jp/kenko_iryo/kenko_iryo/kokoro/1454930939350.html",
+        "title": "こころの相談窓口について｜東浦町",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "dv",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "今すぐ危険か"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.town.aichi-higashiura.lg.jp/kenko_iryo/syakaihukushi/6731.html",
+        "title": "DV・女性相談のご案内｜東浦町",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "legal_debt",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "相談分野"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.town.aichi-higashiura.lg.jp/kurashi/sodan/index.html",
+        "title": "相談｜東浦町",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "elder_care",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "居住地域"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.town.aichi-higashiura.lg.jp/kenko_iryo/korei/koreifukushi/1454930967475.html",
+        "title": "高齢福祉 安心して生活できるために｜東浦町",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "disability_support",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "本人か家族か",
+      "年齢",
+      "発達相談か福祉サービス相談か"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.town.aichi-higashiura.lg.jp/kenko_iryo/shisetsu/7438.html",
+        "title": "東浦町障がい者相談支援センター｜東浦町",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "single_parent",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "子の年齢",
+      "所得"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.town.aichi-higashiura.lg.jp/soshiki/kosodateshien/kodomo/gyomu/jidou_teate/1452566667639.html",
+        "title": "児童に関する手当｜東浦町",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "childcare_temp",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "子の年齢",
+      "利用理由"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.town.aichi-higashiura.lg.jp/kosodate_kyoiku/hoikuen_jidokan_nakayoshi/hoikuen/1454930945102.html",
+        "title": "特別保育（一時的保育）｜東浦町",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "childcare_sick",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "子の年齢",
+      "病状",
+      "保護者が家庭保育できない理由"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.town.aichi-higashiura.lg.jp/soshiki/kosodateshien/hoiku/gyomu/kosodate/7636.html",
+        "title": "病児・病後児保育事業 うららんケアルーム｜東浦町",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "pediatric_emergency",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "緊急性",
+      "子の年齢",
+      "症状",
+      "時間帯"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.town.aichi-higashiura.lg.jp/kenko_iryo/kenko_iryo/kyujitsushinryo/1454930939631.html",
+        "title": "休日急病診療｜東浦町",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "labor",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "雇用関係"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.town.aichi-higashiura.lg.jp/soshiki/shokonose/shokorosei/gyomu/kirousha/index.html",
+        "title": "勤労者の方へ｜東浦町",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "startup",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "事業段階"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.town.aichi-higashiura.lg.jp/soshiki/shokonose/shokorosei/gyomu/sougyo/index.html",
+        "title": "創業（起業）をお考えの方へ｜東浦町",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "crime_victim",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "緊急性"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.town.aichi-higashiura.lg.jp/soshiki/juminjichi/community/gyomu/bohan/13309.html",
+        "title": "犯罪被害者支援相談窓口｜東浦町",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "hikikomori",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "年齢",
+      "本人か家族か",
+      "学校在籍か"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.town.aichi-higashiura.lg.jp/soshiki/fukushi/kyoseishakai/gyomu/tiiki/12136.html",
+        "title": "コミュニティソーシャルワーカー（CSW）を配置しています。｜東浦町",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "move_in",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "転入日"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.town.aichi-higashiura.lg.jp/soshiki/jumin/jumin/gyomu/todokede/1452566739678.html",
+        "title": "住民異動届｜東浦町",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "move_out",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "転出予定日"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.town.aichi-higashiura.lg.jp/soshiki/jumin/jumin/gyomu/todokede/1452566739678.html",
+        "title": "住民異動届｜東浦町",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "resident_record",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "必要な記載事項"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.town.aichi-higashiura.lg.jp/kurashi/shinsei_todokede/shomeisho/1454930947340.html",
+        "title": "住民票・印鑑証明・戸籍関係交付申請｜東浦町",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "birth",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "出生日"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.town.aichi-higashiura.lg.jp/soshiki/jumin/jumin/gyomu/todokede/1474354527044.html",
+        "title": "出生届｜東浦町",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "death",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "死亡日"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.town.aichi-higashiura.lg.jp/soshiki/jumin/jumin/gyomu/todokede/1474357723430.html",
+        "title": "死亡届｜東浦町",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "nhi_join",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "資格喪失日"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.town.aichi-higashiura.lg.jp/soshiki/hokeniryo/hokennenkin/gyomu/hoken/kokuho/1452566692026.html",
+        "title": "国民健康保険 こんなときは健康保険の異動日から14日以内に届出を｜東浦町",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "nhi_leave",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "新保険の資格取得日"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.town.aichi-higashiura.lg.jp/soshiki/hokeniryo/hokennenkin/gyomu/hoken/kokuho/1452566692026.html",
+        "title": "国民健康保険 こんなときは健康保険の異動日から14日以内に届出を｜東浦町",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "oversized_waste",
+    "municipality_id": "higashiura",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "品目",
+      "大きさ"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.town.aichi-higashiura.lg.jp/soshiki/kankyo/junkangata/gyomu/gomi/dashikata/1452566791286.html",
+        "title": "粗大ごみの戸別有料収集｜東浦町",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "authority_question": "",
+    "authority_contact": "",
+    "why_needed": "",
+    "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
+  }
+]

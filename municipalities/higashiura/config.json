@@ -1,0 +1,61 @@
+{
+  "municipality_id": "higashiura",
+  "display_name": "東浦町",
+  "display_name_full": "東浦町版",
+  "app_title": "これどうする？",
+  "search_placeholder": "例：道路の穴・子どもが熱・家賃払えない",
+  "home_intro_title": "公開実証中｜東浦町で困ったら、そのままの言葉で検索できます",
+  "home_intro_text": "行政の手続名が分からなくても、困りごとから次の公的な行動を確認できます。",
+  "features": {
+    "waste_enabled": false
+  },
+  "priority_nav": [
+    {
+      "key": "hikkoshi",
+      "label": "引っ越した",
+      "icon": "🏠",
+      "view": "procedures",
+      "query": "引っ越し"
+    },
+    {
+      "key": "juminhyo",
+      "label": "住民票がほしい",
+      "icon": "📄",
+      "view": "procedures",
+      "query": "住民票"
+    },
+    {
+      "key": "kosodate",
+      "label": "子どものこと",
+      "icon": "👶",
+      "view": "procedures",
+      "query": "子ども"
+    },
+    {
+      "key": "soudan",
+      "label": "相談したい",
+      "icon": "💬",
+      "view": "procedures",
+      "query": "相談"
+    }
+  ],
+  "quick_queries": [
+    "道路の穴",
+    "子どもが熱",
+    "高額療養費",
+    "粗大ごみ"
+  ],
+  "contact": {
+    "name": "東浦町役場（代表）",
+    "phone": "0562-83-3111",
+    "hours": "月〜金 9:00〜16:00（最終受付15:30。最新情報は公式サイトで確認）",
+    "url": "https://www.town.aichi-higashiura.lg.jp/"
+  },
+  "data": {
+    "waste_items": "../municipalities/higashiura/data/waste_items.json",
+    "procedures": "../municipalities/higashiura/data/procedures.json",
+    "life_events": "../municipalities/higashiura/data/life_events.json"
+  },
+  "disclaimer": "本サイトは東浦町の公式サイトではありません。最終的な判断は必ず東浦町公式情報・窓口でご確認ください。",
+  "not_official_notice": "東浦町の町章・公式キャラクターは使用していません。"
+}
