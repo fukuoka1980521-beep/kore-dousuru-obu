@@ -1,0 +1,48 @@
+name: Authority Inquiry (developer only)
+
+on:
+  workflow_dispatch:
+    inputs:
+      municipality_id:
+        description: Municipality ID (e.g. chita)
+        required: true
+        type: string
+      need_id:
+        description: Common need ID (e.g. water_outage)
+        required: true
+        type: string
+      output_format:
+        description: Packet format
+        required: true
+        default: markdown
+        type: choice
+        options:
+          - markdown
+          - json
+
+permissions:
+  contents: read
+
+jobs:
+  prepare-inquiry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Generate inquiry packet
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/authority-inquiry"
+          if [ "${{ inputs.output_format }}" = "json" ]; then
+            node scripts/authority_inquiry.mjs prepare --municipality="${{ inputs.municipality_id }}" --need="${{ inputs.need_id }}" --format=json --out="$RUNNER_TEMP/authority-inquiry/inquiry.json"
+          else
+            node scripts/authority_inquiry.mjs prepare --municipality="${{ inputs.municipality_id }}" --need="${{ inputs.need_id }}" --out="$RUNNER_TEMP/authority-inquiry/inquiry.md"
+          fi
+      - name: Upload inquiry packet
+        uses: actions/upload-artifact@v4
+        with:
+          name: authority-inquiry-${{ inputs.municipality_id }}-${{ inputs.need_id }}
+          path: ${{ runner.temp }}/authority-inquiry/
+          retention-days: 14
