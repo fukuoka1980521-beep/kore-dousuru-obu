@@ -56,7 +56,7 @@ test("sanity: this dataset still has zero multi-version item_ids (Obu has no rea
 });
 
 test("waste card conclusion branches on status === \"UNCONFIRMED\" instead of always using category as the grammatical subject", () => {
-  const fnMatch = appSrc.match(/const conclusionHtml =\s*\n([\s\S]*?);\n\n\s*return `/);
+  const fnMatch = appSrc.match(/const conclusionHtml =\s*\r?\n([\s\S]*?);\r?\n\r?\n\s*return `/);
   assert.ok(fnMatch, "conclusionHtml branch not found in renderWasteCard");
   assert.match(fnMatch[1], /it\.status === "UNCONFIRMED"/);
   // The fallback (non-unconfirmed) branch must still use category as the subject —
@@ -65,9 +65,11 @@ test("waste card conclusion branches on status === \"UNCONFIRMED\" instead of al
 });
 
 test("the UNCONFIRMED branch never re-asserts the unresolved placeholder as a disposal instruction", () => {
-  const fnMatch = appSrc.match(/const conclusionHtml =\s*\n([\s\S]*?);\n\n\s*return `/);
+  const fnMatch = appSrc.match(/const conclusionHtml =\s*\r?\n([\s\S]*?);\r?\n\r?\n\s*return `/);
   assert.ok(fnMatch);
-  const unconfirmedBranch = fnMatch[1].split("? `")[1].split("`\n        :")[0];
+  const unconfirmedMatch = fnMatch[1].match(/\? `([\s\S]*?)`\r?\n\s*:/);
+  assert.ok(unconfirmedMatch, "UNCONFIRMED branch not found");
+  const unconfirmedBranch = unconfirmedMatch[1];
   assert.doesNotMatch(unconfirmedBranch, /として出してください/);
   assert.doesNotMatch(unconfirmedBranch, /\$\{escapeHtml\(it\.category\)\}/);
 });

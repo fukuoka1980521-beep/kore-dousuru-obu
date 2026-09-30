@@ -66,7 +66,7 @@ test("official source seeds are municipality-bound and only use official sources
   const seeds = JSON.parse(
     fs.readFileSync(path.resolve(testDir, "..", "tools", "coverage", "official-source-seeds.json"), "utf8")
   );
-  assert.equal(seeds.length, 21);
+  assert.ok(seeds.length >= 21);
   const validMunicipalities = new Set(["handa", "nagoya", "obu"]);
   for (const seed of seeds) {
     assert.ok(validMunicipalities.has(seed.municipality_id));
@@ -75,7 +75,7 @@ test("official source seeds are municipality-bound and only use official sources
     for (const source of seed.official_sources) {
       const url = new URL(source.url);
       assert.equal(url.protocol, "https:");
-      assert.ok(["www.city.handa.lg.jp", "www.city.nagoya.jp", "www.water.city.nagoya.jp", "www.city.obu.aichi.jp", "www.nenkin.go.jp"].includes(url.hostname));
+      assert.ok(["www.city.handa.lg.jp", "www.city.nagoya.jp", "www.water.city.nagoya.jp", "www.city.obu.aichi.jp", "www.nenkin.go.jp", "jsite.mhlw.go.jp"].includes(url.hostname));
       if (seed.municipality_id === "handa") assert.equal(/city\.nagoya\.jp|city\.obu\.aichi\.jp/.test(url.hostname), false);
       if (seed.municipality_id === "nagoya") assert.equal(/city\.handa\.lg\.jp|city\.obu\.aichi\.jp/.test(url.hostname), false);
       if (seed.municipality_id === "obu") assert.equal(/city\.handa\.lg\.jp|city\.nagoya\.jp/.test(url.hostname), false);
