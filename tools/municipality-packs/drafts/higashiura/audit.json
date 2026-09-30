@@ -1,0 +1,47 @@
+{
+  "municipality_id": "higashiura",
+  "display_name": "東浦町",
+  "taxonomy_need_count": 29,
+  "seed_count": 29,
+  "counts": {
+    "PASS_RULES_MODELED": 27,
+    "NEEDS_AUTHORITY_CONFIRMATION": 2
+  },
+  "research_required": [],
+  "inquiry_candidates": [
+    "water_outage",
+    "noise_odor_neighbor"
+  ],
+  "source_conflicts": [],
+  "implementation_ready": [
+    "roads_damage",
+    "water_leak",
+    "pension_exemption",
+    "high_cost_medical",
+    "livelihood_housing",
+    "public_housing",
+    "mental_health",
+    "dv",
+    "legal_debt",
+    "elder_care",
+    "disability_support",
+    "single_parent",
+    "childcare_temp",
+    "childcare_sick",
+    "pediatric_emergency",
+    "labor",
+    "startup",
+    "crime_victim",
+    "hikikomori",
+    "move_in",
+    "move_out",
+    "resident_record",
+    "birth",
+    "death",
+    "nhi_join",
+    "nhi_leave",
+    "oversized_waste"
+  ],
+  "errors": [],
+  "ready_to_promote": true
+}

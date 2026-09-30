@@ -2,10 +2,11 @@
   "generator_version": "v1",
   "municipality_id": "higashiura",
   "display_name": "東浦町",
-  "state": "DRAFT_RESEARCH",
+  "state": "RESEARCH_COMPLETE_WITH_INQUIRIES",
   "official_base_url": "https://www.town.aichi-higashiura.lg.jp/",
   "official_domain": "www.town.aichi-higashiura.lg.jp",
   "representative_phone": "0562-83-3111",
   "taxonomy_need_count": 29,
-  "publish_policy": "terminal gate required; only PASS_RULES_MODELED becomes a public procedure"
+  "publish_policy": "terminal gate required; only PASS_RULES_MODELED becomes a public procedure",
+  "researched_at": "2026-10-01"
 }

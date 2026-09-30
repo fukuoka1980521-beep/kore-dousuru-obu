@@ -1,6 +1,5 @@
 [
   {
-    "need_id": "roads_damage",
     "procedure_id": "higashiura-proc-roads-damage",
     "municipality_id": "higashiura",
     "name": "道路・側溝・街路灯などの危険箇所",
@@ -32,7 +31,6 @@
     "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
   },
   {
-    "need_id": "water_leak",
     "procedure_id": "higashiura-proc-water-leak",
     "municipality_id": "higashiura",
     "name": "水漏れ・漏水",
@@ -60,62 +58,6 @@
     "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
   },
   {
-    "need_id": "water_outage",
-    "procedure_id": "higashiura-draft-water_outage",
-    "municipality_id": "higashiura",
-    "name": "断水・急に水が出ない",
-    "aliases": [
-      "断水",
-      "水が出ない",
-      "急に水が出ない"
-    ],
-    "conclusion": "",
-    "deadline": "",
-    "how_to": "",
-    "required_documents": [],
-    "fee": "",
-    "window_office": "",
-    "district_dependent": false,
-    "department_name": "",
-    "phone": "",
-    "business_hours": "",
-    "online_available": false,
-    "related_procedures": [],
-    "official_url": "",
-    "official_page_title": "",
-    "source_checked_at": null,
-    "status": "RESEARCH_PENDING",
-    "notes": ""
-  },
-  {
-    "need_id": "noise_odor_neighbor",
-    "procedure_id": "higashiura-draft-noise_odor_neighbor",
-    "municipality_id": "higashiura",
-    "name": "騒音・悪臭・近隣トラブル",
-    "aliases": [
-      "騒音",
-      "悪臭"
-    ],
-    "conclusion": "",
-    "deadline": "",
-    "how_to": "",
-    "required_documents": [],
-    "fee": "",
-    "window_office": "",
-    "district_dependent": false,
-    "department_name": "",
-    "phone": "",
-    "business_hours": "",
-    "online_available": false,
-    "related_procedures": [],
-    "official_url": "",
-    "official_page_title": "",
-    "source_checked_at": null,
-    "status": "RESEARCH_PENDING",
-    "notes": ""
-  },
-  {
-    "need_id": "pension_exemption",
     "procedure_id": "higashiura-proc-pension-exemption",
     "municipality_id": "higashiura",
     "name": "国民年金保険料の免除・納付猶予",
@@ -144,7 +86,6 @@
     "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
   },
   {
-    "need_id": "high_cost_medical",
     "procedure_id": "higashiura-proc-high-cost-medical",
     "municipality_id": "higashiura",
     "name": "高額療養費・医療費負担",
@@ -173,7 +114,6 @@
     "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
   },
   {
-    "need_id": "livelihood_housing",
     "procedure_id": "higashiura-proc-livelihood-housing",
     "municipality_id": "higashiura",
     "name": "家賃・生活費・住まいを失いそう",
@@ -203,7 +143,6 @@
     "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
   },
   {
-    "need_id": "public_housing",
     "procedure_id": "higashiura-proc-public-housing",
     "municipality_id": "higashiura",
     "name": "市営住宅・公営住宅を探したい",
@@ -232,7 +171,6 @@
     "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
   },
   {
-    "need_id": "mental_health",
     "procedure_id": "higashiura-proc-mental-health",
     "municipality_id": "higashiura",
     "name": "こころ・メンタルヘルス相談",
@@ -262,7 +200,6 @@
     "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
   },
   {
-    "need_id": "dv",
     "procedure_id": "higashiura-proc-dv",
     "municipality_id": "higashiura",
     "name": "DV・家庭内暴力",
@@ -291,7 +228,6 @@
     "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
   },
   {
-    "need_id": "legal_debt",
     "procedure_id": "higashiura-proc-legal-debt",
     "municipality_id": "higashiura",
     "name": "法律・借金・債務整理",
@@ -321,7 +257,6 @@
     "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
   },
   {
-    "need_id": "elder_care",
     "procedure_id": "higashiura-proc-elder-care",
     "municipality_id": "higashiura",
     "name": "高齢者・介護・認知症相談",
@@ -350,7 +285,6 @@
     "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
   },
   {
-    "need_id": "disability_support",
     "procedure_id": "higashiura-proc-disability-support",
     "municipality_id": "higashiura",
     "name": "障がい・発達・福祉サービス相談",
@@ -379,7 +313,6 @@
     "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
   },
   {
-    "need_id": "single_parent",
     "procedure_id": "higashiura-proc-single-parent",
     "municipality_id": "higashiura",
     "name": "ひとり親家庭の支援",
@@ -408,7 +341,6 @@
     "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
   },
   {
-    "need_id": "childcare_temp",
     "procedure_id": "higashiura-proc-childcare-temp",
     "municipality_id": "higashiura",
     "name": "一時的に子どもを預けたい",
@@ -436,7 +368,6 @@
     "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
   },
   {
-    "need_id": "childcare_sick",
     "procedure_id": "higashiura-proc-childcare-sick",
     "municipality_id": "higashiura",
     "name": "病気の子どもを預けたい（病児・病後児保育）",
@@ -465,7 +396,6 @@
     "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
   },
   {
-    "need_id": "pediatric_emergency",
     "procedure_id": "higashiura-proc-pediatric-emergency",
     "municipality_id": "higashiura",
     "name": "子どもの急病・小児救急",
@@ -495,7 +425,6 @@
     "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
   },
   {
-    "need_id": "labor",
     "procedure_id": "higashiura-proc-labor",
     "municipality_id": "higashiura",
     "name": "賃金・解雇・職場トラブル",
@@ -525,7 +454,6 @@
     "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
   },
   {
-    "need_id": "startup",
     "procedure_id": "higashiura-proc-startup",
     "municipality_id": "higashiura",
     "name": "創業・起業・開業相談",
@@ -554,7 +482,6 @@
     "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
   },
   {
-    "need_id": "crime_victim",
     "procedure_id": "higashiura-proc-crime-victim",
     "municipality_id": "higashiura",
     "name": "犯罪・事件被害の相談",
@@ -582,7 +509,6 @@
     "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
   },
   {
-    "need_id": "hikikomori",
     "procedure_id": "higashiura-proc-hikikomori",
     "municipality_id": "higashiura",
     "name": "ひきこもり・不登校・若者相談",
@@ -611,7 +537,6 @@
     "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
   },
   {
-    "need_id": "move_in",
     "procedure_id": "higashiura-proc-move-in",
     "municipality_id": "higashiura",
     "name": "市外から転入した",
@@ -639,7 +564,6 @@
     "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
   },
   {
-    "need_id": "move_out",
     "procedure_id": "higashiura-proc-move-out",
     "municipality_id": "higashiura",
     "name": "市外へ転出する",
@@ -667,7 +591,6 @@
     "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
   },
   {
-    "need_id": "resident_record",
     "procedure_id": "higashiura-proc-resident-record",
     "municipality_id": "higashiura",
     "name": "住民票を取得したい",
@@ -695,7 +618,6 @@
     "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
   },
   {
-    "need_id": "birth",
     "procedure_id": "higashiura-proc-birth",
     "municipality_id": "higashiura",
     "name": "子どもが生まれた",
@@ -723,7 +645,6 @@
     "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
   },
   {
-    "need_id": "death",
     "procedure_id": "higashiura-proc-death",
     "municipality_id": "higashiura",
     "name": "家族が亡くなった",
@@ -751,7 +672,6 @@
     "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
   },
   {
-    "need_id": "nhi_join",
     "procedure_id": "higashiura-proc-nhi-join",
     "municipality_id": "higashiura",
     "name": "国民健康保険に加入する",
@@ -779,7 +699,6 @@
     "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
   },
   {
-    "need_id": "nhi_leave",
     "procedure_id": "higashiura-proc-nhi-leave",
     "municipality_id": "higashiura",
     "name": "国民健康保険を脱退する",
@@ -807,7 +726,6 @@
     "notes": "東浦町の現行公式情報を確認し、住民向け導線をモデル化。"
   },
   {
-    "need_id": "oversized_waste",
     "procedure_id": "higashiura-proc-oversized-waste",
     "municipality_id": "higashiura",
     "name": "粗大ごみを収集してほしい",
