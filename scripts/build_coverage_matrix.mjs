@@ -8,7 +8,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, "..");
 const taxonomyPath = path.join(repoRoot, "tools", "coverage", "need-taxonomy.json");
 const sourceSeedsPath = path.join(repoRoot, "tools", "coverage", "official-source-seeds.json");
-const tokaiSeedsPath = path.join(repoRoot, "tools", "coverage", "tokai-source-seeds.json");
 
 export function normalize(value) {
   return String(value ?? "")
@@ -201,15 +200,36 @@ function loadNagoya(root) {
   ];
 }
 
-function loadTokai(root) {
-  const base = path.join(root, "municipalities", "tokai", "data");
+function loadLocalMunicipalityPack(root, municipalityId) {
+  const base = path.join(root, "municipalities", municipalityId, "data");
   const files = [
     ["procedures.json", "procedure"],
     ["life_events.json", "life_event"]
   ];
   return files.flatMap(([name, type]) =>
-    tagged(readJsonIfExists(path.join(base, name)), type, path.join("municipalities", "tokai", "data", name))
+    tagged(readJsonIfExists(path.join(base, name)), type, path.join("municipalities", municipalityId, "data", name))
   );
+}
+
+function discoverLocalMunicipalityPacks(root) {
+  const municipalitiesRoot = path.join(root, "municipalities");
+  return fs.readdirSync(municipalitiesRoot, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
+    .filter((id) => !["obu", "shared", "nagoya"].includes(id))
+    .filter((id) =>
+      fs.existsSync(path.join(municipalitiesRoot, id, "config.json")) &&
+      fs.existsSync(path.join(municipalitiesRoot, id, "data", "procedures.json"))
+    )
+    .sort();
+}
+
+function loadAdditionalSeedFiles(root) {
+  const dir = path.join(root, "tools", "coverage");
+  return fs.readdirSync(dir)
+    .filter((name) => name.endsWith("-source-seeds.json") && name !== "official-source-seeds.json")
+    .sort()
+    .flatMap((name) => readJsonIfExists(path.join(dir, name)));
 }
 function riskWeight(risk) {
   return ({ SAFETY: 5, FINANCIAL: 4, DEADLINE: 4, CARE: 3, QUALITY_OF_LIFE: 2, BUSINESS: 2, ADMIN: 1 })[risk] || 1;
@@ -319,22 +339,26 @@ function parseArgs(argv) {
 
 export function run({ nagoyaRoot, outDir }) {
   const taxonomy = readJson(taxonomyPath);
-  const seeds = [...readJson(sourceSeedsPath), ...readJsonIfExists(tokaiSeedsPath)];
+  const seeds = [...readJson(sourceSeedsPath), ...loadAdditionalSeedFiles(repoRoot)];
   const sources = {
     handa: loadHanda(repoRoot),
     nagoya: loadNagoya(nagoyaRoot),
-    obu: loadObu(repoRoot),
-    tokai: loadTokai(repoRoot)
+    obu: loadObu(repoRoot)
   };
-  const municipalityLabels = { handa: "半田", nagoya: "名古屋", obu: "大府", tokai: "東海" };
+  const municipalityLabels = { handa: "半田", nagoya: "名古屋", obu: "大府" };
+  for (const id of discoverLocalMunicipalityPacks(repoRoot)) {
+    sources[id] = loadLocalMunicipalityPack(repoRoot, id);
+    const config = readJson(path.join(repoRoot, "municipalities", id, "config.json"));
+    municipalityLabels[id] = String(config.display_name || id).replace(/市$/, "");
+  }
   const municipalityOrder = Object.keys(sources);
   const result = {
     generated_at: new Date().toISOString(),
-    taxonomy_version: "v0.2",
+    taxonomy_version: "v0.3",
     municipality_labels: municipalityLabels,
     municipality_order: municipalityOrder,
     source_identity: {
-      obu_handa_tokai: gitIdentity(repoRoot),
+      local_repo: gitIdentity(repoRoot),
       nagoya: gitIdentity(nagoyaRoot)
     },
     source_counts: Object.fromEntries(Object.entries(sources).map(([k, v]) => [k, v.length])),

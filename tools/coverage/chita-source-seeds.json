@@ -1,0 +1,479 @@
+[
+  {
+    "need_id": "roads_damage",
+    "municipality_id": "chita",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.chita.lg.jp/docs/2025041400020/",
+        "title": "行かない窓口について｜知多市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "市公式ページで道路破損のLINE通報と土木課連絡先を確認。"
+  },
+  {
+    "need_id": "water_leak",
+    "municipality_id": "chita",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.chita.lg.jp/docs/2023122600024/",
+        "title": "寒波による水道管の凍結・漏水にご注意ください！｜知多市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "突発的な断水・出水不能は別ニーズとして未確定のまま分離。"
+  },
+  {
+    "need_id": "pension_exemption",
+    "municipality_id": "chita",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.chita.lg.jp/docs/2024122500024/",
+        "title": "国民年金業務のご案内｜知多市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "知多市の現行公式ページを確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "high_cost_medical",
+    "municipality_id": "chita",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.chita.lg.jp/docs/2013121200257/",
+        "title": "国民健康保険の給付制度｜知多市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "INSURANCE_DEPENDENT。令和8年8月の限度額改定後の公式ページを確認。"
+  },
+  {
+    "need_id": "livelihood_housing",
+    "municipality_id": "chita",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.chita.lg.jp/docs/2014020701227/",
+        "title": "生活困窮者自立相談支援・生活保護｜知多市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "知多市の現行公式ページを確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "public_housing",
+    "municipality_id": "chita",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.chita.lg.jp/docs/2020022500010/",
+        "title": "市営住宅入居者随時募集について｜知多市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "知多市の現行公式ページを確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "mental_health",
+    "municipality_id": "chita",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.chita.lg.jp/docs/2014052200026/",
+        "title": "こころの健康づくり（精神保健）｜知多市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "知多市の現行公式ページを確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "dv",
+    "municipality_id": "chita",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.chita.lg.jp/docs/2014010702043/",
+        "title": "相談一覧｜知多市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "給付・保護命令等の判定は行わず、緊急性と相談導線のみ案内。"
+  },
+  {
+    "need_id": "legal_debt",
+    "municipality_id": "chita",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.chita.lg.jp/docs/2014020800029/",
+        "title": "各種相談｜知多市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "知多市の現行公式ページを確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "elder_care",
+    "municipality_id": "chita",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.chita.lg.jp/docs/2014020700992/",
+        "title": "高齢者福祉 相談窓口｜知多市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "知多市の現行公式ページを確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "disability_support",
+    "municipality_id": "chita",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.chita.lg.jp/docs/2014020701203/",
+        "title": "障がい者福祉 その他の支援｜知多市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "知多市の現行公式ページを確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "single_parent",
+    "municipality_id": "chita",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.chita.lg.jp/docs/2016082100017/",
+        "title": "児童扶養手当｜知多市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "知多市の現行公式ページを確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "childcare_temp",
+    "municipality_id": "chita",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.chita.lg.jp/docs/2021082400081/",
+        "title": "保育園一時保育事業｜知多市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "知多市の現行公式ページを確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "childcare_sick",
+    "municipality_id": "chita",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.chita.lg.jp/docs/2015022300029/",
+        "title": "病児・病後児保育事業｜知多市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "38.5度超等は利用不可。病児保育は救急受診の代替ではない。"
+  },
+  {
+    "need_id": "pediatric_emergency",
+    "municipality_id": "chita",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.chita.lg.jp/docs/2024100200014/",
+        "title": "医療費適正化にご協力ください｜知多市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "知多市の現行公式ページを確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "labor",
+    "municipality_id": "chita",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.chita.lg.jp/docs/2013121700061/",
+        "title": "労働相談｜知多市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "知多市の現行公式ページを確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "startup",
+    "municipality_id": "chita",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.chita.lg.jp/docs/2016042800018/",
+        "title": "創業者支援について｜知多市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "知多市の現行公式ページを確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "crime_victim",
+    "municipality_id": "chita",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.chita.lg.jp/docs/2022121600028/",
+        "title": "犯罪被害者等を支援します｜知多市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "知多市の現行公式ページを確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "hikikomori",
+    "municipality_id": "chita",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.chita.lg.jp/docs/2015042300023/",
+        "title": "若者サポート相談｜知多市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "知多市の現行公式ページを確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "move_in",
+    "municipality_id": "chita",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.chita.lg.jp/docs/2014010900371/",
+        "title": "転入・転出などの届出｜知多市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "知多市の現行公式ページを確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "move_out",
+    "municipality_id": "chita",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.chita.lg.jp/docs/2014010900371/",
+        "title": "転入・転出などの届出｜知多市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "知多市の現行公式ページを確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "resident_record",
+    "municipality_id": "chita",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.chita.lg.jp/docs/2016012200015/",
+        "title": "証明書コンビニ交付について｜知多市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "知多市の現行公式ページを確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "birth",
+    "municipality_id": "chita",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.chita.lg.jp/docs/2014010900395/",
+        "title": "出生・婚姻などの届出｜知多市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "知多市の現行公式ページを確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "death",
+    "municipality_id": "chita",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.chita.lg.jp/docs/2014031800018/",
+        "title": "死亡・転籍などの届出｜知多市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "知多市の現行公式ページを確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "nhi_join",
+    "municipality_id": "chita",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.chita.lg.jp/docs/2013121200110/",
+        "title": "国民健康保険の届出｜知多市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "知多市の現行公式ページを確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "nhi_leave",
+    "municipality_id": "chita",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.chita.lg.jp/docs/2013121200110/",
+        "title": "国民健康保険の届出｜知多市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "知多市の現行公式ページを確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "oversized_waste",
+    "municipality_id": "chita",
+    "research_state": "OFFICIAL_SOURCE_FOUND",
+    "local_gate": "PASS_RULES_MODELED",
+    "checked_at": "2026-10-01",
+    "required_context": [],
+    "official_sources": [
+      {
+        "url": "https://www.city.chita.lg.jp/docs/2024011200042",
+        "title": "粗大ごみ・多量ごみの戸別収集｜知多市",
+        "role": "LOCAL_PRIMARY"
+      }
+    ],
+    "notes": "知多市の現行公式ページを確認し、住民向け導線をモデル化。"
+  },
+  {
+    "need_id": "water_outage",
+    "municipality_id": "chita",
+    "research_state": "OFFICIAL_SOURCE_PARTIAL",
+    "local_gate": "NEEDS_AUTHORITY_CONFIRMATION",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "近隣も出ないか",
+      "集合住宅か",
+      "緊急性"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.city.chita.lg.jp/docs/2023122600024/",
+        "title": "寒波による水道管の凍結・漏水にご注意ください！",
+        "role": "LOCAL_EVIDENCE"
+      }
+    ],
+    "authority_question": "平常時に家庭で急に水が出なくなった場合、近隣状況・止水栓・集合住宅かを確認した後の正式な市の連絡先と切り分け手順は何か。受水槽方式の集合住宅はまず管理会社へ案内してよいか。",
+    "authority_contact": "知多市 都市整備部 水道課 0562-36-2677／0562-36-2678",
+    "why_needed": "漏水時の対応と水道課連絡先は確認できるが、平常時の突発的な出水不能の住民向け恒常FAQを公式情報だけで確定できない。",
+    "notes": "漏水と断水を別ニーズとしてfail-closed。"
+  },
+  {
+    "need_id": "noise_odor_neighbor",
+    "municipality_id": "chita",
+    "research_state": "OFFICIAL_SOURCE_PARTIAL",
+    "local_gate": "NEEDS_AUTHORITY_CONFIRMATION",
+    "checked_at": "2026-10-01",
+    "required_context": [
+      "発生源",
+      "継続性"
+    ],
+    "official_sources": [
+      {
+        "url": "https://www.city.chita.lg.jp/soshiki/kankyoukeizaibu/kankyouseisakuka/more.html",
+        "title": "環境政策課",
+        "role": "LOCAL_EVIDENCE"
+      }
+    ],
+    "authority_question": "工場・事業場等の騒音・振動・悪臭の住民相談は環境政策課が受付窓口でよいか。また、家庭生活由来の騒音や同一建物内・民地間の近隣トラブルは市の対象外として管理会社・当事者間等へ案内してよいか。",
+    "authority_contact": "知多市 環境経済部 環境政策課 0562-36-2660",
+    "why_needed": "騒音・振動・悪臭の規制担当課は確認できるが、一般住民向けの苦情受付条件と生活騒音・民事境界を一つの現行公式案内から確定できない。",
+    "notes": "規制担当の存在だけで近隣トラブル全般を行政対応と断定しない。"
+  }
+]

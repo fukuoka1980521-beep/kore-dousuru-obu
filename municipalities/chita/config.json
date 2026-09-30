@@ -1,0 +1,62 @@
+{
+  "municipality_id": "chita",
+  "display_name": "知多市",
+  "display_name_full": "知多市版",
+  "app_title": "これどうする？",
+  "search_placeholder": "例：粗大ごみ・子どもが熱・家賃払えない",
+  "home_intro_title": "公開実証中｜知多市で困ったら、そのままの言葉で検索できます",
+  "home_intro_text": "行政の手続名が分からなくても、困りごとから次の公的な行動を確認できます。",
+  "features": {
+    "waste_enabled": false
+  },
+  "priority_nav": [
+    {
+      "key": "hikkoshi",
+      "label": "引っ越した",
+      "icon": "🏠",
+      "view": "procedures",
+      "query": "引っ越し"
+    },
+    {
+      "key": "juminhyo",
+      "label": "住民票がほしい",
+      "icon": "📄",
+      "view": "procedures",
+      "query": "住民票"
+    },
+    {
+      "key": "kosodate",
+      "label": "子どものこと",
+      "icon": "👶",
+      "view": "procedures",
+      "query": "子ども"
+    },
+    {
+      "key": "soudan",
+      "label": "相談したい",
+      "icon": "💬",
+      "view": "procedures",
+      "query": "相談"
+    }
+  ],
+  "quick_queries": [
+    "粗大ごみ",
+    "子どもが熱",
+    "高額療養費",
+    "家賃払えない"
+  ],
+  "contact": {
+    "name": "知多市役所（代表）",
+    "phone": "0562-33-3151",
+    "hours": "月〜金 9:00〜16:00（閉庁日を除く）",
+    "url": "https://www.city.chita.lg.jp/"
+  },
+  "ward_list_url": "https://www.city.chita.lg.jp/docs/2014020700992/",
+  "data": {
+    "waste_items": "../municipalities/chita/data/waste_items.json",
+    "procedures": "../municipalities/chita/data/procedures.json",
+    "life_events": "../municipalities/chita/data/life_events.json"
+  },
+  "disclaimer": "本サイトは知多市の公式サイトではありません。最終的な判断は必ず知多市公式情報・窓口でご確認ください。",
+  "not_official_notice": "知多市の市章・公式キャラクターは使用していません。"
+}
