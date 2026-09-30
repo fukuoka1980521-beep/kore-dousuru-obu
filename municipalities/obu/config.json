@@ -3,6 +3,11 @@
   "display_name": "大府市",
   "display_name_full": "大府市版",
   "app_title": "これどうする？",
+  "search_placeholder": "例：ソファ捨てたい・住民票ほしい",
+  "home_intro_title": "公開実証中｜大府で困ったら、そのままの言葉で検索できます",
+  "home_intro_text": "行政の手続名が分からなくても大丈夫です。",
+  "quick_queries": ["ソファ捨てたい", "住民票ほしい", "国保に入りたい", "子どもが生まれた"],
+  "features": {"waste_enabled": true},
   "priority_nav": [
     {
       "key": "gomi",

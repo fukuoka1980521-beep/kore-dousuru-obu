@@ -1,0 +1,62 @@
+{
+  "municipality_id": "tokai",
+  "display_name": "東海市",
+  "display_name_full": "東海市版",
+  "app_title": "これどうする？",
+  "search_placeholder": "例：家賃払えない・子どもが熱・住民票ほしい",
+  "home_intro_title": "公開実証中｜東海市で困ったら、そのままの言葉で検索できます",
+  "home_intro_text": "行政の手続名が分からなくても、困りごとから次の公的な行動を確認できます。",
+  "features": {
+    "waste_enabled": false
+  },
+  "priority_nav": [
+    {
+      "key": "hikkoshi",
+      "label": "引っ越した",
+      "icon": "🏠",
+      "view": "procedures",
+      "query": "引っ越し"
+    },
+    {
+      "key": "juminhyo",
+      "label": "住民票がほしい",
+      "icon": "📄",
+      "view": "procedures",
+      "query": "住民票"
+    },
+    {
+      "key": "kosodate",
+      "label": "子どものこと",
+      "icon": "👶",
+      "view": "procedures",
+      "query": "子ども"
+    },
+    {
+      "key": "soudan",
+      "label": "相談したい",
+      "icon": "💬",
+      "view": "procedures",
+      "query": "相談"
+    }
+  ],
+  "quick_queries": [
+    "家賃払えない",
+    "子どもが熱",
+    "高額療養費",
+    "騒音"
+  ],
+  "contact": {
+    "name": "東海市役所（代表）",
+    "phone": "052-603-2211 / 0562-33-1111",
+    "hours": "開庁時間は公式サイトで最新情報をご確認ください",
+    "url": "https://www.city.tokai.aichi.jp/"
+  },
+  "ward_list_url": "https://www.city.tokai.aichi.jp/health/1002623/1002624/1002520.html",
+  "data": {
+    "waste_items": "../municipalities/tokai/data/waste_items.json",
+    "procedures": "../municipalities/tokai/data/procedures.json",
+    "life_events": "../municipalities/tokai/data/life_events.json"
+  },
+  "disclaimer": "本サイトは東海市の公式サイトではありません。最終的な判断は必ず東海市公式情報・窓口でご確認ください。",
+  "not_official_notice": "東海市の市章・公式キャラクターは使用していません。"
+}

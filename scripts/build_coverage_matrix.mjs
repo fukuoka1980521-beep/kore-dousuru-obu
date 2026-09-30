@@ -8,6 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, "..");
 const taxonomyPath = path.join(repoRoot, "tools", "coverage", "need-taxonomy.json");
 const sourceSeedsPath = path.join(repoRoot, "tools", "coverage", "official-source-seeds.json");
+const tokaiSeedsPath = path.join(repoRoot, "tools", "coverage", "tokai-source-seeds.json");
 
 export function normalize(value) {
   return String(value ?? "")
@@ -199,6 +200,17 @@ function loadNagoya(root) {
     ...tagged(gaps, "coverage_gap_overlay", path.relative(root, gapFile))
   ];
 }
+
+function loadTokai(root) {
+  const base = path.join(root, "municipalities", "tokai", "data");
+  const files = [
+    ["procedures.json", "procedure"],
+    ["life_events.json", "life_event"]
+  ];
+  return files.flatMap(([name, type]) =>
+    tagged(readJsonIfExists(path.join(base, name)), type, path.join("municipalities", "tokai", "data", name))
+  );
+}
 function riskWeight(risk) {
   return ({ SAFETY: 5, FINANCIAL: 4, DEADLINE: 4, CARE: 3, QUALITY_OF_LIFE: 2, BUSINESS: 2, ADMIN: 1 })[risk] || 1;
 }
@@ -257,6 +269,9 @@ function cellShort(cell) {
 }
 
 function toMarkdown(result) {
+  const labels = result.municipality_labels || {};
+  const order = result.municipality_order || Object.keys(result.source_counts || {});
+  const headerNames = order.map((key) => labels[key] || key);
   const lines = [
     "# 自治体別 行政ニーズ・カバレッジ差分",
     "",
@@ -264,13 +279,14 @@ function toMarkdown(result) {
     "",
     "> × は「行政制度が存在しない」ではなく「現在のアプリ収録データで確認できない」の意味です。実装前に公式情報を調査します。",
     "",
-    "| 優先 | 共通ニーズ | 半田 | 名古屋 | 大府 | 次工程 |",
-    "|---:|---|:---:|:---:|:---:|---|"
+    `| 優先 | 共通ニーズ | ${headerNames.join(" | ")} | 次工程 |`,
+    `|---:|---|${order.map(() => ":---:|").join("")}---|`
   ];
   result.matrix.forEach((row, index) => {
     const actions = [...new Set(Object.values(row.coverage).map((cell) => cell.next_action).filter((x) => x !== "MAINTAIN"))];
     const next = actions.length ? actions.map(actionShort).join(" / ") : "維持";
-    lines.push(`| ${index + 1} | ${row.label} | ${cellShort(row.coverage.handa)} | ${cellShort(row.coverage.nagoya)} | ${cellShort(row.coverage.obu)} | ${next} |`);
+    const cells = order.map((key) => cellShort(row.coverage[key]));
+    lines.push(`| ${index + 1} | ${row.label} | ${cells.join(" | ")} | ${next} |`);
   });
   lines.push("", "## 優先調査バックログ", "");
   for (const row of result.matrix.filter((x) => Object.values(x.coverage).some((cell) => cell.next_action !== "MAINTAIN"))) {
@@ -303,17 +319,22 @@ function parseArgs(argv) {
 
 export function run({ nagoyaRoot, outDir }) {
   const taxonomy = readJson(taxonomyPath);
-  const seeds = readJson(sourceSeedsPath);
+  const seeds = [...readJson(sourceSeedsPath), ...readJsonIfExists(tokaiSeedsPath)];
   const sources = {
     handa: loadHanda(repoRoot),
     nagoya: loadNagoya(nagoyaRoot),
-    obu: loadObu(repoRoot)
+    obu: loadObu(repoRoot),
+    tokai: loadTokai(repoRoot)
   };
+  const municipalityLabels = { handa: "半田", nagoya: "名古屋", obu: "大府", tokai: "東海" };
+  const municipalityOrder = Object.keys(sources);
   const result = {
     generated_at: new Date().toISOString(),
-    taxonomy_version: "v0.1",
+    taxonomy_version: "v0.2",
+    municipality_labels: municipalityLabels,
+    municipality_order: municipalityOrder,
     source_identity: {
-      obu_and_handa: gitIdentity(repoRoot),
+      obu_handa_tokai: gitIdentity(repoRoot),
       nagoya: gitIdentity(nagoyaRoot)
     },
     source_counts: Object.fromEntries(Object.entries(sources).map(([k, v]) => [k, v.length])),
@@ -345,9 +366,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     top_gaps: result.matrix.slice(0, 10).map((x) => ({
       need_id: x.need_id,
       label: x.label,
-      handa: x.coverage.handa.status,
-      nagoya: x.coverage.nagoya.status,
-      obu: x.coverage.obu.status,
+      coverage: Object.fromEntries(Object.entries(x.coverage).map(([k, v]) => [k, v.status])),
       next_actions: Object.fromEntries(Object.entries(x.coverage).map(([k, v]) => [k, v.next_action])),
       priority_score: x.priority_score
     }))

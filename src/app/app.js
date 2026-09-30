@@ -67,7 +67,7 @@
         <div class="muni-name">${escapeHtml(state.config.display_name)}版 <span class="unofficial-badge">非公式・実証版</span></div>
         <div class="app-title">${escapeHtml(state.config.app_title)}</div>
         <div class="search-box">
-          <input id="search-input" type="search" inputmode="search" placeholder="例：ソファ捨てたい・住民票ほしい" value="${escapeHtml(state.query || "")}" />
+          <input id="search-input" type="search" inputmode="search" placeholder="${escapeHtml(state.config.search_placeholder || "例：ソファ捨てたい・住民票ほしい")}" value="${escapeHtml(state.query || "")}" />
           <button id="search-btn" aria-label="検索">検索</button>
         </div>
       </header>
@@ -89,7 +89,7 @@
   function renderFooter() {
     const tabs = [
       { key: "home", label: "ホーム", icon: "🏠" },
-      { key: "gomi", label: "ごみ", icon: "🗑️" },
+      ...(state.config.features?.waste_enabled === false ? [] : [{ key: "gomi", label: "ごみ", icon: "🗑️" }]),
       { key: "procedures", label: "手続き", icon: "📋" },
       { key: "contact", label: "問い合わせ", icon: "☎️" },
     ];
@@ -311,7 +311,7 @@
         </div>
         <dl class="procedure-method">
           <div class="row"><dt>手続方法</dt><dd>${escapeHtml(p.how_to)}</dd></div>
-          ${p.district_dependent ? `<div class="row"><dt>窓口一覧</dt><dd><a class="official-link" href="${state.config.ward_list_url}" target="_blank" rel="noopener">窓口一覧を見る</a></dd></div>` : ""}
+          ${p.district_dependent && state.config.ward_list_url ? `<div class="row"><dt>窓口一覧</dt><dd><a class="official-link" href="${state.config.ward_list_url}" target="_blank" rel="noopener">窓口一覧を見る</a></dd></div>` : ""}
         </dl>
         <details class="source-details">
           <summary>問い合わせ先・公式情報を確認</summary>
@@ -492,15 +492,14 @@
       body = `
         ${renderPriorityNav()}
         <div class="beta-notice">
-          <strong>公開実証中｜大府で困ったら、そのままの言葉で検索できます</strong>
-          <div>行政の手続名が分からなくても大丈夫です。</div>
+          <strong>${escapeHtml(state.config.home_intro_title || `公開実証中｜${state.config.display_name}で困ったら、そのままの言葉で検索できます`)}</strong>
+          <div>${escapeHtml(state.config.home_intro_text || "行政の手続名が分からなくても大丈夫です。")}</div>
         </div>
         <div class="section-title">こんな言い方で検索できます</div>
         <div class="quick-query-row">
-          <button data-query="ソファ捨てたい">ソファ捨てたい</button>
-          <button data-query="住民票ほしい">住民票ほしい</button>
-          <button data-query="国保に入りたい">国保に入りたい</button>
-          <button data-query="子どもが生まれた">子どもが生まれた</button>
+          ${(state.config.quick_queries || ["ソファ捨てたい", "住民票ほしい", "国保に入りたい", "子どもが生まれた"])
+            .map((q) => `<button data-query="${escapeHtml(q)}">${escapeHtml(q)}</button>`)
+            .join("")}
         </div>
         ${
           state.lifeEvents.length
@@ -564,7 +563,11 @@
         state.detailProc = null;
         state.detailEvent = null;
         state.categoryFilter = null;
-        if (key === "gomi") state.view = "gomi";
+        const nav = state.config.priority_nav.find((item) => item.key === key);
+        if (nav?.view) state.view = nav.view;
+        if (typeof nav?.query === "string") {
+          state.query = nav.query;
+        } else if (key === "gomi") state.view = "gomi";
         else if (key === "hikkoshi") { state.view = "procedures"; state.query = "引っ越し"; }
         else if (key === "juminhyo") { state.view = "procedures"; state.query = "住民票"; }
         else if (key === "kosodate") { state.view = "procedures"; state.query = "子ども"; }
@@ -710,9 +713,8 @@
   }
 
   async function init() {
-    const { config, wasteItems, procedures, lifeEvents } = await window.KoreDousuruCore.loadMunicipality(
-      "../../municipalities/obu/config.json"
-    );
+    const configPath = window.KORE_DOUSURU_CONFIG_PATH || "../../municipalities/obu/config.json";
+    const { config, wasteItems, procedures, lifeEvents } = await window.KoreDousuruCore.loadMunicipality(configPath);
     state.config = config;
     state.wasteItemsAll = wasteItems;
     state.procedures = procedures;
