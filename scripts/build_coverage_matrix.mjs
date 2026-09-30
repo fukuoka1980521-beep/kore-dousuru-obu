@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, "..");
 const taxonomyPath = path.join(repoRoot, "tools", "coverage", "need-taxonomy.json");
+const sourceSeedsPath = path.join(repoRoot, "tools", "coverage", "official-source-seeds.json");
 
 export function normalize(value) {
   return String(value ?? "")
@@ -133,28 +134,57 @@ function riskWeight(risk) {
   return ({ SAFETY: 5, FINANCIAL: 4, DEADLINE: 4, CARE: 3, QUALITY_OF_LIFE: 2, BUSINESS: 2, ADMIN: 1 })[risk] || 1;
 }
 
-export function buildMatrix(taxonomy, sources) {
+function seedIndex(seeds) {
+  return new Map(seeds.map((seed) => [`${seed.need_id}:${seed.municipality_id}`, seed]));
+}
+
+function nextAction(cell, seed) {
+  if (cell.status === "COVERED") return "MAINTAIN";
+  if (!seed) return "OFFICIAL_RESEARCH_REQUIRED";
+  if (seed.local_gate === "NEEDS_AUTHORITY_CONFIRMATION") return "AUTHORITY_CONFIRMATION_REQUIRED";
+  if (seed.local_gate === "SOURCE_CONFLICT") return "SOURCE_CONFLICT";
+  if (seed.local_gate === "PASS_NONE_FOUND" || seed.local_gate === "PASS_RULES_MODELED") return "IMPLEMENTATION_READY";
+  return "OFFICIAL_RESEARCH_REQUIRED";
+}
+
+export function buildMatrix(taxonomy, sources, seeds = []) {
+  const seedsByKey = seedIndex(seeds);
   return taxonomy.map((need) => {
     const coverage = {};
     let gapScore = 0;
     for (const [municipality, records] of Object.entries(sources)) {
-      coverage[municipality] = matchNeed(need, records);
-      if (coverage[municipality].status === "MISSING_IN_APP") gapScore += 3;
-      else if (coverage[municipality].status === "PARTIAL") gapScore += 1;
+      const cell = matchNeed(need, records);
+      const seed = seedsByKey.get(`${need.need_id}:${municipality}`) || null;
+      cell.next_action = nextAction(cell, seed);
+      cell.research = seed;
+      coverage[municipality] = cell;
+      if (cell.status === "MISSING_IN_APP") gapScore += 3;
+      else if (cell.status === "PARTIAL") gapScore += 1;
     }
     const priority_score = gapScore * riskWeight(need.risk);
     return {
       ...need,
       coverage,
       gap_count: Object.values(coverage).filter((x) => x.status !== "COVERED").length,
+      implementation_ready_count: Object.values(coverage).filter((x) => x.next_action === "IMPLEMENTATION_READY").length,
+      authority_confirmation_count: Object.values(coverage).filter((x) => x.next_action === "AUTHORITY_CONFIRMATION_REQUIRED").length,
       priority_score,
-      research_required: Object.values(coverage).some((x) => x.status !== "COVERED")
+      research_required: Object.values(coverage).some((x) => x.next_action === "OFFICIAL_RESEARCH_REQUIRED")
     };
-  }).sort((a, b) => b.priority_score - a.priority_score || b.gap_count - a.gap_count || a.label.localeCompare(b.label, "ja"));
+  }).sort((a, b) => b.priority_score - a.priority_score || b.implementation_ready_count - a.implementation_ready_count || b.gap_count - a.gap_count || a.label.localeCompare(b.label, "ja"));
 }
 
 function statusShort(status) {
   return ({ COVERED: "○", PARTIAL: "△", MISSING_IN_APP: "×" })[status] || "?";
+}
+
+function actionShort(action) {
+  return ({ MAINTAIN: "維持", IMPLEMENTATION_READY: "実装可", AUTHORITY_CONFIRMATION_REQUIRED: "要行政確認", OFFICIAL_RESEARCH_REQUIRED: "要公式調査", SOURCE_CONFLICT: "情報矛盾" })[action] || action;
+}
+
+function cellShort(cell) {
+  const base = statusShort(cell.status);
+  return cell.next_action === "MAINTAIN" ? base : `${base}→${actionShort(cell.next_action)}`;
 }
 
 function toMarkdown(result) {
@@ -169,18 +199,19 @@ function toMarkdown(result) {
     "|---:|---|:---:|:---:|:---:|---|"
   ];
   result.matrix.forEach((row, index) => {
-    const next = row.research_required ? "公式調査" : "維持";
-    lines.push(`| ${index + 1} | ${row.label} | ${statusShort(row.coverage.handa.status)} | ${statusShort(row.coverage.nagoya.status)} | ${statusShort(row.coverage.obu.status)} | ${next} |`);
+    const actions = [...new Set(Object.values(row.coverage).map((cell) => cell.next_action).filter((x) => x !== "MAINTAIN"))];
+    const next = actions.length ? actions.map(actionShort).join(" / ") : "維持";
+    lines.push(`| ${index + 1} | ${row.label} | ${cellShort(row.coverage.handa)} | ${cellShort(row.coverage.nagoya)} | ${cellShort(row.coverage.obu)} | ${next} |`);
   });
   lines.push("", "## 優先調査バックログ", "");
-  for (const row of result.matrix.filter((x) => x.research_required)) {
+  for (const row of result.matrix.filter((x) => Object.values(x.coverage).some((cell) => cell.next_action !== "MAINTAIN"))) {
     const gaps = Object.entries(row.coverage)
-      .filter(([, value]) => value.status !== "COVERED")
-      .map(([key, value]) => `${key}=${value.status}`)
+      .filter(([, value]) => value.next_action !== "MAINTAIN")
+      .map(([key, value]) => `${key}=${value.status}/${value.next_action}`)
       .join(", ");
     lines.push(`- **${row.label}** — ${gaps}; 必要Context: ${(row.required_context || []).join(" / ") || "なし"}`);
   }
-  lines.push("", "## 判定凡例", "", "- ○ COVERED: 公式確認済みレコードに強一致", "- △ PARTIAL: 弱一致、または公式確認状態が十分でない", "- × MISSING_IN_APP: 現在の収録データに一致なし", "");
+  lines.push("", "## 判定凡例", "", "- ○ COVERED: 公式確認済みレコードに強一致", "- △ PARTIAL: 弱一致、または公式確認状態が十分でない", "- × MISSING_IN_APP: 現在の収録データに一致なし", "- 実装可: 公式根拠と自治体固有ルール確認が揃い、実装候補に進める", "- 要行政確認: 公式情報だけでは住民向け導線を安全に確定できない", "- 要公式調査: 公式根拠の調査が未完了", "");
   return lines.join("\n");
 }
 
@@ -195,6 +226,7 @@ function parseArgs(argv) {
 
 export function run({ nagoyaRoot, outDir }) {
   const taxonomy = readJson(taxonomyPath);
+  const seeds = readJson(sourceSeedsPath);
   const sources = {
     handa: loadHanda(repoRoot),
     nagoya: loadNagoya(nagoyaRoot),
@@ -205,7 +237,8 @@ export function run({ nagoyaRoot, outDir }) {
     taxonomy_version: "v0.1",
     source_counts: Object.fromEntries(Object.entries(sources).map(([k, v]) => [k, v.length])),
     semantics: { missing: "MISSING_IN_APP means not found in current app data, not that the public service does not exist." },
-    matrix: buildMatrix(taxonomy, sources)
+    research_seed_count: seeds.length,
+    matrix: buildMatrix(taxonomy, sources, seeds)
   };
   fs.mkdirSync(outDir, { recursive: true });
   fs.writeFileSync(path.join(outDir, "coverage-matrix.json"), JSON.stringify(result, null, 2) + "\n");
@@ -223,6 +256,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
       handa: x.coverage.handa.status,
       nagoya: x.coverage.nagoya.status,
       obu: x.coverage.obu.status,
+      next_actions: Object.fromEntries(Object.entries(x.coverage).map(([k, v]) => [k, v.next_action])),
       priority_score: x.priority_score
     }))
   }, null, 2));
