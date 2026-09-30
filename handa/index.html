@@ -907,6 +907,7 @@ if (typeof window !== "undefined") {
 }
 
 </script>
+<script src="./coverage-gap-records.js"></script>
 <script>
 /* これどうする？ 半田市版 UIロジック */
 (function () {
@@ -1927,6 +1928,11 @@ if (typeof window !== "undefined") {
   async function init() {
     const { config, wasteItems, procedures, lifeEvents, offices, branchJurisdiction, collectionSchedule } =
       await window.KoreDousuruCore.loadMunicipality("../../municipalities/handa/config.json");
+    const gapRecords = window.__HANDA_COVERAGE_GAP_RECORDS__ || [];
+    const procedureIds = new Set(procedures.map((p) => p.procedure_id));
+    for (const record of gapRecords) {
+      if (!procedureIds.has(record.procedure_id)) procedures.push({ ...record });
+    }
     state.config = config;
     state.wasteItemsAll = wasteItems;
     state.procedures = procedures;

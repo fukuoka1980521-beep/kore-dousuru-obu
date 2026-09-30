@@ -25,7 +25,11 @@ export const PUBLIC_SURFACE_FILES = [
   'municipalities/obu/data/procedures.json',
   'municipalities/obu/data/life_events.json',
   'municipalities/shared/core.js',
+  'handa/index.html',
+  'handa/coverage-gap-records.js',
   'src/app/index.html',
   'src/app/app.js',
   'src/app/style.css',
+  'src/app/support-overlay.js',
+  'src/app/coverage-gap-overlay.js',
 ];
