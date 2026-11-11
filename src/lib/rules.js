@@ -4,7 +4,12 @@
 // Given a reference date, pick the record whose window contains it.
 
 function toDate(d) {
-  if (d instanceof Date) return d;
+  if (d instanceof Date) return Number.isFinite(d.getTime()) ? d : null;
+  if (typeof d !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(d)) return null;
+  const calendarDate = new Date(`${d}T00:00:00Z`);
+  if (!Number.isFinite(calendarDate.getTime()) || calendarDate.toISOString().slice(0, 10) !== d) {
+    return null;
+  }
   return new Date(`${d}T00:00:00+09:00`); // JST, matches Japanese municipal effective dates
 }
 
@@ -12,9 +17,13 @@ function toDate(d) {
 // referenceDate: Date | string (YYYY-MM-DD), defaults to now
 export function selectApplicableRecord(records, referenceDate = new Date()) {
   const ref = toDate(referenceDate);
+  if (!ref) return null;
   const applicable = records.filter((r) => {
-    const from = r.valid_from ? toDate(r.valid_from) : null;
-    const to = r.valid_to ? toDate(r.valid_to) : null;
+    const from = r.valid_from == null ? null : typeof r.valid_from === 'string' && toDate(r.valid_from);
+    const to = r.valid_to == null ? null : typeof r.valid_to === 'string' && toDate(r.valid_to);
+    if (r.valid_from != null && !from) return false;
+    if (r.valid_to != null && !to) return false;
+    if (from && to && from > to) return false;
     if (from && ref < from) return false;
     if (to && ref > to) return false;
     return true;
